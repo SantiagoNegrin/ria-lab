@@ -1,0 +1,15 @@
+<p>buscar-areas works!</p>
+
+<input type="number" [(ngModel)]="areaId" name="areaId">
+<button (click)="getAreaById(areaId)">Obtener Área</button>
+
+<div *ngIf="area">
+  <h3>Área:</h3>
+  <p>ID: {{ area.id }}</p>
+  <p>Activo: {{ area.activo }}</p>
+  <p>Nombre: {{ area.nombre }}</p>
+</div>
+
+<div *ngIf="error">
+  <p>Error: {{ error }}</p>
+</div>
