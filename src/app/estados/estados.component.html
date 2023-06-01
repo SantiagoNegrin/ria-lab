@@ -1,0 +1,26 @@
+<h2>Estados</h2>
+
+<button (click)="redirectNuevo()">Nuevo</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Activo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estado of estados">
+      <td>{{ estado.id }}</td>
+      <td>{{ estado.nombre }}</td>
+      <td>{{ estado.activo }}</td>
+      <td>
+        <button (click)="redirectUpdate(estado.id)">Editar</button>
+        <button (click)="eliminarEstado(estado.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

@@ -1,0 +1,10 @@
+<h2>Nuevo estado</h2>
+<form (submit)="crearEstado()">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required [(ngModel)]="nombre">
+    <br>
+    <label for="activo">Activo:</label>
+    <input type="checkbox" id="activo" name="activo" [(ngModel)]="activo">
+    <br>
+    <button type="submit">Crear</button>
+</form>

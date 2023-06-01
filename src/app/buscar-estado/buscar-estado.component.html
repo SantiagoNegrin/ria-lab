@@ -1,0 +1,11 @@
+<h2>Buscar estado</h2>
+
+<input type="number" [(ngModel)]="id" name="id">
+<button (click)="getEstadoById(id)">Buscar</button>
+
+<div *ngIf="estado">
+  <h3>Estado:</h3>
+  <p>ID: {{ estado.id }}</p>
+  <p>Activo: {{ estado.activo }}</p>
+  <p>Nombre: {{ estado.nombre }}</p>
+</div>
