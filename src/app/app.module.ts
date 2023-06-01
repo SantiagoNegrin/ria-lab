@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BuscarAreasComponent } from './buscar-areas/buscar-areas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearAreaComponent } from './crear-area/crear-area.component';
+import { ModificarAreaComponent } from './modificar-area/modificar-area.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { CrearAreaComponent } from './crear-area/crear-area.component';
     AppComponent,
     BuscarAreasComponent,
     CrearAreaComponent,
+    ModificarAreaComponent,
   ],
   imports: [
     HttpClientModule,
