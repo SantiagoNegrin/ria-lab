@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +12,11 @@ import { AppComponent } from './app.component';
 import { BuscarAreasComponent } from './buscar-areas/buscar-areas.component';
 import { CrearAreaComponent } from './crear-area/crear-area.component';
 import { ModificarAreaComponent } from './modificar-area/modificar-area.component';
-
+import { AuthService } from './auth/login/auth.service';
+import { FormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './auth/login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -25,18 +28,18 @@ import { ModificarAreaComponent } from './modificar-area/modificar-area.componen
     BuscarAreasComponent,
     CrearAreaComponent,
     ModificarAreaComponent,
+    LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     HttpClientModule,
-    FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule,
-    HttpClientModule
+    FormsModule ,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-export class BuscarAreasModule { }
