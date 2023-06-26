@@ -17,6 +17,10 @@ import { FormsModule  } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ListarAreasComponent } from './listar-areas/listar-areas.component';
+import { AltaTipoIntegranteComponent } from './alta-tipo-integrante/alta-tipo-integrante.component';
+import { ListarTipoIntegranteComponent } from './listar-tipo-integrante/listar-tipo-integrante.component';
+import { ModificarTipoIntegranteComponent } from './modificar-tipo-integrante/modificar-tipo-integrante.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { LogoutComponent } from './logout/logout.component';
     ModificarAreaComponent,
     LoginComponent,
     LogoutComponent,
+    ListarAreasComponent,
+    AltaTipoIntegranteComponent,
+    ListarTipoIntegranteComponent,
+    ModificarTipoIntegranteComponent,
   ],
   imports: [
     HttpClientModule,

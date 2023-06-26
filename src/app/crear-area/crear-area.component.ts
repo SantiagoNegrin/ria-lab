@@ -7,21 +7,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./crear-area.component.css']
 })
 export class CrearAreaComponent {
-  public areaId: number = 2;
   public activo: boolean = true;
   public nombre: string = "";
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.areaId = 0;
     // Lógica que deseas ejecutar cuando se inicialice el componente
   }
 
   crearArea(): void {
     const url = 'http://localhost:5000/api/Areas';
     const area = {
-      id: this.areaId,
       activo: this.activo,
       nombre: this.nombre
     };

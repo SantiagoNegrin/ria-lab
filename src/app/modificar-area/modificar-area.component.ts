@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,35 +7,41 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './modificar-area.component.html',
   styleUrls: ['./modificar-area.component.css']
 })
-export class ModificarAreaComponent {
-  public areaId: number = 2;
+export class ModificarAreaComponent implements OnInit {
+  public areaId: number = 0;
   public activo: boolean = true;
   public nombre: string = "";
   public areaEncontrada: any;
   public error: string = "";
   public successMessage: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.areaId = +params['id'];
+      this.nombre = params['nombre'];
+      this.getAreaById(this.areaId);
+    });
+  }
 
   getAreaById(id: number): void {
     const url = `http://localhost:5000/api/Areas/${id}`;
     this.http.get<any>(url).subscribe(
       (response) => {
-        // Aquí puedes hacer lo que necesites con los datos del área devueltos
         console.log('Área:', response);
         this.areaEncontrada = response;
       },
       (error) => {
         console.log('Error al obtener el área:', error);
-        this.error = `Error al obtener el área${id}`;
+        this.error = `Error al obtener el área ${id}`;
       }
     );
   }
+
   modificarArea(): void {
-    const url = `http://localhost:5000/api/Areas/${this.areaEncontrada.id}`; // Reemplaza con la URL de tu endpoint
+    const url = `http://localhost:5000/api/Areas/${this.areaEncontrada.id}`;
     const body = {
-      // Aquí define los datos que deseas enviar en la solicitud PUT
-      // Ejemplo:
       id: this.areaEncontrada.id,
       nombre: this.areaEncontrada.nombre,
       activo: this.areaEncontrada.activo
@@ -43,15 +50,12 @@ export class ModificarAreaComponent {
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Solicitud PUT exitosa:', response);
-        // Realiza acciones adicionales después de una solicitud PUT exitosa
-        this.successMessage  = `Se modifico con exito el area con id = ${this.areaEncontrada.id}`;
+        this.successMessage  = `Se modificó con éxito el área con id = ${this.areaEncontrada.id}`;
       },
       (error) => {
         console.error('Error en la solicitud PUT:', error);
-        // Maneja el error de la solicitud PUT
         this.error = `Error al modificar el área con id = ${this.areaEncontrada.id}`;
       }
     );
   }
-
 }

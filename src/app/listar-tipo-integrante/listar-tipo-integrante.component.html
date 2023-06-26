@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-body">
+      <h2>Lista de Tipos de Integrantes</h2>
+  
+      <form (ngSubmit)="obtenerTipoIntegrantes()">
+        <label for="filtroNombre">Filtrar por nombre:</label>
+        <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
+        <button type="submit">Aplicar filtro</button>
+      </form>
+  
+      <ul>
+        <li *ngFor="let tipoIntegrante of tipoIntegrantes">
+          <a [routerLink]="['/modificar-tipo-integrante', tipoIntegrante.id]">{{ tipoIntegrante.nombre }}</a>
+        </li>
+      </ul>
+  
+      <nav aria-label="Navegación de páginas">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="cambiarPagina(currentPage - 1)">Anterior</a>
+          </li>
+          <li class="page-item" [class.active]="currentPage === page" *ngFor="let page of totalPagesArray">
+            <a class="page-link" (click)="cambiarPagina(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="cambiarPagina(currentPage + 1)">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  

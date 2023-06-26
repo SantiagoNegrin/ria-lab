@@ -1,0 +1,26 @@
+
+<div class="alert alert-success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+  <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+    <p>Error: {{ errorMessage }}</p>
+  </div>
+<div class="card">
+  <div class="card-body">
+    <h2>Modificar Tipo de Integrante</h2>
+
+    <form (ngSubmit)="modificarTipoIntegrante()">
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
+      </div>
+      <div>
+        <label for="orden">Orden:</label>
+        <input type="number" id="orden" [(ngModel)]="orden" name="orden">
+      </div>
+      <div>
+        <button type="submit">Modificar</button>
+      </div>
+    </form>
+  </div>
+</div>
