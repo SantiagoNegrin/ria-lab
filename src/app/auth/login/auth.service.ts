@@ -44,5 +44,9 @@ export class AuthService {
   private clearRoles(): void {
     localStorage.removeItem('roles');
   }
+  
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
 }

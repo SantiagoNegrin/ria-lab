@@ -21,6 +21,8 @@ import { ListarAreasComponent } from './listar-areas/listar-areas.component';
 import { AltaTipoIntegranteComponent } from './alta-tipo-integrante/alta-tipo-integrante.component';
 import { ListarTipoIntegranteComponent } from './listar-tipo-integrante/listar-tipo-integrante.component';
 import { ModificarTipoIntegranteComponent } from './modificar-tipo-integrante/modificar-tipo-integrante.component';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,11 @@ import { ModificarTipoIntegranteComponent } from './modificar-tipo-integrante/mo
     FormsModule ,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,TokenInterceptor,
+    {provide: HTTP_INTERCEPTORS,
+       useClass: TokenInterceptor, 
+       multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

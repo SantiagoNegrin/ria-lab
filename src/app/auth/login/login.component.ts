@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { HttpClient, HttpInterceptor } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent {
 
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
+    
 
     this.authService.login(username, password).subscribe(
       (response) => {
