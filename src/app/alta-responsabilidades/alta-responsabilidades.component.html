@@ -1,0 +1,22 @@
+<h2>Alta de Responsabilidades</h2>
+
+<form (ngSubmit)="crearResponsabilidades()">
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required>
+  </div>
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required></textarea>
+  </div>
+  <div>
+    <label for="areaId">ID de Área:</label>
+    <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
+      <option value="">Seleccione un área</option>
+      <app-listar-areas></app-listar-areas>
+    </select>
+  </div>
+  
+  
+  <button type="submit">Guardar</button>
+</form>

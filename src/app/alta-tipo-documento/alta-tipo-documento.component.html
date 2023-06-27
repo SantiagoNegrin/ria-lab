@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>Alta de Tipo de Documento</h2>
+  
+    <form [formGroup]="altaTipoDocumentoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+  

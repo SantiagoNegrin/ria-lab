@@ -1,0 +1,17 @@
+<h1>Modificar Tipo de Documento</h1>
+
+<div class="alert alert-success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+  <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+    <p>Error: {{ errorMessage }}</p>
+  </div>
+
+<div>
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="nombre" />
+</div>
+
+<div>
+  <button (click)="modificarTipoDocumento()">Guardar cambios</button>
+</div>

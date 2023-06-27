@@ -1,0 +1,29 @@
+<h2>Listar Tipos de Documento</h2>
+
+<div>
+  <label for="filtroNombre">Filtrar por nombre:</label>
+  <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" (input)="obtenerTiposDocumento()">
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Orden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tipoDocumento of tiposDocumento">
+      <td>
+        <a [routerLink]="['/modificar-tipo-documento', tipoDocumento.id, tipoDocumento.nombre]">{{ tipoDocumento.nombre }}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <button [disabled]="currentPage === 1" (click)="cambiarPagina(currentPage - 1)">Anterior</button>
+  <span>Página {{ currentPage }} de {{ totalPages }}</span>
+  <button [disabled]="currentPage === totalPages" (click)="cambiarPagina(currentPage + 1)">Siguiente</button>
+</div>

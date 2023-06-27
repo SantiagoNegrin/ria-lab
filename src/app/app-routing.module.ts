@@ -15,6 +15,10 @@ import { ListarAreasComponent } from './listar-areas/listar-areas.component';
 import { AltaTipoIntegranteComponent } from './alta-tipo-integrante/alta-tipo-integrante.component';
 import { ListarTipoIntegranteComponent } from './listar-tipo-integrante/listar-tipo-integrante.component';
 import { ModificarTipoIntegranteComponent } from './modificar-tipo-integrante/modificar-tipo-integrante.component';
+import { AltaTipoDocumentoComponent } from './alta-tipo-documento/alta-tipo-documento.component';
+import { ListarTipoDocumentoComponent } from './listar-tipo-documento/listar-tipo-documento.component';
+import { ModificarTipoDocumentoComponent } from './modificar-tipo-documento/modificar-tipo-documento.component';
+import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-responsabilidades.component';
 
 
 const routes: Routes = [
@@ -22,7 +26,7 @@ const routes: Routes = [
   { path: 'nuevoEstado', component: NuevoEstadoComponent },
   { path: 'buscarEstado', component: BuscarEstadoComponent },
   { path: 'editarEstado/:id', component: EditarEstadoComponent },
-
+  { path: 'alta-tipo-documento', component: AltaTipoDocumentoComponent },
   { path: 'buscar-area', component: BuscarAreasComponent },
   { path: 'crear-area', component: CrearAreaComponent },
   { path: 'modificar-area', component: ModificarAreaComponent },
@@ -32,7 +36,10 @@ const routes: Routes = [
   { path: 'modificar-area/:id/:nombre', component: ModificarAreaComponent },
   { path: 'alta-tipo-integrante', component: AltaTipoIntegranteComponent },
   { path: 'listar-tipo-integrante', component: ListarTipoIntegranteComponent },
-  { path: 'modificar-tipo-integrante/:id', component: ModificarTipoIntegranteComponent }
+  { path: 'modificar-tipo-integrante/:id', component: ModificarTipoIntegranteComponent },
+  { path: 'listar-tipo-documento', component: ListarTipoDocumentoComponent },
+  { path: 'modificar-tipo-documento/:id/:nombre',component: ModificarTipoDocumentoComponent},
+  { path: 'alta-responsabilidades', component: AltaResponsabilidadesComponent },
 
 
 ];

@@ -23,6 +23,10 @@ import { ListarTipoIntegranteComponent } from './listar-tipo-integrante/listar-t
 import { ModificarTipoIntegranteComponent } from './modificar-tipo-integrante/modificar-tipo-integrante.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AltaTipoDocumentoComponent } from './alta-tipo-documento/alta-tipo-documento.component';
+import { ListarTipoDocumentoComponent } from './listar-tipo-documento/listar-tipo-documento.component';
+import { ModificarTipoDocumentoComponent } from './modificar-tipo-documento/modificar-tipo-documento.component';
+import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-responsabilidades.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AltaTipoIntegranteComponent,
     ListarTipoIntegranteComponent,
     ModificarTipoIntegranteComponent,
+    AltaTipoDocumentoComponent,
+    ListarTipoDocumentoComponent,
+    ModificarTipoDocumentoComponent,
+    AltaResponsabilidadesComponent,
   ],
   imports: [
     HttpClientModule,
