@@ -27,6 +27,8 @@ import { AltaTipoDocumentoComponent } from './alta-tipo-documento/alta-tipo-docu
 import { ListarTipoDocumentoComponent } from './listar-tipo-documento/listar-tipo-documento.component';
 import { ModificarTipoDocumentoComponent } from './modificar-tipo-documento/modificar-tipo-documento.component';
 import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-responsabilidades.component';
+import { ListarResponsabilidadesComponent } from './listar-responsabilidades/listar-responsabilidades.component';
+import { ModificarResponsabilidadesComponent } from './modificar-responsabilidades/modificar-responsabilidades.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-re
     ListarTipoDocumentoComponent,
     ModificarTipoDocumentoComponent,
     AltaResponsabilidadesComponent,
+    ListarResponsabilidadesComponent,
+    ModificarResponsabilidadesComponent,
   ],
   imports: [
     HttpClientModule,

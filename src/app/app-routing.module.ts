@@ -19,6 +19,8 @@ import { AltaTipoDocumentoComponent } from './alta-tipo-documento/alta-tipo-docu
 import { ListarTipoDocumentoComponent } from './listar-tipo-documento/listar-tipo-documento.component';
 import { ModificarTipoDocumentoComponent } from './modificar-tipo-documento/modificar-tipo-documento.component';
 import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-responsabilidades.component';
+import { ListarResponsabilidadesComponent } from './listar-responsabilidades/listar-responsabilidades.component';
+import { ModificarResponsabilidadesComponent } from './modificar-responsabilidades/modificar-responsabilidades.component';
 
 
 const routes: Routes = [
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'listar-tipo-documento', component: ListarTipoDocumentoComponent },
   { path: 'modificar-tipo-documento/:id/:nombre',component: ModificarTipoDocumentoComponent},
   { path: 'alta-responsabilidades', component: AltaResponsabilidadesComponent },
+  { path: 'listar-responsabilidades', component: ListarResponsabilidadesComponent },
+  { path: 'modificar-responsabilidades/:id', component: ModificarResponsabilidadesComponent },
 
 
 ];

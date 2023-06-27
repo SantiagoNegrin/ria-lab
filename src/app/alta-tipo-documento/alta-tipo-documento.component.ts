@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./alta-tipo-documento.component.css']
 })
 export class AltaTipoDocumentoComponent {
+  successMessage: string = '';
+  errorMessage: string = '';
   altaTipoDocumentoForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {
@@ -34,12 +36,15 @@ export class AltaTipoDocumentoComponent {
         (response) => {
           // Maneja la respuesta del servidor en caso de éxito
           console.log(response);
-
+          this.successMessage = 'Alta exitosa'; // Mensaje de éxito
+        this.errorMessage = ''; // Reinicia el mensaje de error
           // Realiza las acciones necesarias después del alta exitosa, como redireccionar o mostrar un mensaje de éxito
         },
         (error) => {
           // Maneja el error en caso de que la solicitud falle
           console.error(error);
+          this.successMessage = ''; // Reinicia el mensaje de éxito
+        this.errorMessage = 'Error en el alta'; // Mensaje de error
         }
       );
   }

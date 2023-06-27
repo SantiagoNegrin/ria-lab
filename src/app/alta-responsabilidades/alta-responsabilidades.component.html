@@ -1,4 +1,11 @@
 <h2>Alta de Responsabilidades</h2>
+<div *ngIf="successMessage" class="alert alert-success" role="alert">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>
 
 <form (ngSubmit)="crearResponsabilidades()">
   <div>
@@ -9,13 +16,13 @@
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required></textarea>
   </div>
-  <div>
-    <label for="areaId">ID de Área:</label>
-    <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
-      <option value="">Seleccione un área</option>
-      <app-listar-areas></app-listar-areas>
-    </select>
-  </div>
+    <div>
+        <label for="areaId">ID de Área:</label>
+        <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
+          <option value="">Seleccione un área</option>
+          <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
+        </select>
+      </div>
   
   
   <button type="submit">Guardar</button>
