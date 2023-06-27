@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-body">
+    <h2>Listado de Personas</h2>
+
+    <form (submit)="aplicarFiltros()" class="mb-3">
+      <!-- Resto del formulario de filtros -->
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Documento</th>
+          <th>Tipo Doc</th>
+          <th>Primer Nombre</th>
+          <th>Segundo Nombre</th>
+          <th>Primer Apellido</th>
+          <th>Segundo Apellido</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let persona of personas">
+          <td>{{ persona.documento }}</td>
+          <td>{{ persona.tipoDeDocumento.nombre }}</td> <!-- Agregamos el campo "nombre" del tipo de documento -->
+          <td>{{ persona.primerNombre }}</td>
+          <td>{{ persona.segundoNombre }}</td>
+          <td>{{ persona.primerApellido }}</td>
+          <td>{{ persona.segundoApellido }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="modificarPersona(persona.id)">
+              <i class="bi bi-pencil"></i> Modificar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+</table>
+    <div>
+      <button (click)="cambiarPagina(currentPage - 1)" class="btn btn-primary">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button (click)="cambiarPagina(currentPage + 1)" class="btn btn-primary">Siguiente</button>
+    </div>
+  </div>
+</div>

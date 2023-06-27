@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-body">
+      <h2>Modificar Persona</h2>
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+        <p>Error: {{ errorMessage }}</p>
+      </div>
+      <form *ngIf="persona" (submit)="guardarCambios()">
+        <label for="tipoDocumento">Tipo de Documento:</label>
+        <select id="tipoDocumento" [ngModel]="persona.tipoDeDocumento?.id" (ngModelChange)="persona.tipoDeDocumento ? persona.tipoDeDocumento.id = $event : null" name="tipoDocumento">
+          <option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.id">{{ tipoDoc.nombre }}</option>
+        </select>
+  
+        <div class="form-group">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" [(ngModel)]="persona.documento" name="documento" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="primerNombre">Primer Nombre:</label>
+          <input type="text" id="primerNombre" [(ngModel)]="persona.primerNombre" name="primerNombre" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="segundoNombre">Segundo Nombre:</label>
+          <input type="text" id="segundoNombre" [(ngModel)]="persona.segundoNombre" name="segundoNombre" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="primerApellido">Primer Apellido:</label>
+          <input type="text" id="primerApellido" [(ngModel)]="persona.primerApellido" name="primerApellido" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="segundoApellido">Segundo Apellido:</label>
+          <input type="text" id="segundoApellido" [(ngModel)]="persona.segundoApellido" name="segundoApellido" class="form-control">
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+  

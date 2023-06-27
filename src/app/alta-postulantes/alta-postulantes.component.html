@@ -1,0 +1,32 @@
+<h2>Alta de Postulante</h2>
+
+<form (submit)="crearPostulante()">
+  <div>
+    <label for="documento">Documento:</label>
+    <input type="text" id="documento" [(ngModel)]="postulante.persona.documento" name="documento" required>
+  </div>
+
+  <div>
+    <label for="primerNombre">Primer Nombre:</label>
+    <input type="text" id="primerNombre" [(ngModel)]="postulante.persona.primerNombre" name="primerNombre" required>
+  </div>
+
+  <div>
+    <label for="segundoNombre">Segundo Nombre:</label>
+    <input type="text" id="segundoNombre" [(ngModel)]="postulante.persona.segundoNombre" name="segundoNombre">
+  </div>
+
+  <div>
+    <label for="primerApellido">Primer Apellido:</label>
+    <input type="text" id="primerApellido" [(ngModel)]="postulante.persona.primerApellido" name="primerApellido" required>
+  </div>
+
+  <div>
+    <label for="segundoApellido">Segundo Apellido:</label>
+    <input type="text" id="segundoApellido" [(ngModel)]="postulante.persona.segundoApellido" name="segundoApellido">
+  </div>
+
+  <!-- Agrega los demás campos del formulario según tus necesidades -->
+
+  <button type="submit">Crear</button>
+</form>

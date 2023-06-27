@@ -1,0 +1,44 @@
+<h2>Alta de Persona</h2>
+
+<div>
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+  <label for="tipoDocumento">Tipo de Documento:</label>
+  <select id="tipoDocumento" [(ngModel)]="selectedTipoDocumento" name="tipoDocumento">
+    <option *ngFor="let tipoDocumento of tiposDocumento" [value]="tipoDocumento.id">{{ tipoDocumento.nombre }}</option>
+  </select>
+</div>
+
+<div>
+  <label for="documento">Documento:</label>
+  <input type="text" id="documento" [(ngModel)]="persona.documento" name="documento" required>
+</div>
+
+<div>
+  <label for="primerNombre">Primer Nombre:</label>
+  <input type="text" id="primerNombre" [(ngModel)]="persona.primerNombre" name="primerNombre" required>
+</div>
+
+<div>
+  <label for="segundoNombre">Segundo Nombre:</label>
+  <input type="text" id="segundoNombre" [(ngModel)]="persona.segundoNombre" name="segundoNombre">
+</div>
+
+<div>
+  <label for="primerApellido">Primer Apellido:</label>
+  <input type="text" id="primerApellido" [(ngModel)]="persona.primerApellido" name="primerApellido" required>
+</div>
+
+<div>
+  <label for="segundoApellido">Segundo Apellido:</label>
+  <input type="text" id="segundoApellido" [(ngModel)]="persona.segundoApellido" name="segundoApellido">
+</div>
+
+<!-- Agrega los demás campos del formulario según tus necesidades -->
+
+<button (click)="crearPersona()">Crear</button>
