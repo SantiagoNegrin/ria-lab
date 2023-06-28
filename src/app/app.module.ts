@@ -33,6 +33,9 @@ import { AltaPostulantesComponent } from './alta-postulantes/alta-postulantes.co
 import { AltaPersonaComponent } from './alta-persona/alta-persona.component';
 import { ListarPersonaComponent } from './listar-persona/listar-persona.component';
 import { ModificarPersonaComponent } from './modificar-persona/modificar-persona.component';
+import { AltaEstadosPosiblesComponent } from './alta-estados-posibles/alta-estados-posibles.component';
+import { ListarEstadosPosiblesComponent } from './listar-estados-posibles/listar-estados-posibles.component';
+import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/modificar-posibles-estados.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { ModificarPersonaComponent } from './modificar-persona/modificar-persona
     AltaPersonaComponent,
     ListarPersonaComponent,
     ModificarPersonaComponent,
+    AltaEstadosPosiblesComponent,
+    ListarEstadosPosiblesComponent,
+    ModificarPosiblesEstadosComponent,
   ],
   imports: [
     HttpClientModule,

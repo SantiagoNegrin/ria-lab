@@ -1,0 +1,41 @@
+<h1>Listar Estados Posibles</h1>
+
+<!-- Filtros -->
+<div class="mb-3">
+  <label for="activo">Activo:</label>
+  <input type="checkbox" id="activo" [(ngModel)]="activo">
+</div>
+
+<div class="mb-3">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="nombre">
+</div>
+
+<button class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>
+
+<!-- Resultados -->
+<div *ngIf="estadosPosibles.length > 0">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Modificar</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let estado of estadosPosibles">
+            <td>{{ estado.nombre }}</td>
+            <td>
+                <a class="btn btn-primary" [routerLink]="['/modificar-estados-posibles', estado.id]">Modificar</a>            </td>
+          </tr>
+          
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginado -->
+<div>
+  <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
+  <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+  <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
+</div>

@@ -1,0 +1,24 @@
+<h1>Modificar Posibles Estados</h1>
+<div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+<div class="mb-3">
+  <label for="estadoId">ID:</label>
+  <input type="number" id="estadoId" [(ngModel)]="estadoId">
+</div>
+
+<div class="mb-3">
+  <label for="estadoActivo">Activo:</label>
+  <input type="checkbox" id="estadoActivo" [(ngModel)]="estadoActivo">
+</div>
+
+<div class="mb-3">
+  <label for="estadoNombre">Nombre:</label>
+  <input type="text" id="estadoNombre" [(ngModel)]="estadoNombre">
+</div>
+
+<button class="btn btn-primary" (click)="modificarEstado()">Modificar</button>
