@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent },
   { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent },
   { path: 'registro', component: AltaUsuarioComponent },
-  { path: 'listar-usuario', component: ListarUsuarioComponent }
+  { path: 'listar-usuario', component: ListarUsuarioComponent },
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
 ];
 

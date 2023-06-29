@@ -70,6 +70,10 @@ import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribuna
     AltaEstadosPosiblesComponent,
     ListarEstadosPosiblesComponent,
     ModificarPosiblesEstadosComponent,
+    AltaMiembrosTribunalesComponenComponent,
+    AltaLlamadoComponent,
+    ListarUsuarioComponent,
+    AltaUsuarioComponent,
   ],
   imports: [
     HttpClientModule,
