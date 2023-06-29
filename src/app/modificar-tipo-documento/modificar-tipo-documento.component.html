@@ -1,17 +1,23 @@
-<h1>Modificar Tipo de Documento</h1>
+<h1 class="mt-4">Modificar Tipo de Documento</h1>
 
 <div class="alert alert-success" *ngIf="successMessage">
-    {{ successMessage }}
-  </div>
-  <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
-    <p>Error: {{ errorMessage }}</p>
-  </div>
-
-<div>
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="nombre" />
+  {{ successMessage }}
 </div>
 
-<div>
-  <button (click)="modificarTipoDocumento()">Guardar cambios</button>
+<div class="mt-4 alert alert-danger" *ngIf="errorMessage">
+  <p>Error: {{ errorMessage }}</p>
+</div>
+
+<div class="mt-4">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="nombre" class="form-control">
+</div>
+
+<div class="mt-4">
+  <label for="activo">Activo:</label>
+  <input type="checkbox" id="activo" [(ngModel)]="activo">
+</div>
+
+<div class="mt-4">
+  <button (click)="modificarTipoDocumento()" class="btn btn-primary">Guardar cambios</button>
 </div>

@@ -1,20 +1,24 @@
-<div class="container">
-    
-    <h2>Alta de Tipo de Documento</h2>
-    <div *ngIf="successMessage" class="alert alert-success" role="alert">
-        {{ successMessage }}
-      </div>
+<div class="card">
+  <div class="card-body bg-primary text-white">
+    <h2 class="card-title">Alta de Tipo de Documento</h2>
+  </div>
   
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
-      </div>
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card-body">
     <form [formGroup]="altaTipoDocumentoForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
       </div>
-  
+
       <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
   </div>
-  
+</div>

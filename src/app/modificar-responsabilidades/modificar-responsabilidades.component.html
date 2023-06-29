@@ -1,20 +1,24 @@
-<h2>Modificar Responsabilidad</h2>
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Modificar Responsabilidad</h2>
 
-<div>
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="responsabilidad.nombre" name="nombre">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="responsabilidad.nombre" name="nombre">
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <textarea class="form-control" id="descripcion" [(ngModel)]="responsabilidad.descripcion" name="descripcion"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="area">Área:</label>
+      <select class="form-control" id="area" [(ngModel)]="responsabilidad.areaId" name="area">
+        <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" (click)="guardarResponsabilidad()">Guardar</button>
+  </div>
 </div>
-
-<div>
-  <label for="descripcion">Descripción:</label>
-  <textarea id="descripcion" [(ngModel)]="responsabilidad.descripcion" name="descripcion"></textarea>
-</div>
-
-<div>
-  <label for="area">Área:</label>
-  <select id="area" [(ngModel)]="responsabilidad.areaId" name="area">
-    <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
-  </select>
-</div>
-
-<button (click)="guardarResponsabilidad()">Guardar</button>

@@ -12,6 +12,7 @@ export class ModificarTipoDocumentoComponent implements OnInit {
   nombre: string = '';
   successMessage: string = '';
   errorMessage: string = '';
+  activo: boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.params.subscribe(params => {
@@ -28,6 +29,7 @@ export class ModificarTipoDocumentoComponent implements OnInit {
 
     this.http.get<any>(url).subscribe(response => {
       this.nombre = response.nombre;
+      this.activo = response.activo;
     });
   }
 
@@ -35,7 +37,7 @@ export class ModificarTipoDocumentoComponent implements OnInit {
     const url = `http://localhost:5000/api/TiposDeDocumentos/${this.tipoDocumentoId}`;
     const body = {
       id: this.tipoDocumentoId,
-      activo: true,
+      activo: this.activo, // Incluir el valor del estado activo en el objeto body
       nombre: this.nombre
     };
 

@@ -40,6 +40,7 @@ import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
+import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-area/asignar-responsabilidad-area.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribuna
     AltaLlamadoComponent,
     ListarUsuarioComponent,
     AltaUsuarioComponent,
+    AsignarResponsabilidadAreaComponent,
   ],
   imports: [
     HttpClientModule,

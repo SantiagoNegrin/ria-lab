@@ -7,9 +7,9 @@
       <label for="filtroNombre">Filtrar por nombre:</label>
       <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
       <div class="btn-group" role="group" aria-label="Filtro de activo">
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === '' }" (click)="filtroActivo = ''">Todos</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === 'true' }" (click)="filtroActivo = 'true'">Activo</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === 'false' }" (click)="filtroActivo = 'false'">Inactivo</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }" (click)="filtroActivo = null">Todos</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }" (click)="filtroActivo = true">Activo</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }" (click)="filtroActivo = false">Inactivo</button>
       </div>
       <button type="submit">Aplicar filtro</button>
     </form>

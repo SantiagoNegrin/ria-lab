@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ListarTipoDocumentoComponent implements OnInit {
   tiposDocumento: any[] = [];
   filtroNombre: string = '';
+  filtroActivo: boolean | null = null;
   totalPages: number = 0;
   currentPage: number = 1;
   limit: number = 10;
@@ -26,7 +27,7 @@ export class ListarTipoDocumentoComponent implements OnInit {
       offset: (this.currentPage - 1) * this.limit,
       id: 0,
       filters: {
-        activo: true,
+        activo: this.filtroActivo,
         nombre: this.filtroNombre
       },
       orders: ["string"]
@@ -51,5 +52,10 @@ export class ListarTipoDocumentoComponent implements OnInit {
       pages.push(i);
     }
     return pages;
+  }
+
+  aplicarFiltro() {
+    this.currentPage = 1;
+    this.obtenerTiposDocumento();
   }
 }

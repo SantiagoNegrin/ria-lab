@@ -1,29 +1,32 @@
-<h2>Alta de Responsabilidades</h2>
-<div *ngIf="successMessage" class="alert alert-success" role="alert">
-  {{ successMessage }}
-</div>
+<div class="card bg-primary text-center">
+  <div class="card-body">
+    <h2 class="card-title text-white">Alta de Responsabilidades</h2>
 
-<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-  {{ errorMessage }}
-</div>
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+      {{ successMessage }}
+    </div>
 
-<form (ngSubmit)="crearResponsabilidades()">
-  <div>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required>
-  </div>
-  <div>
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required></textarea>
-  </div>
-    <div>
-        <label for="areaId">ID de Área:</label>
-        <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="crearResponsabilidades()">
+      <div class="form-group">
+        <label for="nombre" class="text-white">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="descripcion" class="text-white">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="areaId" class="text-white">ID de Área:</label>
+        <select id="areaId" [(ngModel)]="areaId" name="areaId" required class="form-control">
           <option value="">Seleccione un área</option>
           <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
         </select>
       </div>
-  
-  
-  <button type="submit">Guardar</button>
-</form>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+</div>
