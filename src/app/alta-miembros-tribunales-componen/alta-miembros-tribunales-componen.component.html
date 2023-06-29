@@ -1,0 +1,26 @@
+<form (submit)="enviarFormulario()">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Alta de Miembros de Tribunales</h2>
+  
+        <div>
+          <label for="persona">Persona:</label>
+          <select id="persona" [(ngModel)]="personaSeleccionada" name="persona" required class="form-select">
+            <option value="" disabled selected hidden>Seleccione una persona</option>
+            <option *ngFor="let persona of personas" [ngValue]="persona">{{ persona.primerNombre }}</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="tipoIntegrante">Tipo de Integrante:</label>
+          <select id="tipoIntegrante" [(ngModel)]="tipoIntegranteSeleccionado" name="tipoIntegrante" required class="form-select">
+            <option value="" disabled selected hidden>Seleccione un tipo de integrante</option>
+            <option *ngFor="let tipoIntegrante of tiposIntegrantes" [ngValue]="tipoIntegrante">{{ tipoIntegrante.nombre }}</option>
+          </select>
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </form>
+  

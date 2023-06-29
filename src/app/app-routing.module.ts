@@ -28,6 +28,7 @@ import { ModificarPersonaComponent } from './modificar-persona/modificar-persona
 import { AltaEstadosPosiblesComponent } from './alta-estados-posibles/alta-estados-posibles.component';
 import { ListarEstadosPosiblesComponent } from './listar-estados-posibles/listar-estados-posibles.component';
 import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/modificar-posibles-estados.component';
+import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
 
 
 
@@ -60,7 +61,7 @@ const routes: Routes = [
   { path: 'alta-estados-posibles-llamado', component: AltaEstadosPosiblesComponent },
   { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent },
   { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent },
-
+  { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
 ];
 
 @NgModule({

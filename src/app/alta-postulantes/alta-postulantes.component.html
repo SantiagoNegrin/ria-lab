@@ -2,6 +2,14 @@
 
 <form (submit)="crearPostulante()">
   <div>
+    <label for="tipoDocumento">Tipo de Documento:</label>
+    <select id="tipoDocumento" [(ngModel)]="postulante.persona.tipoDeDocumento" name="tipoDocumento" required>
+      <option value="">Seleccione un tipo de documento</option>
+      <option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento">{{ tipoDocumento.nombre }}</option>
+    </select>
+  </div>
+
+  <div>
     <label for="documento">Documento:</label>
     <input type="text" id="documento" [(ngModel)]="postulante.persona.documento" name="documento" required>
   </div>

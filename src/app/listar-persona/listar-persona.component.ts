@@ -43,6 +43,9 @@ export class ListarPersonaComponent implements OnInit {
   modificarPersona(id: number) {
     this.router.navigate(['/modificar-persona', id]);
   }
+  postularPersona(id: number) {
+    this.router.navigate(['/postular-Persona', id]);
+  }
 
   cambiarPagina(page: number) {
     if (page >= 1 && page <= this.totalPages) {
