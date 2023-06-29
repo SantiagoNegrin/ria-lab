@@ -1,0 +1,14 @@
+/* Personaliza el color de fondo de la barra de navegación */
+.navbar-custom {
+    background-color: #424ab4;
+  }
+  
+  /* Personaliza el color del texto de los enlaces de navegación */
+  .navbar-custom .nav-link {
+    color: #fff;
+  }
+  
+  /* Personaliza el color del enlace activo */
+  .navbar-custom .nav-item.active .nav-link {
+    color: #ffcc00;
+  }
