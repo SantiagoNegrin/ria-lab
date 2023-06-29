@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ListarAreasComponent implements OnInit {
   areas: any[] = [];
   filtroNombre: string = '';
+  filtroActivo: string = '';
   totalPages: number = 0;
   currentPage: number = 1;
   limit: number = 10;
@@ -26,7 +27,7 @@ export class ListarAreasComponent implements OnInit {
       offset: (this.currentPage - 1) * this.limit,
       id: 0,
       filters: {
-        activo: true,
+        activo: this.filtroActivo === '' ? null : JSON.parse(this.filtroActivo),
         nombre: this.filtroNombre
       },
       orders: ["string"]
