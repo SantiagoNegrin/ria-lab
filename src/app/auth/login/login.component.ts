@@ -33,7 +33,8 @@ export class LoginComponent {
         console.log(response);
     
         // Redirige al usuario a la página principal
-        this.router.navigate(['']);
+        
+        location.reload()
       },
       (error) => {
         // Maneja el error del inicio de sesión

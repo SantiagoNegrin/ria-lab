@@ -1,0 +1,89 @@
+<h1>Listado de Usuarios</h1>
+
+<div class="container card">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="idUsuario">Id:</label>
+          <input type="text" class="form-control" id="idUsuario" [(ngModel)]="idUsuario">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" id="username" [(ngModel)]="username">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" class="form-control" id="email" [(ngModel)]="email">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="documento">Documento:</label>
+          <input type="text" class="form-control" id="documento" [(ngModel)]="documento">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+        <div class="form-group">
+          <label for="activo">Activo:</label>
+          <input type="checkbox" id="activo" [(ngModel)]="activo">
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>  
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-12 d-flex justify-content-end">
+    <button class="btn btn-primary" routerLink="/registro" >Nuevo</button>  
+  </div>
+</div>
+
+
+<!-- Resultados -->
+<div *ngIf="usuarios.length > 0">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let u of usuarios">
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.persona.primerNombre }}</td>
+            <td>{{ u.persona.documento }}</td>
+            <td>{{ u.email }}</td>
+            <!-- <td>
+                <a class="btn btn-primary" [routerLink]="['/modificar-usuario', u.id]">Modificar</a>            
+            </td> -->
+          </tr>
+          
+    </tbody>
+  </table>
+</div>
+
+<!-- Paginado -->
+<div>
+  <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
+  <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+  <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
+</div>
+

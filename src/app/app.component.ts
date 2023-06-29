@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.authService.logout();
 
     // Navegar a la misma ruta actual para actualizar la página
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
       this.router.navigate([this.router.url]);
     });
   }

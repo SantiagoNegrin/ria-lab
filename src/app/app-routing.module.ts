@@ -29,8 +29,8 @@ import { AltaEstadosPosiblesComponent } from './alta-estados-posibles/alta-estad
 import { ListarEstadosPosiblesComponent } from './listar-estados-posibles/listar-estados-posibles.component';
 import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/modificar-posibles-estados.component';
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
-
-
+import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
+import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 
 
 const routes: Routes = [
@@ -61,6 +61,8 @@ const routes: Routes = [
   { path: 'alta-estados-posibles-llamado', component: AltaEstadosPosiblesComponent },
   { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent },
   { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent },
+  { path: 'registro', component: AltaUsuarioComponent },
+  { path: 'listar-usuario', component: ListarUsuarioComponent }
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
 ];
 

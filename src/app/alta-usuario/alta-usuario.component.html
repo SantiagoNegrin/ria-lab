@@ -1,0 +1,48 @@
+<h2>Nuevo Usuario</h2>
+
+<div>
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+  <label for="tipoDocumento">Tipo de Documento:</label>
+  <select id="tipoDocumento" [(ngModel)]="selectedTipoDocumento" name="tipoDocumento">
+    <option *ngFor="let tipoDocumento of tiposDocumento" [value]="tipoDocumento.id">{{ tipoDocumento.nombre }}</option>
+  </select>
+</div>
+
+<div>
+  <label for="documento">Documento:</label>
+  <input type="text" id="documento" [(ngModel)]="usuario.documento" name="documento" required>
+</div>
+
+<div>
+  <label for="primerNombre">Primer Nombre:</label>
+  <input type="text" id="primerNombre" [(ngModel)]="usuario.primerNombre" name="primerNombre" required>
+</div>
+
+<div>
+  <label for="segundoNombre">Segundo Nombre:</label>
+  <input type="text" id="segundoNombre" [(ngModel)]="usuario.segundoNombre" name="segundoNombre">
+</div>
+
+<div>
+  <label for="primerApellido">Primer Apellido:</label>
+  <input type="text" id="primerApellido" [(ngModel)]="usuario.primerApellido" name="primerApellido" required>
+</div>
+
+<div>
+  <label for="segundoApellido">Segundo Apellido:</label>
+  <input type="text" id="segundoApellido" [(ngModel)]="usuario.segundoApellido" name="segundoApellido">
+</div>
+
+<div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" [(ngModel)]="usuario.email" name="email">
+  </div>
+
+
+<button (click)="crearUsuario()">Crear</button>
