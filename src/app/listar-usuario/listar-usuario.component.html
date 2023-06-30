@@ -1,6 +1,10 @@
-<h1>Listado de Usuarios</h1>
-
-<div class="container card">
+<div class="card" style="width: 95%; ">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Usuarios</h4>
+    <button class="btn btn-primary" routerLink="/registro">Nuevo</button>
+  </div>
+  
+  <div class="container card-body">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
@@ -37,22 +41,18 @@
           <label for="activo">Activo:</label>
           <input type="checkbox" id="activo" [(ngModel)]="activo">
         </div>
+        
       </div>
-      <div class="col-12 d-flex justify-content-end">
+      <div class="col-12 d-flex justify-content-end" style="margin: 10px;">
           <button class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>  
       </div>
     </div>
-</div>
-
-<div class="row">
-  <div class="col-12 d-flex justify-content-end">
-    <button class="btn btn-primary" routerLink="/registro" >Nuevo</button>  
   </div>
-</div>
 
 
 <!-- Resultados -->
-<div *ngIf="usuarios.length > 0">
+
+<div *ngIf="usuarios.length > 0" class="card" >
   <table class="table">
     <thead>
       <tr>
@@ -81,9 +81,9 @@
 </div>
 
 <!-- Paginado -->
-<div>
+<div *ngIf="usuarios.length > 0" style="margin: 10px;">
   <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
   <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
   <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
 </div>
-
+</div>

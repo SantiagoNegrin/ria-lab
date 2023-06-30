@@ -31,6 +31,8 @@ import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
 import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
+import { RestorePasswordComponent } from './restore-password/restore-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -64,6 +66,8 @@ const routes: Routes = [
   { path: 'registro', component: AltaUsuarioComponent },
   { path: 'listar-usuario', component: ListarUsuarioComponent },
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
+  { path: 'restore-password', component: RestorePasswordComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent }
 ];
 
 @NgModule({
