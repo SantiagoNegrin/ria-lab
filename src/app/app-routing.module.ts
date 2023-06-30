@@ -31,6 +31,7 @@ import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
 import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
+import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,8 @@ const routes: Routes = [
   { path: 'registro', component: AltaUsuarioComponent },
   { path: 'listar-usuario', component: ListarUsuarioComponent },
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
+  { path: 'listar-llamados', component: ListarLlamadosComponent },
+
 ];
 
 @NgModule({
