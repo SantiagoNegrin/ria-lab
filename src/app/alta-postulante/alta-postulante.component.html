@@ -1,0 +1,20 @@
+<h2>Alta de Postulante</h2>
+
+<!-- Formulario para seleccionar persona y llamado -->
+<form (ngSubmit)="altaPostulante()">
+  <div class="form-group">
+    <label for="persona">Persona:</label>
+    <select id="persona" class="form-control" [(ngModel)]="personaId" name="personaId">
+      <option *ngFor="let persona of personas" [value]="persona.id">{{ persona.primerNombre }} {{ persona.primerApellido }}</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="llamado">Llamado:</label>
+    <select id="llamado" class="form-control" [(ngModel)]="llamadoId" name="llamadoId">
+      <option *ngFor="let llamado of llamados" [value]="llamado.id">{{ llamado.nombre }}</option>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Crear Postulante</button>
+</form>

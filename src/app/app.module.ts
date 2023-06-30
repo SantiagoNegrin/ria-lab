@@ -44,6 +44,8 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-area/asignar-responsabilidad-area.component';
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
+import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
+import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.compo
     RestorePasswordComponent,
     ForgotPasswordComponent,
     AsignarResponsabilidadAreaComponent,
-    ListarLlamadosComponent
+    ListarLlamadosComponent,
+    ListarPostulantesLlamadoComponent,
+    AltaPostulanteComponent
   ],
   imports: [
     HttpClientModule,

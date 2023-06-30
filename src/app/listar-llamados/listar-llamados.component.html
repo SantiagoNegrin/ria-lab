@@ -37,8 +37,9 @@
                     <span class="fas fa-arrow-down"></span>
                 </button>
             </td>
+            
             <td>
-              <button class="btn btn-primary btn-sm">Postulantes</button>
+              <a class="btn btn-primary btn-sm" [routerLink]="['/listar-postulantes-llamado', llamado.nombre, llamado.identificador]">Postulantes</a>
               <button class="btn btn-primary btn-sm">Tribunal</button>
               <button class="btn btn-primary btn-sm">Estados</button>
             </td>

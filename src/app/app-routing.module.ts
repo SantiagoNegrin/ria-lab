@@ -34,6 +34,8 @@ import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.componen
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
+import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
+
 
 
 const routes: Routes = [
@@ -69,7 +71,8 @@ const routes: Routes = [
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
   { path: 'restore-password', component: RestorePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'listar-llamados', component: ListarLlamadosComponent }
+  { path: 'listar-llamados', component: ListarLlamadosComponent },
+  { path: 'listar-postulantes-llamado/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent }
 
 ];
 
