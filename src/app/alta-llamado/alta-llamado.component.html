@@ -1,40 +1,47 @@
-<form (ngSubmit)="crearLlamado()">
-    <div class="form-group">
-      <label for="areaID" class="text-white"> Área:</label>
-      <select id="areaID" [(ngModel)]="areaID" name="areaID" required class="form-control">
-        <option value="">Seleccione un área</option>
-        <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
-      </select>
-    </div>
-  
-    <div class="form-group">
-      <label for="identificador">Identificador:</label>
-      <input type="text" class="form-control" id="identificador" [(ngModel)]="identificador" name="identificador">
-    </div>
-    <div class="form-group">
-      <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre">
-    </div>
-    <div class="form-group">
-      <label for="linkPlanillaPuntajes">Link Plantilla Puntajes:</label>
-      <input type="text" class="form-control" id="linkPlanillaPuntajes" [(ngModel)]="linkPlanillaPuntajes" name="linkPlanillaPuntajes">
-    </div>
-  
-    <div class="form-group">
-      <label for="linkActa">Link Acta:</label>
-      <input type="text" class="form-control" id="linkActa" [(ngModel)]="linkActa" name="linkActa">
-    </div>
-    <div class="form-group">
-      <label for="minutosEntrevista">Minutos Entrevista:</label>
-      <input type="number" class="form-control" id="minutosEntrevista" [(ngModel)]="minutosEntrevista" name="minutosEntrevista">
-    </div>
-  
-    <button type="submit" class="btn btn-primary">Crear Llamado</button>
-  </form>
-  <div *ngIf="successMessage" class="alert alert-success" role="alert">
-    {{ successMessage }}
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Nuevo Llamado</h2>
   </div>
+  <div class="card-body">
+    <form (ngSubmit)="crearLlamado()">
+      <div class="form-group">
+        <label for="areaID">Área:</label>
+        <select id="areaID" [(ngModel)]="areaID" name="areaID" required class="form-control">
+          <option value="">Seleccione un área</option>
+          <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
+        </select>
+      </div>
 
-  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-    {{ errorMessage }}
+      <div class="form-group">
+        <label for="identificador">Identificador:</label>
+        <input type="text" class="form-control" id="identificador" [(ngModel)]="identificador" name="identificador">
+      </div>
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre">
+      </div>
+      <div class="form-group">
+        <label for="linkPlanillaPuntajes">Link Plantilla Puntajes:</label>
+        <input type="text" class="form-control" id="linkPlanillaPuntajes" [(ngModel)]="linkPlanillaPuntajes" name="linkPlanillaPuntajes">
+      </div>
+
+      <div class="form-group">
+        <label for="linkActa">Link Acta:</label>
+        <input type="text" class="form-control" id="linkActa" [(ngModel)]="linkActa" name="linkActa">
+      </div>
+      <div class="form-group">
+        <label for="minutosEntrevista">Minutos Entrevista:</label>
+        <input type="number" class="form-control" id="minutosEntrevista" [(ngModel)]="minutosEntrevista" name="minutosEntrevista">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Crear Llamado</button>
+    </form>
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
   </div>
+</div>
