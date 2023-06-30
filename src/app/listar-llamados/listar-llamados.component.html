@@ -1,4 +1,5 @@
 <app-alta-llamado></app-alta-llamado>
+
 <div class="card">
     <div class="card-header">
       <h2 class="card-title">Lista Llamados</h2>
@@ -14,6 +15,7 @@
             <th>Minutos Entrevista</th>
             <th>Área</th>
             <th>Estado</th>
+            <th>Modificar Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -27,10 +29,18 @@
             <td>{{ llamado.area.nombre }}</td>
             <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
             <td>
-              <button class="btn btn-primary btn-sm">Ver Postulantes</button>
-              <button class="btn btn-primary btn-sm">Ver Miembros Tribunal</button>
-              <button class="btn btn-primary btn-sm">Ver Llamados Estados</button>
-              <button class="btn btn-primary btn-sm">Ver Último Estado</button>
+                <button class="btn btn-primary" style="margin-right: 10px;">
+                    <span class="fas fa-arrow-up"></span>
+                </button>
+                
+                <button class="btn btn-primary" style="margin-left: 10px;">
+                    <span class="fas fa-arrow-down"></span>
+                </button>
+            </td>
+            <td>
+              <button class="btn btn-primary btn-sm">Postulantes</button>
+              <button class="btn btn-primary btn-sm">Tribunal</button>
+              <button class="btn btn-primary btn-sm">Estados</button>
             </td>
           </tr>
         </tbody>
