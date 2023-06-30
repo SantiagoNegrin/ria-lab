@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alta-postulante',
@@ -10,23 +11,25 @@ export class AltaPostulanteComponent implements OnInit {
   personas: any[] = [];
   llamados: any[] = [];
   personaId: number = 0;
-  llamadoId: number = 0;
+  idG: number = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.fetchPersonas();
-    this.fetchLlamados();
+    this.route.params.subscribe(params => {
+      this.idG = params['idG'];
+    });
   }
 
   fetchPersonas() {
     const data = {
-      limit: 0,
+      limit: 10000,
       offset: 0,
       id: 0,
       filters: {
         activo: true,
-        nombre: 'string' // Reemplaza 'string' con el valor de filtro deseado
+        nombre: '' // Reemplaza 'string' con el valor de filtro deseado
       },
       orders: ['string']
     };
@@ -37,55 +40,24 @@ export class AltaPostulanteComponent implements OnInit {
       });
   }
 
-  fetchLlamados() {
-    const data = {
-      limit: 0,
-      offset: 0,
-      id: 0,
-      filters: {
-        activo: true,
-        nombre: 'string', // Reemplaza 'string' con el valor de filtro deseado
-        identificador: 'string', // Reemplaza 'string' con el valor de filtro deseado
-        personaTribunalId: 0,
-        estadoId: 0
-      },
-      orders: ['string']
-    };
-
-    this.http.post('http://localhost:5000/api/Llamados/Paged', data)
-      .subscribe((response: any) => {
-        this.llamados = response.list; // Asignar la lista de llamados a la variable del componente
-      });
-  }
-
   altaPostulante() {
     const data = {
       id: 0,
       activo: true,
-      fechaHoraEntrevista: new Date().toISOString(), // Reemplaza con la fecha y hora deseada
+      fechaHoraEntrevista: '2023-06-30T22:43:37.414Z', // Reemplaza con la fecha y hora deseada
       estudioMeritosRealizado: true,
       entrevistaRealizada: true,
-      llamadoId: this.llamadoId,
-      personaId: this.personaId,
-      persona: {
-        id: 0,
-        activo: true,
-        tipoDeDocumento: {
-          id: 0,
-          activo: true,
-          nombre: 'string'
-        },
-        documento: 'string',
-        primerNombre: 'string',
-        segundoNombre: 'string',
-        primerApellido: 'string',
-        segundoApellido: 'string'
-      }
+      llamadoId: this.idG, // Reemplaza con el valor deseado
+      personaId: this.personaId, // Reemplaza con el valor deseado
+
     };
+
+    console.log('Request Bodyyyyy:', data);
 
     this.http.post('http://localhost:5000/api/Postulantes', data)
       .subscribe((response: any) => {
         // Procesar la respuesta del alta del postulante
+        console.log('Response:', response);
       });
   }
 }

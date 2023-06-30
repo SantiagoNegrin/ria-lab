@@ -72,7 +72,7 @@ const routes: Routes = [
   { path: 'restore-password', component: RestorePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'listar-llamados', component: ListarLlamadosComponent },
-  { path: 'listar-postulantes-llamado/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent }
+  { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
 
 ];
 

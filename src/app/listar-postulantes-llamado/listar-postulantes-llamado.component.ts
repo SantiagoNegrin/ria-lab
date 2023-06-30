@@ -9,16 +9,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListarPostulantesLlamadoComponent implements OnInit {
   nombreG: string = '';
+  idG: string = '';
   identificadorG: string = '';
   postulantes: any[] = [];
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
-
+  
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.idG = params['idG'];
       this.nombreG = params['nombreG'];
       this.identificadorG = params['identificadorG'];
       this.fetchPostulantes();
+      console.log('GET VALUES',this.nombreG,this.identificadorG,this.idG);
     });
   }
 
