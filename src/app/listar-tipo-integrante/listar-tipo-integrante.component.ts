@@ -8,9 +8,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListarTipoIntegranteComponent implements OnInit {
   tipoIntegrantes: any[] = [];
-  filtroNombre: string = '';
   currentPage: number = 1;
   totalPages: number = 0;
+  filtroNombre: string = '';
+  filtroActivo: boolean | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class ListarTipoIntegranteComponent implements OnInit {
       offset: (this.currentPage - 1) * 20,
       id: 0,
       filters: {
-        activo: true,
+        activo: this.filtroActivo,
         nombre: this.filtroNombre
       },
       orders: ['string']
