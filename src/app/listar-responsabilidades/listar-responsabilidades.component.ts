@@ -10,6 +10,7 @@ export class ListarResponsabilidadesComponent implements OnInit {
   apiUrl = 'http://localhost:5000/api/Responsabilidades/Paged';
   responsabilidades: any[] = [];
   filtroNombre: string = '';
+  filtroActivo: string = '';
   filtroArea: number = 0;
   areas: any[] = [];
   totalPages: number = 0;
@@ -28,7 +29,7 @@ export class ListarResponsabilidadesComponent implements OnInit {
       offset: (this.currentPage - 1) * this.limit,
       id: 0,
       filters: {
-        activo: true,
+        activo: this.filtroActivo !== '' ? JSON.parse(this.filtroActivo) : null,
         nombre: this.filtroNombre,
         areaId: this.filtroArea
       },
@@ -47,7 +48,10 @@ export class ListarResponsabilidadesComponent implements OnInit {
       this.obtenerResponsabilidades();
     }
   }
-
+  aplicarFiltro() {
+    this.currentPage = 1;
+    this.obtenerResponsabilidades();
+  }
   obtenerPaginas(): number[] {
     const pages: number[] = [];
     for (let i = 1; i <= this.totalPages; i++) {

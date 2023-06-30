@@ -46,11 +46,11 @@ export class ModificarAreaComponent implements OnInit {
       nombre: this.areaEncontrada.nombre,
       activo: this.areaEncontrada.activo
     };
-
+  
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Solicitud PUT exitosa:', response);
-        this.successMessage  = `Se modificó con éxito el área con id = ${this.areaEncontrada.id}`;
+        this.successMessage = `Se modificó con éxito el área con id = ${this.areaEncontrada.id}`;
       },
       (error) => {
         console.error('Error en la solicitud PUT:', error);

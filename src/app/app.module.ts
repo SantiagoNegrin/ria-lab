@@ -42,6 +42,8 @@ import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-area/asignar-responsabilidad-area.component';
+import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AltaUsuarioComponent,
     RestorePasswordComponent,
     ForgotPasswordComponent,
+    AsignarResponsabilidadAreaComponent,
+    ListarLlamadosComponent
   ],
   imports: [
     HttpClientModule,

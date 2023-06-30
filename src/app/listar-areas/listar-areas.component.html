@@ -1,32 +1,49 @@
 <div class="card">
-    <div class="card-body">
-      <h2>Listado de Áreas</h2>
-  
-      <form (ngSubmit)="obtenerAreas()">
-        <label for="filtroNombre">Filtrar por nombre:</label>
-        <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
-        <button type="submit">Aplicar filtro</button>
-      </form>
-  
-      <ul>
-        <li *ngFor="let area of areas">
-          <a [routerLink]="['/modificar-area', area.id, area.nombre]">{{ area.nombre }}</a>
+  <app-crear-area></app-crear-area>
+  <div class="card-body">
+    <h2>Listado de Áreas</h2>
+
+    <form (ngSubmit)="obtenerAreas()">
+      <label for="filtroNombre">Filtrar por nombre:</label>
+      <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
+      <div class="btn-group" role="group" aria-label="Filtro de activo">
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }" (click)="filtroActivo = null">Todos</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }" (click)="filtroActivo = true">Activo</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }" (click)="filtroActivo = false">Inactivo</button>
+      </div>
+      <button type="submit">Aplicar filtro</button>
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let area of areas">
+          <td>{{ area.nombre }}</td>
+          <td>
+            <a class="btn btn-primary btn-sm" [routerLink]="['/modificar-area', area.id, area.nombre]">Modificar</a>
+            <a class="btn btn-info btn-sm" [routerLink]="['/ver-responsabilidades', area.id, area.nombre]">Ver Responsabilidades</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav aria-label="Paginación" *ngIf="totalPages > 1">
+      <ul class="pagination mt-3">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="cambiarPagina(currentPage - 1)">Anterior</a>
+        </li>
+        <li class="page-item" *ngFor="let page of obtenerPaginas()" [class.active]="currentPage === page">
+          <a class="page-link" (click)="cambiarPagina(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="cambiarPagina(currentPage + 1)">Siguiente</a>
         </li>
       </ul>
-  
-      <nav aria-label="Paginación" *ngIf="totalPages > 1">
-        <ul class="pagination mt-3">
-          <li class="page-item" [class.disabled]="currentPage === 1">
-            <a class="page-link"  (click)="cambiarPagina(currentPage - 1)">Anterior</a>
-          </li>
-          <li class="page-item" *ngFor="let page of obtenerPaginas()" [class.active]="currentPage === page">
-            <a class="page-link"  (click)="cambiarPagina(page)">{{ page }}</a>
-          </li>
-          <li class="page-item" [class.disabled]="currentPage === totalPages">
-            <a class="page-link"  (click)="cambiarPagina(currentPage + 1)">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    </nav>
   </div>
-  
+</div>
