@@ -1,0 +1,16 @@
+<app-alta-postulante></app-alta-postulante>
+<table>
+    <thead>
+      <tr>
+        <th>Documento</th>
+        <th>Primer Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let postulante of postulantes">
+        <td>{{ postulante.persona.documento }}</td>
+        <td>{{ postulante.persona.primerNombre }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

@@ -36,6 +36,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
 import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
+import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
+
 
 
 const routes: Routes = [
@@ -74,6 +76,7 @@ const routes: Routes = [
   { path: 'listar-llamados', component: ListarLlamadosComponent },
   { path: 'modificar-usuario/:id', component: ModificarUsuarioComponent },
   { path: 'roles-usuario/:id', component: RolesUsuarioComponent },
+  { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
 
 ];
 

@@ -1,2 +1,51 @@
-<p>listar-llamados works!</p>
 <app-alta-llamado></app-alta-llamado>
+
+<div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Lista Llamados</h2>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Identificador</th>
+            <th>Nombre</th>
+            <th>Link Planilla Puntajes</th>
+            <th>Link Acta</th>
+            <th>Minutos Entrevista</th>
+            <th>Área</th>
+            <th>Estado</th>
+            <th>Modificar Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let llamado of llamados">
+            <td>{{ llamado.identificador }}</td>
+            <td>{{ llamado.nombre }}</td>
+            <td>{{ llamado.linkPlanillaPuntajes }}</td>
+            <td>{{ llamado.linkActa }}</td>
+            <td>{{ llamado.minutosEntrevista }}</td>
+            <td>{{ llamado.area.nombre }}</td>
+            <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
+            <td>
+                <button class="btn btn-primary" style="margin-right: 10px;">
+                    <span class="fas fa-arrow-up"></span>
+                </button>
+                
+                <button class="btn btn-primary" style="margin-left: 10px;">
+                    <span class="fas fa-arrow-down"></span>
+                </button>
+            </td>
+            
+            <td>
+              <a class="btn btn-primary btn-sm" [routerLink]="['/listar-postulantes-llamado', llamado.id,llamado.nombre, llamado.identificador]">Postulantes</a>
+              <button class="btn btn-primary btn-sm">Tribunal</button>
+              <button class="btn btn-primary btn-sm">Estados</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

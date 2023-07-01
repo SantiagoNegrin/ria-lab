@@ -46,6 +46,8 @@ import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-a
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
 import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
+import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
+import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
     AsignarResponsabilidadAreaComponent,
     ListarLlamadosComponent,
     ModificarUsuarioComponent,
-    RolesUsuarioComponent
+    RolesUsuarioComponent,
+    ListarPostulantesLlamadoComponent,
+    AltaPostulanteComponent
   ],
   imports: [
     HttpClientModule,
