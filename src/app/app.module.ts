@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { EstadosComponent } from './estados/estados.component';
 import { NuevoEstadoComponent } from './nuevo-estado/nuevo-estado.component';
 import { BuscarEstadoComponent } from './buscar-estado/buscar-estado.component';
@@ -44,6 +44,8 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-area/asignar-responsabilidad-area.component';
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
+import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.compo
     RestorePasswordComponent,
     ForgotPasswordComponent,
     AsignarResponsabilidadAreaComponent,
-    ListarLlamadosComponent
+    ListarLlamadosComponent,
+    ModificarUsuarioComponent,
+    RolesUsuarioComponent
   ],
   imports: [
     HttpClientModule,

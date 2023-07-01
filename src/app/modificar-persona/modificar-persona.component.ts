@@ -10,9 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ModificarPersonaComponent implements OnInit {
   persona: any = {};
   tiposDocumento: any[] = [];
-  errorMessage: string = ''; // Variable para almacenar el mensaje de error
-  successMessage: string = ''; // Variable para almacenar el mensaje de éxito
-
+  errorMessage: string = ''; 
+  successMessage: string = ''; 
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
@@ -28,7 +27,7 @@ export class ModificarPersonaComponent implements OnInit {
   obtenerPersona(id: number) {
     const url = `http://localhost:5000/api/Personas/${id}`;
     this.http.get<any>(url).subscribe(response => {
-      if (response && response.id) { // Verificar si la respuesta contiene la propiedad 'id'
+      if (response && response.id) { 
         this.persona = response;
       } else {
         console.error('No se pudo obtener la persona');
@@ -42,15 +41,11 @@ export class ModificarPersonaComponent implements OnInit {
     const url = `http://localhost:5000/api/Personas/${this.persona.id}`;
     this.http.put<any>(url, this.persona).subscribe(
       response => {
-        // Asignar mensaje de éxito
         this.successMessage = 'Los cambios se guardaron correctamente.';
-        // Limpiar mensaje de error
         this.errorMessage = '';
       },
       error => {
-        // Asignar mensaje de error
         this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
-        // Limpiar mensaje de éxito
         this.successMessage = '';
       }
     );
@@ -70,7 +65,7 @@ export class ModificarPersonaComponent implements OnInit {
     };
 
     this.http.post<any>(url, body).subscribe(response => {
-      if (response && response.list) { // Verificar si la respuesta contiene la propiedad 'list'
+      if (response && response.list) { 
         this.tiposDocumento = response.list;
       } else {
         console.error('No se pudieron obtener los tipos de documento');

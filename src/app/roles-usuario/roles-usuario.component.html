@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Roles de: {{ nombre }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-success" *ngIf="successMessage">
+            {{ successMessage }}
+        </div>
+        <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+            <p>Error: {{ errorMessage }}</p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of rolesDisp">
+                    <td>{{ role }}</td>
+                    <td>
+                        <button *ngIf="!rolesUser.includes(role)" (click)="addRole(role)" class="btn btn-primary">
+                            Agregar
+                        </button>
+                        <button *ngIf="rolesUser.includes(role)" (click)="removeRole(role)" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -26,7 +26,7 @@ export class ListarPersonaComponent implements OnInit {
     const body = {
       limit: this.limit,
       offset: (this.currentPage - 1) * this.limit,
-      id: 0,
+      id: -1,
       filters: {
         activo: this.filtroActivo,
         primerNombre: this.filtroNombre

@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Modificar usuario</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-success" *ngIf="successMessage">
+            {{ successMessage }}
+        </div>
+        <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+            <p>Error: {{ errorMessage }}</p>
+        </div>
+        <form *ngIf="usuario" (submit)="guardarCambios()">
+            <div class="form-group">
+                <label for="tipoDocumento">Tipo de Documento:</label>
+                <select id="tipoDocumento" [ngModel]="usuario.tipoDeDocumentoId" name="tipoDocumento">
+                    <option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.id">{{ tipoDoc.nombre }}
+                    </option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="documento">Documento:</label>
+                <input type="text" id="documento" [(ngModel)]="usuario.documento" name="documento"
+                    class="form-control" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="primerNombre">Primer Nombre:</label>
+                <input type="text" id="primerNombre" [(ngModel)]="usuario.primerNombre" name="primerNombre"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="segundoNombre">Segundo Nombre:</label>
+                <input type="text" id="segundoNombre" [(ngModel)]="usuario.segundoNombre" name="segundoNombre"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="primerApellido">Primer Apellido:</label>
+                <input type="text" id="primerApellido" [(ngModel)]="usuario.primerApellido" name="primerApellido"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="segundoApellido">Segundo Apellido:</label>
+                <input type="text" id="segundoApellido" [(ngModel)]="usuario.segundoApellido" name="segundoApellido"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" [(ngModel)]="usuario.email" name="email"
+                    class="form-control" disabled>
+            </div>
+
+            <div class="form-group">
+                <label style="margin-right: 10px;" for="activo">Activo:</label>
+                <input type="checkbox" id="activo" [(ngModel)]="usuario.activo">
+              </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Guardar Cambios</button>
+        </form>
+    </div>
+
+</div>

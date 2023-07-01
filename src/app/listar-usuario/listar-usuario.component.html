@@ -43,7 +43,7 @@
         </div>
         
       </div>
-      <div class="col-12 d-flex justify-content-end" style="margin: 10px;">
+      <div class="col-12 d-flex justify-content-end" style="padding-right: 20px; margin: 10px;">
           <button class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>  
       </div>
     </div>
@@ -62,6 +62,7 @@
         <th>Documento</th>
         <th>Email</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -71,9 +72,13 @@
             <td>{{ u.persona.primerNombre }}</td>
             <td>{{ u.persona.documento }}</td>
             <td>{{ u.email }}</td>
-            <!-- <td>
-                <a class="btn btn-primary" [routerLink]="['/modificar-usuario', u.id]">Modificar</a>            
-            </td> -->
+            <td>
+              <img src="..\assets\editar2.png" ngbTooltip="Modificar" [routerLink]="['/modificar-usuario', u.id]">
+              <!--  <a class="btn btn-primary" [routerLink]="['/modificar-usuario', u.id]">Modificar</a> -->
+            </td>
+            <td>
+              <img src="..\assets\roles2.png" ngbTooltip="Roles" [routerLink]="['/roles-usuario', u.id]">
+            </td>
           </tr>
           
     </tbody>
@@ -81,7 +86,7 @@
 </div>
 
 <!-- Paginado -->
-<div *ngIf="usuarios.length > 0" style="margin: 10px;">
+<div *ngIf="usuarios.length > 0" class="d-flex justify-content-center" style="margin: 10px;">
   <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
   <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
   <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
