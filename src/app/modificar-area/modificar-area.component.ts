@@ -19,8 +19,10 @@ export class ModificarAreaComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.areaId = +params['id'];
-      this.nombre = params['nombre'];
+     // this.areaId = params['id'];
+      //this.nombre = params['nombre'];
+      console.log(this.areaId);
+      console.log(this.nombre);
       this.getAreaById(this.areaId);
     });
   }
@@ -34,7 +36,7 @@ export class ModificarAreaComponent implements OnInit {
       },
       (error) => {
         console.log('Error al obtener el área:', error);
-        this.error = `Error al obtener el área ${id}`;
+        this.error = `Error al obtener el área`;
       }
     );
   }
@@ -50,11 +52,13 @@ export class ModificarAreaComponent implements OnInit {
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Solicitud PUT exitosa:', response);
-        this.successMessage = `Se modificó con éxito el área con id = ${this.areaEncontrada.id}`;
+        this.successMessage = 'Los cambios se guardaron correctamente.';
+        this.error = '';
       },
       (error) => {
         console.error('Error en la solicitud PUT:', error);
-        this.error = `Error al modificar el área con id = ${this.areaEncontrada.id}`;
+        this.error = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
+        this.successMessage = '';
       }
     );
   }

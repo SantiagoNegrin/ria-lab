@@ -1,22 +1,27 @@
 <div class="card">
-  <div class="card-body text-center bg-primary text-white">
-    <h5 class="card-title">Modificar Área</h5>
-    <div class="container mt-4">
-      <div class="mt-4" *ngIf="areaEncontrada">
-        <h3>Área:</h3>
-
-        <input type="string" class="form-control" [(ngModel)]="areaEncontrada.nombre" name="nombre">
-        <label for="activo">Activo:</label>
-        <input type="checkbox" [(ngModel)]="areaEncontrada.activo" name="activo">
-        <button class="btn btn-primary mt-2" (click)="modificarArea()">Guardar Cambios</button>
-      </div>
-      <br>
-      <div class="mt-4" *ngIf="error" class="alert alert-danger">
-        <p>Error: {{ error }}</p>
-      </div>
-      <div class="alert alert-success" *ngIf="successMessage">
-        {{ successMessage }}
-      </div>
-    </div>
+  <div class="card-header">
+    <h4>Modificar Área</h4>
   </div>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+    <div class="mt-4" *ngIf="error" class="alert alert-danger">
+      <p>Error: {{ error }}</p>
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="string" class="form-control" [(ngModel)]="areaEncontrada.nombre" name="nombre">
+    </div>
+
+    <div class="form-group" style="margin-top: 10px;">
+      <label style="margin-right: 10px;" for="activo">Activo:</label>
+      <input type="checkbox" class="form-checkbox" id="activo" [(ngModel)]="areaEncontrada.activo">
+    </div>
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button class="btn btn-primary mt-2" (click)="modificarArea()">Guardar Cambios</button>
+    </div>
+
+  </div>
+
 </div>

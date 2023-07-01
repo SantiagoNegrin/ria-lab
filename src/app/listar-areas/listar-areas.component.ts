@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CrearAreaComponent } from '../crear-area/crear-area.component';
+import { ModificarAreaComponent } from '../modificar-area/modificar-area.component';
 
 @Component({
   selector: 'app-listar-areas',
@@ -14,7 +17,7 @@ export class ListarAreasComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 10;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public modal: NgbModal) { }
 
   ngOnInit() {
     this.obtenerAreas();
@@ -53,4 +56,15 @@ export class ListarAreasComponent implements OnInit {
     }
     return pages;
   }
+
+  openModal() {
+		this.modal.open(CrearAreaComponent, { scrollable:true });
+	}
+
+  openModificar(id: number, nombre: string){
+      const modalRef = this.modal.open(ModificarAreaComponent);
+      modalRef.componentInstance.areaId = id;
+      modalRef.componentInstance.nombre = nombre;
+  }
+
 }

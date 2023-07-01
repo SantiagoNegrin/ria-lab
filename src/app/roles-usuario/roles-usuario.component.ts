@@ -21,10 +21,10 @@ export class RolesUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerRoles();
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
+    /*this.route.params.subscribe(params => {
+      this.id = params['id'];*/
       this.obtenerUsuario(this.id);
-    });
+    //});
   }
 
   obtenerUsuario(id: string) {
@@ -57,29 +57,13 @@ export class RolesUsuarioComponent implements OnInit {
     });
   }
 
-  /*guardarCambios() {
-    const url = `http://localhost:5000/api/Auth/Users`;
-    this.http.put<any>(url, this.usuario).subscribe(
-      response => {
-        this.successMessage = 'Los cambios se guardaron correctamente.';
-        this.errorMessage = '';
-        
-      },
-      error => {
-        this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
-        this.successMessage = '';
-      }
-    );
-  }*/
-
   obtenerRoles() {
     const url = 'http://localhost:5000/api/Auth/Users/Roles';
 
     this.http.get<any>(url).subscribe(response => {
       this.rolesDisp = response;
-      console.log(this.rolesDisp);
     }, error => {
-      console.error('Error al obtener los tipos de documento:', error);
+      console.error('Error al obtener los roles', error);
     });
   }
 
@@ -89,6 +73,7 @@ export class RolesUsuarioComponent implements OnInit {
       userId: this.id,
       roleId: role
     }
+    console.log(data);
     this.http.post<any>(url, data).subscribe(
       response => {
         this.successMessage = 'Rol asignado.';
@@ -99,6 +84,7 @@ export class RolesUsuarioComponent implements OnInit {
         }
       },
       error => {
+        console.log(error);
         this.errorMessage = 'Ocurrió un error al asignar el rol. Por favor, inténtalo de nuevo.';
         this.successMessage = '';
       }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModificarUsuarioComponent } from '../modificar-usuario/modificar-usuario.component';
+import { RolesUsuarioComponent } from "../roles-usuario/roles-usuario.component";
+import { AltaUsuarioComponent } from '../alta-usuario/alta-usuario.component';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -25,7 +29,7 @@ export class ListarUsuarioComponent implements OnInit{
   email: string = '';
   documento: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { } // Agregar Router al constructor
+  constructor(private http: HttpClient, private router: Router, public modal: NgbModal) { }
 
   ngOnInit(): void {
     this.listarUsuarios();
@@ -88,5 +92,18 @@ export class ListarUsuarioComponent implements OnInit{
     }
   }
 
+  openModal() {
+		this.modal.open(AltaUsuarioComponent, { scrollable:true });
+	}
+
+  openModificar(id: string){
+      const modalRef = this.modal.open(ModificarUsuarioComponent);
+      modalRef.componentInstance.id = id;
+  }
+
+  openRoles(id: string){
+    const modalRef = this.modal.open(RolesUsuarioComponent);
+    modalRef.componentInstance.id = id;
+  }
 
 }

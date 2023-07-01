@@ -1,32 +1,57 @@
-<div class="card">
-  <app-crear-area></app-crear-area>
-  <div class="card-body">
-    <h2>Listado de Áreas</h2>
+<div class="card" style="width: 95%; ">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Áreas</h4>
+    <button class="btn btn-primary" (click)="openModal()">Nuevo</button>
+  </div>
 
+  <div class="container card-body">
+    
     <form (ngSubmit)="obtenerAreas()">
-      <label for="filtroNombre">Filtrar por nombre:</label>
-      <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
-      <div class="btn-group" role="group" aria-label="Filtro de activo">
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }" (click)="filtroActivo = null">Todos</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }" (click)="filtroActivo = true">Activo</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }" (click)="filtroActivo = false">Inactivo</button>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="filtroNombre">Nombre:</label>
+            <input class="form-control" type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
+          <div class="form-group">
+            <div class="btn-group" role="group" aria-label="Filtro de activo">
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }"
+                (click)="filtroActivo = null">Todos</button>
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }"
+                (click)="filtroActivo = true">Activo</button>
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }"
+                (click)="filtroActivo = false">Inactivo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-end" style="padding-right: 20px; margin: 10px;">
+          <button class="btn btn-primary" type="submit">Aplicar filtro</button>
+        </div>
       </div>
-      <button type="submit">Aplicar filtro</button>
     </form>
+  
 
     <table class="table">
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Acciones</th>
+          <th>Activo</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let area of areas">
           <td>{{ area.nombre }}</td>
+          <td> {{ area.activo === true ? 'Si' : 'No' }}</td>
           <td>
-            <a class="btn btn-primary btn-sm" [routerLink]="['/modificar-area', area.id, area.nombre]">Modificar</a>
-            <a class="btn btn-info btn-sm" [routerLink]="['/ver-responsabilidades', area.id, area.nombre]">Ver Responsabilidades</a>
+            <img src="..\assets\editar2.png" ngbTooltip="Modificar" (click)="openModificar(area.id, area.nombre)">
+            <!-- <a class="btn btn-primary btn-sm" [routerLink]="['/modificar-area', area.id, area.nombre]">Modificar</a>
+            <a class="btn btn-info btn-sm" [routerLink]="['/ver-responsabilidades', area.id, area.nombre]">Ver
+              Responsabilidades</a> -->
           </td>
         </tr>
       </tbody>

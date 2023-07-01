@@ -12,7 +12,7 @@
         <form *ngIf="usuario" (submit)="guardarCambios()">
             <div class="form-group">
                 <label for="tipoDocumento">Tipo de Documento:</label>
-                <select id="tipoDocumento" [ngModel]="usuario.tipoDeDocumentoId" name="tipoDocumento">
+                <select class="form-select" id="tipoDocumento" [ngModel]="usuario.tipoDeDocumentoId" name="tipoDocumento">
                     <option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.id">{{ tipoDoc.nombre }}
                     </option>
                 </select>
@@ -57,9 +57,12 @@
             <div class="form-group">
                 <label style="margin-right: 10px;" for="activo">Activo:</label>
                 <input type="checkbox" id="activo" [(ngModel)]="usuario.activo">
-              </div>
+            </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Guardar Cambios</button>
+            <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            
         </form>
     </div>
 
