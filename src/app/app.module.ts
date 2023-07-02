@@ -3,20 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { EstadosComponent } from './estados/estados.component';
-import { NuevoEstadoComponent } from './nuevo-estado/nuevo-estado.component';
-import { BuscarEstadoComponent } from './buscar-estado/buscar-estado.component';
-import { EditarEstadoComponent } from './editar-estado/editar-estado.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BuscarAreasComponent } from './buscar-areas/buscar-areas.component';
 import { CrearAreaComponent } from './crear-area/crear-area.component';
 import { ModificarAreaComponent } from './modificar-area/modificar-area.component';
 import { AuthService } from './auth/login/auth.service';
 import { FormsModule  } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
-import { LogoutComponent } from './logout/logout.component';
 import { ListarAreasComponent } from './listar-areas/listar-areas.component';
 import { AltaTipoIntegranteComponent } from './alta-tipo-integrante/alta-tipo-integrante.component';
 import { ListarTipoIntegranteComponent } from './listar-tipo-integrante/listar-tipo-integrante.component';
@@ -29,7 +23,6 @@ import { ModificarTipoDocumentoComponent } from './modificar-tipo-documento/modi
 import { AltaResponsabilidadesComponent } from './alta-responsabilidades/alta-responsabilidades.component';
 import { ListarResponsabilidadesComponent } from './listar-responsabilidades/listar-responsabilidades.component';
 import { ModificarResponsabilidadesComponent } from './modificar-responsabilidades/modificar-responsabilidades.component';
-import { AltaPostulantesComponent } from './alta-postulantes/alta-postulantes.component';
 import { AltaPersonaComponent } from './alta-persona/alta-persona.component';
 import { ListarPersonaComponent } from './listar-persona/listar-persona.component';
 import { ModificarPersonaComponent } from './modificar-persona/modificar-persona.component';
@@ -42,7 +35,6 @@ import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
 import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AsignarResponsabilidadAreaComponent } from './asignar-responsabilidad-area/asignar-responsabilidad-area.component';
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
 import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
@@ -52,15 +44,9 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
 @NgModule({
   declarations: [
     AppComponent,
-    EstadosComponent,
-    NuevoEstadoComponent,
-    BuscarEstadoComponent,
-    EditarEstadoComponent,
-    BuscarAreasComponent,
     CrearAreaComponent,
     ModificarAreaComponent,
     LoginComponent,
-    LogoutComponent,
     ListarAreasComponent,
     AltaTipoIntegranteComponent,
     ListarTipoIntegranteComponent,
@@ -71,7 +57,6 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
     AltaResponsabilidadesComponent,
     ListarResponsabilidadesComponent,
     ModificarResponsabilidadesComponent,
-    AltaPostulantesComponent,
     AltaPersonaComponent,
     ListarPersonaComponent,
     ModificarPersonaComponent,
@@ -84,7 +69,6 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
     AltaUsuarioComponent,
     RestorePasswordComponent,
     ForgotPasswordComponent,
-    AsignarResponsabilidadAreaComponent,
     ListarLlamadosComponent,
     ModificarUsuarioComponent,
     RolesUsuarioComponent,
