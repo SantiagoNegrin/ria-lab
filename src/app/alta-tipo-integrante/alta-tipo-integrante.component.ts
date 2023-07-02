@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AltaTipoIntegranteComponent {
   nombre: string = '';
   orden: number = 0;
+  activo: boolean = true
   successMessage: string = '';
   errorMessage: string = '';
 
@@ -18,7 +19,7 @@ export class AltaTipoIntegranteComponent {
     const url = 'http://localhost:5000/api/TiposDeIntegrantes';
     const body = {
       id: 0,
-      activo: true,
+      activo: this.activo,
       nombre: this.nombre,
       orden: this.orden
     };
@@ -26,15 +27,14 @@ export class AltaTipoIntegranteComponent {
     this.http.post(url, body).subscribe(
       (response) => {
         console.log('Alta exitosa:', response);
-        this.successMessage = 'Alta exitosa'; // Mensaje de éxito
-        this.errorMessage = ''; // Reinicia el mensaje de error
-        // Realiza acciones adicionales después de un alta exitosa
+        this.successMessage = 'Alta exitosa'; 
+        this.errorMessage = ''; 
+        location.reload();
       },
       (error) => {
         console.error('Error en el alta:', error);
-        this.successMessage = ''; // Reinicia el mensaje de éxito
-        this.errorMessage = 'Error en el alta'; // Mensaje de error
-        // Maneja el error del alta
+        this.successMessage = ''; 
+        this.errorMessage = 'Error al crear tipo de integrante'; 
       }
     );
   }

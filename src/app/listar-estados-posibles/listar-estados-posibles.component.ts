@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AltaEstadosPosiblesComponent } from '../alta-estados-posibles/alta-estados-posibles.component';
+import { ModificarPosiblesEstadosComponent } from '../modificar-posibles-estados/modificar-posibles-estados.component';
 
 @Component({
   selector: 'app-listar-estados-posibles',
@@ -18,10 +21,10 @@ export class ListarEstadosPosiblesComponent implements OnInit {
   totalCount: number = 0;
 
   // Filtros
-  activo: boolean = true;
+  activo: boolean | null = null;
   nombre: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { } // Agregar Router al constructor
+  constructor(private http: HttpClient, public modal: NgbModal) { } // Agregar Router al constructor
 
   ngOnInit(): void {
     this.listarEstadosPosibles();
@@ -76,4 +79,14 @@ export class ListarEstadosPosiblesComponent implements OnInit {
       this.listarEstadosPosibles();
     }
   }
+
+  openModal() {
+		this.modal.open(AltaEstadosPosiblesComponent, { scrollable:true });
+	}
+
+  openModificar(id: string){
+      const modalRef = this.modal.open(ModificarPosiblesEstadosComponent);
+      modalRef.componentInstance.estadoId = id;
+  }
+
 }

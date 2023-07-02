@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AltaTipoIntegranteComponent } from '../alta-tipo-integrante/alta-tipo-integrante.component';
+import { ModificarTipoIntegranteComponent } from '../modificar-tipo-integrante/modificar-tipo-integrante.component';
 
 @Component({
   selector: 'app-listar-tipo-integrante',
@@ -13,7 +16,7 @@ export class ListarTipoIntegranteComponent implements OnInit {
   filtroNombre: string = '';
   filtroActivo: boolean | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public modal: NgbModal) { }
 
   ngOnInit() {
     this.obtenerTipoIntegrantes();
@@ -38,6 +41,11 @@ export class ListarTipoIntegranteComponent implements OnInit {
     });
   }
 
+  applyFilters() {
+    this.currentPage = 1;
+    this.obtenerTipoIntegrantes();
+  }
+
   cambiarPagina(pagina: number) {
     this.currentPage = pagina;
     this.obtenerTipoIntegrantes();
@@ -45,5 +53,14 @@ export class ListarTipoIntegranteComponent implements OnInit {
 
   get totalPagesArray() {
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  }
+
+  openModal() {
+		this.modal.open(AltaTipoIntegranteComponent, { scrollable:true });
+	}
+
+  openModificar(id: string){
+      const modalRef = this.modal.open(ModificarTipoIntegranteComponent);
+      modalRef.componentInstance.tipoIntegranteId = id;
   }
 }

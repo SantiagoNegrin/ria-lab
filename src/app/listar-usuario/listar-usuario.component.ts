@@ -22,7 +22,7 @@ export class ListarUsuarioComponent implements OnInit{
   totalCount: number = 0;
 
   // Filtros
-  activo: boolean = true;
+  activo: boolean | null = null;
   nombre: string = '';
   idUsuario: string = '';
   username: string = '';

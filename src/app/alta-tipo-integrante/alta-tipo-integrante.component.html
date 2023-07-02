@@ -1,28 +1,30 @@
 <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Alta de Tipo de Integrante</h5>
-  
-      <div *ngIf="successMessage" class="alert alert-success" role="alert">
-        {{ successMessage }}
-      </div>
-  
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
-      </div>
-  
-      <form (ngSubmit)="altaTipoIntegrante()">
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="orden" class="form-label">Orden:</label>
-          <input type="number" id="orden" [(ngModel)]="orden" name="orden" class="form-control">
-        </div>
-        <div>
-          <button type="submit" class="btn btn-primary">Dar de alta</button>
-        </div>
-      </form>
-    </div>
+  <div class="card-header">
+    <h4>Nuevo Tipo de Integrante</h4>
   </div>
-  
+  <div class="card-body">
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="string" class="form-control" [(ngModel)]="nombre" name="nombre">
+    </div>
+
+    <div class="form-group">
+      <label for="orden">Orden:</label>
+      <input type="number" class="form-control" [(ngModel)]="orden" name="orden">
+    </div>
+
+    <div class="form-group" style="margin-top: 10px;">
+      <label style="margin-right: 10px;" for="activo">Activo:</label>
+      <input type="checkbox" class="form-checkbox" id="activo" [(ngModel)]="activo">
+    </div>
+
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button class="btn btn-primary mt-2" (click)="altaTipoIntegrante()">Guardar</button>
+    </div>
+
+  </div>
+</div>

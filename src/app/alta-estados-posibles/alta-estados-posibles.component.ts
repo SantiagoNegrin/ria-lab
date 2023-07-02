@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AltaEstadosPosiblesComponent {
   nombre: string = '';
-  successMessage: string = '';
+  activo: boolean = true;
   errorMessage: string = '';
 
   constructor(private http: HttpClient) { }
@@ -17,20 +17,17 @@ export class AltaEstadosPosiblesComponent {
     const url = 'http://localhost:5000/api/LlamadosEstadosPosibles';
 
     const body = {
-      activo: true,
+      activo: this.activo,
       nombre: this.nombre
     };
 
     this.http.post(url, body).subscribe(response => {
-      this.successMessage = 'Estado posible creado exitosamente.';
       this.errorMessage = '';
       console.log('Estado posible creado exitosamente.');
-      // Aquí puedes agregar lógica adicional, como redireccionar a otra página.
+      location.reload();
     }, error => {
-      this.successMessage = '';
-      this.errorMessage = 'Error al crear el estado posible: ' + error.message;
+      this.errorMessage = 'Error al crear estado posible';
       console.error('Error al crear el estado posible:', error);
-      // Aquí puedes manejar el error, mostrar un mensaje de error más específico, etc.
     });
   }
 }

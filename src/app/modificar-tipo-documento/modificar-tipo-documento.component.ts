@@ -15,9 +15,9 @@ export class ModificarTipoDocumentoComponent implements OnInit {
   activo: boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.route.params.subscribe(params => {
+   /* this.route.params.subscribe(params => {
       this.tipoDocumentoId = params['id'];
-    });
+    });*/
   }
 
   ngOnInit() {
@@ -37,23 +37,19 @@ export class ModificarTipoDocumentoComponent implements OnInit {
     const url = `http://localhost:5000/api/TiposDeDocumentos/${this.tipoDocumentoId}`;
     const body = {
       id: this.tipoDocumentoId,
-      activo: this.activo, // Incluir el valor del estado activo en el objeto body
+      activo: this.activo, 
       nombre: this.nombre
     };
 
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Modificación exitosa:', response);
-        // Realiza acciones adicionales después de una modificación exitosa
-        this.successMessage = `Se modificó con éxito el tipo de documento.`;
-        this.errorMessage = '';
+        location.reload();
       },
       (error) => {
         console.error('Error en la modificación:', error);
         this.successMessage = '';
         this.errorMessage = `Error al modificar el tipo de documento. Por favor, inténtelo nuevamente.`;
-    
-        // Maneja el error de la modificación
       }
     );
   }

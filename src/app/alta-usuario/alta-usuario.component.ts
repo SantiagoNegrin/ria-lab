@@ -55,8 +55,8 @@ export class AltaUsuarioComponent implements OnInit {
 
     this.http.post<any>(apiUrl, this.usuario).subscribe(response => {
       this.errorMessage = '';
-      this.successMessage = 'Usuario registrado correctamente';
       this.usuario = {};
+      location.reload();
     }, error => {
       this.errorMessage = 'Error al registrar el usuario';
       console.log(error);

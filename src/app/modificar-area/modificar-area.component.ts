@@ -52,8 +52,8 @@ export class ModificarAreaComponent implements OnInit {
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Solicitud PUT exitosa:', response);
-        this.successMessage = 'Los cambios se guardaron correctamente.';
         this.error = '';
+        location.reload();
       },
       (error) => {
         console.error('Error en la solicitud PUT:', error);

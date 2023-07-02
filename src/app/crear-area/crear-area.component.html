@@ -1,12 +1,26 @@
 <div class="card">
-    <div class="card-body text-center bg-primary text-white">
-      <h5 class="card-title">Crear Área</h5>
-      <div class="container mt-4">
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre">
-        </div>
-        <button class="btn btn-primary" (click)="crearArea()">Crear Área</button>
-      </div>
+  <div class="card-header">
+    <h4>Nueva Área</h4>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="string" class="form-control" [(ngModel)]="nombre" name="nombre">
+    </div>
+
+    <div class="form-group" style="margin-top: 10px;">
+      <label style="margin-right: 10px;" for="activo">Activo:</label>
+      <input type="checkbox" class="form-checkbox" id="activo" [(ngModel)]="activo">
+    </div>
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button class="btn btn-primary mt-2" (click)="crearArea()">Guardar</button>
     </div>
   </div>
+</div>

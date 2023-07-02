@@ -11,14 +11,11 @@ export class ModificarTipoIntegranteComponent {
   tipoIntegranteId: number = 0;
   nombre: string = '';
   orden: number = 0;
+  activo: boolean = true;
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.route.params.subscribe(params => {
-      this.tipoIntegranteId = params['id'];
-    });
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.obtenerTipoIntegrante();
@@ -30,6 +27,7 @@ export class ModificarTipoIntegranteComponent {
     this.http.get<any>(url).subscribe(response => {
       this.nombre = response.nombre;
       this.orden = response.orden;
+      this.activo = response.activo;
     });
   }
 
@@ -37,7 +35,7 @@ export class ModificarTipoIntegranteComponent {
     const url = `http://localhost:5000/api/TiposDeIntegrantes/${this.tipoIntegranteId}`;
     const body = {
       id: this.tipoIntegranteId,
-      activo: true,
+      activo: this.activo,
       nombre: this.nombre,
       orden: this.orden
     };
@@ -45,16 +43,12 @@ export class ModificarTipoIntegranteComponent {
     this.http.put(url, body).subscribe(
       (response) => {
         console.log('Modificación exitosa:', response);
-        // Realiza acciones adicionales después de una modificación exitosa
-        this.successMessage = `Se modificó con éxito el tipo de integrante.`;
-      this.errorMessage = '';
+        location.reload();
       },
       (error) => {
         console.error('Error en la modificación:', error);
         this.successMessage = '';
-      this.errorMessage = `Error al modificar el tipo de integrante. Por favor, inténtelo nuevamente.`;
-    
-        // Maneja el error de la modificación
+        this.errorMessage = `Error al modificar el tipo de integrante. Por favor, inténtelo nuevamente.`;
       }
     );
   }

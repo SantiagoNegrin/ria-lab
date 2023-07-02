@@ -1,32 +1,37 @@
-<div class="card bg-primary text-center">
+<div class="card">
+  <div class="card-header">
+    <h4>Nueva Responsabilidad</h4>
+  </div>
   <div class="card-body">
-    <h2 class="card-title text-white">Alta de Responsabilidades</h2>
-
-    <div *ngIf="successMessage" class="alert alert-success" role="alert">
-      {{ successMessage }}
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="string" class="form-control" [(ngModel)]="nombre" name="nombre">
     </div>
 
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-      {{ errorMessage }}
+    <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <textarea class="form-control" id="descripcion" [(ngModel)]="descripcion" name="descripcion"></textarea>
     </div>
 
-    <form (ngSubmit)="crearResponsabilidades()">
-      <div class="form-group">
-        <label for="nombre" class="text-white">Nombre:</label>
-        <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="descripcion" class="text-white">Descripción:</label>
-        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="areaId" class="text-white">ID de Área:</label>
-        <select id="areaId" [(ngModel)]="areaId" name="areaId" required class="form-control">
-          <option value="">Seleccione un área</option>
-          <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
+    <div class="form-group">
+      <label for="area">Área:</label>
+      <select class="form-select" id="area" [(ngModel)]="areaId" name="area">
+        <option *ngFor="let area of areas" [value]="area.id">{{ area.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="margin-top: 10px;">
+      <label style="margin-right: 10px;" for="activo">Activo:</label>
+      <input type="checkbox" class="form-checkbox" id="activo" [(ngModel)]="activo">
+    </div>
+
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button class="btn btn-primary mt-2" (click)="guardarResponsabilidad()">Guardar</button>
+    </div>
+
   </div>
 </div>

@@ -1,48 +1,68 @@
-<app-alta-tipo-integrante></app-alta-tipo-integrante>
 <div class="card">
-  <div class="card-body">
-    <h2>Lista de Tipos de Integrantes</h2>
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Tipos de integrante</h4>
+    <button class="btn btn-primary" (click)="openModal()">Nuevo</button>
+  </div>
 
-    <form (ngSubmit)="obtenerTipoIntegrantes()">
-      <label for="filtroNombre">Filtrar por nombre:</label>
-      <input type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
-      <div class="btn-group" role="group" aria-label="Filtro de activo">
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }" (click)="filtroActivo = null">Todos</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }" (click)="filtroActivo = true">Activo</button>
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }" (click)="filtroActivo = false">Inactivo</button>
+  <div class="container card-body">
+    <form (ngSubmit)="applyFilters()" class="form-inline">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="filtroNombre">Nombre:</label>
+            <input type="text" class="form-control" id="filtroNombre" name="filtroNombre" [(ngModel)]="filtroNombre">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
+          <div class="form-group">
+            <div class="btn-group" role="group" aria-label="Filtro de activo">
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }"
+                (click)="filtroActivo = null">Todos</button>
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }"
+                (click)="filtroActivo = true">Activo</button>
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }"
+                (click)="filtroActivo = false">Inactivo</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 d-flex justify-content-end" style="padding-right: 20px; margin: 10px;">
+          <button class="btn btn-primary" type="submit">Aplicar filtro</button>
+        </div>
       </div>
-      <button type="submit">Aplicar filtro</button>
     </form>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tipoIntegrante of tipoIntegrantes">
-          <td>{{ tipoIntegrante.nombre }}</td>
-          <td>
-            <a class="btn btn-primary" [routerLink]="['/modificar-tipo-integrante', tipoIntegrante.id]">Modificar</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div *ngIf="tipoIntegrantes.length > 0" class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Activo</th>
+            <th>Orden</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tipoIntegrante of tipoIntegrantes">
+            <td>{{ tipoIntegrante.nombre }}</td>
+            <td> {{ tipoIntegrante.activo === true ? 'Si' : 'No' }}</td>
+            <td>{{ tipoIntegrante.orden }}</td>
+            <td>
+              <img src="..\assets\editar2.png" ngbTooltip="Modificar" (click)="openModificar(tipoIntegrante.id)">
+            </td>
 
-    <nav aria-label="Navegación de páginas">
-      <ul class="pagination">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="cambiarPagina(currentPage - 1)">Anterior</a>
-        </li>
-        <li class="page-item" [class.active]="currentPage === page" *ngFor="let page of totalPagesArray">
-          <a class="page-link" (click)="cambiarPagina(page)">{{ page }}</a>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="cambiarPagina(currentPage + 1)">Siguiente</a>
-        </li>
-      </ul>
-    </nav>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="tipoIntegrantes.length > 0" class="d-flex justify-content-center" style="margin: 10px;">
+      <button class="btn btn-primary" [disabled]="currentPage === 1"
+        (click)="cambiarPagina(currentPage - 1)">Anterior</button>
+      <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+      <button class="btn btn-primary" [disabled]="currentPage === totalPages"
+        (click)="cambiarPagina(currentPage + 1)">Siguiente</button>
+    </div>
   </div>
 </div>

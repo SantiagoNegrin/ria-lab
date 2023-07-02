@@ -70,8 +70,7 @@ export class ModificarUsuarioComponent implements OnInit {
     const url = `http://localhost:5000/api/Auth/Users`;
     this.http.put<any>(url, this.usuario).subscribe(
       response => {
-        this.successMessage = 'Los cambios se guardaron correctamente.';
-        this.errorMessage = '';
+        location.reload();
         
       },
       error => {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AltaTipoDocumentoComponent } from '../alta-tipo-documento/alta-tipo-documento.component';
+import { ModificarTipoDocumentoComponent } from '../modificar-tipo-documento/modificar-tipo-documento.component';
 
 @Component({
   selector: 'app-listar-tipo-documento',
@@ -14,7 +17,7 @@ export class ListarTipoDocumentoComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 10;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public modal: NgbModal) { }
 
   ngOnInit() {
     this.obtenerTiposDocumento();
@@ -58,4 +61,14 @@ export class ListarTipoDocumentoComponent implements OnInit {
     this.currentPage = 1;
     this.obtenerTiposDocumento();
   }
+
+  openModal() {
+		this.modal.open(AltaTipoDocumentoComponent, { scrollable:true });
+	}
+
+  openModificar(id: string){
+      const modalRef = this.modal.open(ModificarTipoDocumentoComponent);
+      modalRef.componentInstance.tipoDocumentoId = id;
+  }
+
 }

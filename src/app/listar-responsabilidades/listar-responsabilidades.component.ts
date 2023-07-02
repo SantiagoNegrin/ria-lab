@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AltaResponsabilidadesComponent } from '../alta-responsabilidades/alta-responsabilidades.component';
+import { ModificarResponsabilidadesComponent } from '../modificar-responsabilidades/modificar-responsabilidades.component';
 
 @Component({
   selector: 'app-listar-responsabilidades',
@@ -10,14 +13,14 @@ export class ListarResponsabilidadesComponent implements OnInit {
   apiUrl = 'http://localhost:5000/api/Responsabilidades/Paged';
   responsabilidades: any[] = [];
   filtroNombre: string = '';
-  filtroActivo: string = '';
+  filtroActivo: boolean | null = null;
   filtroArea: number = 0;
   areas: any[] = [];
   totalPages: number = 0;
   currentPage: number = 1;
   limit: number = 10;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public modal: NgbModal) { }
 
   ngOnInit() {
     this.obtenerResponsabilidades();
@@ -29,7 +32,7 @@ export class ListarResponsabilidadesComponent implements OnInit {
       offset: (this.currentPage - 1) * this.limit,
       id: 0,
       filters: {
-        activo: this.filtroActivo !== '' ? JSON.parse(this.filtroActivo) : null,
+        activo: this.filtroActivo,
         nombre: this.filtroNombre,
         areaId: this.filtroArea
       },
@@ -59,4 +62,14 @@ export class ListarResponsabilidadesComponent implements OnInit {
     }
     return pages;
   }
+
+  openModal() {
+		this.modal.open(AltaResponsabilidadesComponent, { scrollable:true });
+	}
+
+  openModificar(id: number){
+      const modalRef = this.modal.open(ModificarResponsabilidadesComponent);
+      modalRef.componentInstance.responsabilidadId = id;
+  }
+
 }

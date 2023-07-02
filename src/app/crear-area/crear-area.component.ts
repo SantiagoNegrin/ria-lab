@@ -9,12 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class CrearAreaComponent {
   public activo: boolean = true;
   public nombre: string = "";
+  public successMessage: string = '';
+  public errorMessage: string = '';
 
   constructor(private http: HttpClient) { }
-
-  ngOnInit(): void {
-    // Lógica que deseas ejecutar cuando se inicialice el componente
-  }
 
   crearArea(): void {
     const url = 'http://localhost:5000/api/Areas';
@@ -26,11 +24,13 @@ export class CrearAreaComponent {
     this.http.post(url, area).subscribe(
       (response) => {
         console.log('Área creada:', response);
-        // Realiza otras acciones después de crear el área
+        this.errorMessage = '';
+        location.reload();
       },
       (error) => {
         console.log('Error al crear el área:', error);
-        // Realiza acciones en caso de error
+        this.errorMessage = 'Error al crear el área';
+        this.successMessage = '';
       }
     );
   }

@@ -1,23 +1,27 @@
-<h1 class="mt-4">Modificar Tipo de Documento</h1>
+<div class="card">
+  <div class="card-header">
+    <h4>Modificar Tipo de Documento</h4>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="string" class="form-control" [(ngModel)]="nombre" name="nombre">
+    </div>
 
-<div class="alert alert-success" *ngIf="successMessage">
-  {{ successMessage }}
-</div>
+    <div class="form-group" style="margin-top: 10px;">
+      <label style="margin-right: 10px;" for="activo">Activo:</label>
+      <input type="checkbox" class="form-checkbox" id="activo" [(ngModel)]="activo">
+    </div>
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button class="btn btn-primary mt-2" (click)="modificarTipoDocumento()">Guardar Cambios</button>
+    </div>
 
-<div class="mt-4 alert alert-danger" *ngIf="errorMessage">
-  <p>Error: {{ errorMessage }}</p>
-</div>
+  </div>
 
-<div class="mt-4">
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="nombre" class="form-control">
-</div>
-
-<div class="mt-4">
-  <label for="activo">Activo:</label>
-  <input type="checkbox" id="activo" [(ngModel)]="activo">
-</div>
-
-<div class="mt-4">
-  <button (click)="modificarTipoDocumento()" class="btn btn-primary">Guardar cambios</button>
 </div>

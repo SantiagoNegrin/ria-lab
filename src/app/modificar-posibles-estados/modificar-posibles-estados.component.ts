@@ -9,33 +9,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModificarPosiblesEstadosComponent implements OnInit {
   estadoId: number = 0;
-  estadoActivo: boolean = true;
-  estadoNombre: string = '';
+  activo: boolean = true;
+  nombre: string = '';
 
-  successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-      if (idParam) {
-        this.estadoId = parseInt(idParam, 10);
-        this.obtenerEstadoActual();
-      }
-    });
+    this.obtenerEstadoActual();
   }
 
   obtenerEstadoActual() {
     const url = `http://localhost:5000/api/LlamadosEstadosPosibles/${this.estadoId}`;
     this.http.get(url).subscribe(response => {
       const estadoActual = response as any;
-      this.estadoActivo = estadoActual.activo;
-      this.estadoNombre = estadoActual.nombre;
+      this.activo = estadoActual.activo;
+      this.nombre = estadoActual.nombre;
     }, error => {
       this.errorMessage = 'Error al obtener el estado: ' + error.message;
       console.error('Error al obtener el estado:', error);
@@ -52,15 +42,15 @@ export class ModificarPosiblesEstadosComponent implements OnInit {
 
     const body = {
       id: this.estadoId,
-      activo: this.estadoActivo,
-      nombre: this.estadoNombre
+      activo: this.activo,
+      nombre: this.nombre
     };
 
     this.http.put(url, body, { headers }).subscribe(response => {
-      this.successMessage = 'Estado modificado exitosamente';
       console.log('Estado modificado exitosamente:', response);
+      location.reload();
     }, error => {
-      this.errorMessage = 'Error al modificar el estado: ' + error.message;
+      this.errorMessage = `Error al modificar el estado posible. Por favor, inténtelo nuevamente.`;
       console.error('Error al modificar el estado:', error);
     });
   }

@@ -1,24 +1,27 @@
-<h1>Modificar Posibles Estados</h1>
-<div *ngIf="successMessage" class="alert alert-success" role="alert">
-        {{ successMessage }}
+<div class="card">
+  <div class="card-header">
+    <h4>Nuevo Estado Posible</h4>
+  </div>
+  <div class="card-body">
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+
+    <form (submit)="modificarEstado()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre" required>
       </div>
-  
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
+
+      <div class="form-group" style="margin-top: 10px;">
+        <label style="margin-right: 10px;" for="activo">Activo:</label>
+        <input type="checkbox" class="form-checkbox" id="activo" name="activo" [(ngModel)]="activo">
       </div>
-<div class="mb-3">
-  <label for="estadoId">ID:</label>
-  <input type="number" id="estadoId" [(ngModel)]="estadoId">
+
+      <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
 </div>
 
-<div class="mb-3">
-  <label for="estadoActivo">Activo:</label>
-  <input type="checkbox" id="estadoActivo" [(ngModel)]="estadoActivo">
-</div>
-
-<div class="mb-3">
-  <label for="estadoNombre">Nombre:</label>
-  <input type="text" id="estadoNombre" [(ngModel)]="estadoNombre">
-</div>
-
-<button class="btn btn-primary" (click)="modificarEstado()">Modificar</button>

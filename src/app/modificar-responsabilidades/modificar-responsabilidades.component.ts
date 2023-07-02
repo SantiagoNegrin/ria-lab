@@ -11,6 +11,7 @@ export class ModificarResponsabilidadesComponent implements OnInit {
   responsabilidadId?: number;
   responsabilidad: any = {};
   areas: any[] = [];
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -19,11 +20,11 @@ export class ModificarResponsabilidadesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.responsabilidadId = params['id'];
+    //this.route.params.subscribe(params => {
+      //this.responsabilidadId = params['id'];
       this.obtenerResponsabilidad();
       this.obtenerAreas();
-    });
+    //});
   }
 
   obtenerResponsabilidad() {
@@ -55,8 +56,9 @@ export class ModificarResponsabilidadesComponent implements OnInit {
     const apiUrl = `http://localhost:5000/api/Responsabilidades/${this.responsabilidadId}`;
     this.http.put<any>(apiUrl, this.responsabilidad).subscribe(response => {
       console.log('Responsabilidad modificada:', response);
-      // Puedes redirigir a una página de éxito o realizar otras acciones después de guardar la responsabilidad
-      this.router.navigate(['/listar-responsabilidades']);
+      location.reload();      
+    }, (error) => {
+      this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.'
     });
   }
 }

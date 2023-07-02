@@ -29,12 +29,11 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(
       (response) => {
-        // Maneja la respuesta del inicio de sesión exitoso
         console.log(response);
-    
-        // Redirige al usuario a la página principal
-        
-        location.reload()
+        this.router.navigateByUrl('/listar-llamados', { skipLocationChange: false }).then(() => {
+          location.reload();
+        });
+                
       },
       (error) => {
         // Maneja el error del inicio de sesión

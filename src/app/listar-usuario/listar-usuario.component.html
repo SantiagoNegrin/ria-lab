@@ -36,12 +36,17 @@
           <input type="text" class="form-control" id="documento" [(ngModel)]="documento">
         </div>
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-center">
+      <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
         <div class="form-group">
-          <label style="margin-right: 10px;" for="activo">Activo:</label>
-          <input type="checkbox" id="activo" [(ngModel)]="activo">
+          <div class="btn-group" role="group" aria-label="Filtro de activo">
+            <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': activo === null }"
+              (click)="activo = null">Todos</button>
+            <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': activo === true }"
+              (click)="activo = true">Activo</button>
+            <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': activo === false }"
+              (click)="activo = false">Inactivo</button>
+          </div>
         </div>
-        
       </div>
       <div class="col-12 d-flex justify-content-end" style="padding-right: 20px; margin: 10px;">
           <button class="btn btn-primary" (click)="applyFilters()">Aplicar Filtros</button>  
@@ -56,26 +61,23 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Username</th>
         <th>Nombre</th>
         <th>Documento</th>
         <th>Email</th>
+        <th>Código</th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
         <tr *ngFor="let u of usuarios">
-            <td>{{ u.id }}</td>
-            <td>{{ u.username }}</td>
-            <td>{{ u.persona.primerNombre }}</td>
+            
+            <td>{{ u.persona.primerNombre }} {{ u.persona.segundoNombre }} {{ u.persona.primerApellido }} {{ u.persona.segundoApellido }}</td>
             <td>{{ u.persona.documento }}</td>
             <td>{{ u.email }}</td>
+            <td>{{ u.id }}</td>
             <td>
               <img src="..\assets\editar2.png" ngbTooltip="Modificar" (click)="openModificar(u.id)">
-              <!-- <img src="..\assets\editar2.png" ngbTooltip="Modificar" [routerLink]="['/modificar-usuario', u.id]"> -->
-              <!--  <a class="btn btn-primary" [routerLink]="['/modificar-usuario', u.id]">Modificar</a> -->
             </td>
             <td>
               <img src="..\assets\roles2.png" ngbTooltip="Roles" (click)="openRoles(u.id)">
@@ -94,13 +96,4 @@
 </div>
 </div>
 
-<ng-template #modalNuevo let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Nuevo</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body"></div>
-  <app-alta-usuario></app-alta-usuario>
-  <div class="modal-footr"></div>
-</ng-template>
 

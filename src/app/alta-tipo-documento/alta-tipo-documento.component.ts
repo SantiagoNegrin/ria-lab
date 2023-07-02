@@ -10,11 +10,14 @@ import { HttpClient } from '@angular/common/http';
 export class AltaTipoDocumentoComponent {
   successMessage: string = '';
   errorMessage: string = '';
+  activo:boolean = true;
+  
   altaTipoDocumentoForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {
     this.altaTipoDocumentoForm = this.formBuilder.group({
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      activo: [true]
     });
   }
 
@@ -24,27 +27,27 @@ export class AltaTipoDocumentoComponent {
     }
 
     const nombre = this.altaTipoDocumentoForm.value.nombre;
+    const activo = this.altaTipoDocumentoForm.value.activo;
 
     const tipoDocumento = {
       id: 0,
-      activo: true,
+      activo: activo,
       nombre: nombre
     };
 
     this.http.post('http://localhost:5000/api/TiposDeDocumentos', tipoDocumento)
       .subscribe(
         (response) => {
-          // Maneja la respuesta del servidor en caso de éxito
           console.log(response);
-          this.successMessage = 'Alta exitosa'; // Mensaje de éxito
-        this.errorMessage = ''; // Reinicia el mensaje de error
-          // Realiza las acciones necesarias después del alta exitosa, como redireccionar o mostrar un mensaje de éxito
-        },
+          //this.successMessage = 'Tipo de documento creado'; 
+          this.errorMessage = ''; 
+          location.reload();
+      },
         (error) => {
-          // Maneja el error en caso de que la solicitud falle
+          
           console.error(error);
-          this.successMessage = ''; // Reinicia el mensaje de éxito
-        this.errorMessage = 'Error en el alta'; // Mensaje de error
+          this.successMessage = ''; 
+          this.errorMessage = 'Error al crear tipo de documento'; 
         }
       );
   }

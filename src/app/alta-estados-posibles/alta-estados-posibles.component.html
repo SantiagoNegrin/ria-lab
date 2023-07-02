@@ -1,20 +1,26 @@
 <div class="card">
-    <div class="card-body">
-      <h2>Alta de Estados Posibles</h2>
-      <div *ngIf="successMessage" class="alert alert-success" role="alert">
-        {{ successMessage }}
-      </div>
-  
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
-      </div>
-      <form (submit)="crearEstadoPosible()" class="mb-3">
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Crear</button>
-      </form>
-    </div>
+  <div class="card-header">
+    <h4>Nuevo Estado Posible</h4>
   </div>
-  
+  <div class="card-body">
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+
+    <form (submit)="crearEstadoPosible()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre" required>
+      </div>
+
+      <div class="form-group" style="margin-top: 10px;">
+        <label style="margin-right: 10px;" for="activo">Activo:</label>
+        <input type="checkbox" class="form-checkbox" id="activo" name="activo" [(ngModel)]="activo">
+      </div>
+
+      <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
