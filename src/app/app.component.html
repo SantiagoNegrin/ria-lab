@@ -8,24 +8,12 @@
 </head>
 <body>
   <div *ngIf="isLoggedIn">
+
+    <!-- Header ADMIN -->
     <div *ngIf="userRoles.includes('ADMIN')">
-      <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="#">UTEC Admin</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/logout" (click)="logout()">Cerrar sesión</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> -->
       <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="#" class="nav-link d-flex align-items-center"> <img style="width: 35px; margin: 8px;" src="../assets/logo.png" alt=""> UTEC Admin</a>
+        <h3 class="nav-title" style="margin-left: 10px;"> Gestión de llamados docentes</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +29,19 @@
             <li class="nav-item">
               <a class="nav-link" href="/listar-persona">Personas</a>
             </li>
+                        
+            <div ngbDropdown class="d-inline-block">
+              <button type="button" class="btn btn-primary nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                Opciones
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem routerLink="/listar-areas">Áreas</button>
+                <button ngbDropdownItem routerLink="/listar-responsabilidades">Responsabilidades</button>
+                <button ngbDropdownItem routerLink="/listar-tipo-documento">Tipos de Documento</button>
+                <button ngbDropdownItem routerLink="/listar-tipo-integrante">Tipos de Integrante</button>
+                <button ngbDropdownItem routerLink="/listar-posibles-estados-llamados">Estados Posibles</button>
+              </div>
+            </div>
             <li class="nav-item">
               <a class="nav-link" routerLink="/listar-areas">Áreas</a>
             </li>
@@ -64,45 +65,56 @@
             </li>
           </ul>
         </div>
-      </nav>
-      <!-- Esto es un comentario en HTML 
-      <a routerLink="/alta-tipo-integrante">Dar de alta Tipo de Integrante</a><br>
-      <a routerLink="/listar-tipo-integrante">Listar Tipo de Integrante</a><br>
-      <a routerLink="/alta-tipo-documento">Ir a Alta Tipo de Documento</a><br>
-      <a routerLink="/listar-tipo-documento">listar-tipo-documento</a><br>
-      <a routerLink="/alta-responsabilidades">alta responsablidades</a><br>
-      <a routerLink="/listar-responsabilidades">listar responsablidades</a><br>
-      <a routerLink="/alta-postulante">alta Postulante</a><br>
-      <a routerLink="/alta-persona">alta Persona</a><br>
-      <a routerLink="/listar-persona">listar persona</a><br>
-      <a routerLink="/alta-estados-posibles-llamado">alta estados posibles llamado</a><br>
-      <a routerLink="/listar-posibles-estados-llamados">listar estados posibles llamado</a><br>
-      <a routerLink="/alta-miembros-tribunales">alta miembros tribunales</a><br>
-       Esto es un comentario en HTML -->
-     
-    </div>
-  </div>
+      </nav>     
+      <br>
 
-  <div *ngIf="!isLoggedIn">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">Logeate</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+    </div>
+
+    <!-- Fin header ADMIN -->
+
+    <div *ngIf="!userRoles.includes('ADMIN')">
+      <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="/listar-llamados" class="nav-link d-flex align-items-center"> <img style="width: 35px; margin: 8px;" src="../assets/logo.png" alt=""> UTEC </a>
+        <h3 class="nav-title" style="margin-left: 10px;"> Gestión de llamados docentes</h3>
+        <div class="collapse navbar-collapse  d-flex justify-content-end" id="navbarNav">
+          <ul class="navbar-nav ml-auto" >          
             <li class="nav-item">
-              <a class="nav-link" routerLink="/login">Iniciar sesión</a>
+              <a class="nav-link" (click)="logout()"><img src="../assets/cerrar-sesion.png" alt=""> Cerrar sesión</a>
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
-    <h1>Inicia sesión para acceder</h1>
-    <!-- Resto del contenido de la página de inicio de sesión -->
+      </nav>  
+      <br> 
+    </div>
+
+
   </div>
-  
+
+
+  <div *ngIf="!isLoggedIn">
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <a class="navbar-brand" href="/listar-llamados" class="nav-link d-flex align-items-center"> <img style="width: 35px; margin: 8px;" src="../assets/logo.png" alt=""> UTEC </a>
+      <h3 class="nav-title" style="margin-left: 10px;"> Gestión de llamados docentes</h3>
+      <div class="collapse navbar-collapse  d-flex justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto" >          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" ><img src="../assets/login.png" alt=""> Iniciar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </nav>     
+    <br>
+    <br>
+    <div class="d-flex justify-content-center" *ngIf="isActiveRoute('/')">
+     
+    <div class="card" style="width: 60%;">
+      <div class="card-header d-flex justify-content-center"> <h4>Inicia sesión para ver los llamados</h4> </div>  
+      <div class="card-body d-flex justify-content-center">
+        <img src="../assets/utec.jpg" alt="" style="width: 90%;">
+      </div>
+    </div>
+  </div>
+  </div>
   <div class="d-flex justify-content-center" role="main">
     <router-outlet ></router-outlet>
   </div>

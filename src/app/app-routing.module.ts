@@ -30,39 +30,55 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
 import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
+import { AuthGuard } from './auth.guard';
+import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
+import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 
 
 const routes: Routes = [
   
-  { path: 'alta-tipo-documento', component: AltaTipoDocumentoComponent },
-  { path: 'crear-area', component: CrearAreaComponent },
-  { path: 'modificar-area', component: ModificarAreaComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'listar-areas', component: ListarAreasComponent },
-  { path: 'modificar-area/:id/:nombre', component: ModificarAreaComponent },
-  { path: 'alta-tipo-integrante', component: AltaTipoIntegranteComponent },
-  { path: 'listar-tipo-integrante', component: ListarTipoIntegranteComponent },
-  { path: 'modificar-tipo-integrante/:id', component: ModificarTipoIntegranteComponent },
-  { path: 'listar-tipo-documento', component: ListarTipoDocumentoComponent },
-  { path: 'modificar-tipo-documento/:id/:nombre',component: ModificarTipoDocumentoComponent},
-  { path: 'alta-responsabilidades', component: AltaResponsabilidadesComponent },
-  { path: 'listar-responsabilidades', component: ListarResponsabilidadesComponent },
-  { path: 'modificar-responsabilidades/:id', component: ModificarResponsabilidadesComponent },
-  { path: 'alta-postulante', component: AltaPostulanteComponent },
-  { path: 'alta-persona', component: AltaPersonaComponent },
-  { path: 'listar-persona', component: ListarPersonaComponent },
-  { path: 'modificar-persona/:id', component: ModificarPersonaComponent },
-  { path: 'alta-estados-posibles-llamado', component: AltaEstadosPosiblesComponent },
-  { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent },
-  { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent },
-  { path: 'registro', component: AltaUsuarioComponent },
-  { path: 'listar-usuario', component: ListarUsuarioComponent },
-  { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent },
   { path: 'restore-password', component: RestorePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'listar-llamados', component: ListarLlamadosComponent },
-  { path: 'modificar-usuario/:id', component: ModificarUsuarioComponent },
-  { path: 'roles-usuario/:id', component: RolesUsuarioComponent },
+
+  { path: 'listar-llamados', component: ListarLlamadosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'COORDINADOR', 'TRIBUNAL'] } },
+
+  { path: 'alta-llamado', component: AltaLlamadoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
+  { path: 'listar-areas', component: ListarAreasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'crear-area', component: CrearAreaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-area/:id/:nombre', component: ModificarAreaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
+  { path: 'listar-tipo-integrante', component: ListarTipoIntegranteComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-tipo-integrante', component: AltaTipoIntegranteComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-tipo-integrante/:id', component: ModificarTipoIntegranteComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+ 
+  { path: 'listar-tipo-documento', component: ListarTipoDocumentoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-tipo-documento', component: AltaTipoDocumentoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-tipo-documento/:id/:nombre',component: ModificarTipoDocumentoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
+  { path: 'listar-responsabilidades', component: ListarResponsabilidadesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-responsabilidades', component: AltaResponsabilidadesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-responsabilidades/:id', component: ModificarResponsabilidadesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  
+  { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-estados-posibles-llamado', component: AltaEstadosPosiblesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+ 
+  { path: 'listar-usuario', component: ListarUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'registro', component: AltaUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-usuario/:id', component: ModificarUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'roles-usuario/:id', component: RolesUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
+  { path: 'listar-persona', component: ListarPersonaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-persona', component: AltaPersonaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'modificar-persona/:id', component: ModificarPersonaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
+  { path: 'alta-postulante', component: AltaPostulanteComponent },
+
+  { path: 'ver-tribunal/:id', component: VerTribunalComponent},
+
+  { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
 
 ];
