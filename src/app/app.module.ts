@@ -40,6 +40,7 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
 import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
+import { ModificarEstadoComponent } from './modificar-estado/modificar-estado.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
     ModificarUsuarioComponent,
     RolesUsuarioComponent,
     ListarPostulantesLlamadoComponent,
-    AltaPostulanteComponent
+    AltaPostulanteComponent,
+    ModificarEstadoComponent
   ],
   imports: [
     HttpClientModule,
