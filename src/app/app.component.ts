@@ -14,10 +14,9 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Verificar si el token y los roles están almacenados
     const token = localStorage.getItem('token');
     const rolesString = localStorage.getItem('roles');
-    this.isLoggedIn = !!token; // Si el token existe, establecer isLoggedIn en true
+    this.isLoggedIn = !!token;
 
     if (rolesString) {
       this.userRoles = JSON.parse(rolesString);
@@ -25,12 +24,15 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
-    // Realiza el proceso de cierre de sesión
     this.authService.logout();
 
-    // Navegar a la misma ruta actual para actualizar la página
-    this.router.navigateByUrl('/login', { skipLocationChange: false }).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
       location.reload();
     });
   }
+
+  isActiveRoute(route: string): boolean {
+    return this.router.isActive(route, true);
+  }
+
 }

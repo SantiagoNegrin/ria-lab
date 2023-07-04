@@ -8,22 +8,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./modificar-usuario.component.css']
 })
 export class ModificarUsuarioComponent implements OnInit {
+  id: string = '';
   usuario: any = {};
   tiposDocumento: any[] = [];
+  tipoDocumento: string = '';
   errorMessage: string = ''; 
   successMessage: string = ''; 
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.obtenerTiposDocumento();
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.obtenerUsuario(id);
-    });
+    //this.obtenerTiposDocumento();
+    this.obtenerUsuario(this.id);
   }
 
-  obtenerUsuario(id: number) {
+  obtenerUsuario(id: string) {
     const url = 'http://localhost:5000/api/Auth/Users';
     const body = {
       limit: 1,
@@ -45,6 +44,7 @@ export class ModificarUsuarioComponent implements OnInit {
       
       if (response && response.list[0].id) { 
         const u = response.list[0];
+        console.log(response.list[0]);
         this.usuario = {
           id: u.id,
           tipoDocumentoId: u.persona.tipoDeDocumento.id,
@@ -57,6 +57,7 @@ export class ModificarUsuarioComponent implements OnInit {
           imagen: u.imagen,
           activo: u.activo
         }
+        this.tipoDocumento = u.persona.tipoDeDocumento.nombre;
         console.log(this.usuario);
       } else {
         console.error('No se pudo obtener el usuario');
@@ -74,6 +75,7 @@ export class ModificarUsuarioComponent implements OnInit {
         
       },
       error => {
+        console.log(error);
         this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
         this.successMessage = '';
       }
@@ -96,6 +98,7 @@ export class ModificarUsuarioComponent implements OnInit {
     this.http.post<any>(url, body).subscribe(response => {
       if (response && response.list) { 
         this.tiposDocumento = response.list;
+        this.obtenerUsuario(this.id);
       } else {
         console.error('No se pudieron obtener los tipos de documento');
       }

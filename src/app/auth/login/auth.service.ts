@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginResponse } from './login-response'; // Importa la interfaz LoginResponse desde el archivo login-response.ts
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { LoginResponse } from './login-response'; // Importa la interfaz LoginRe
 export class AuthService {
   private apiUrl = 'http://localhost:5000/api/Auth/Login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string): Observable<LoginResponse> {
     const body = { username, password };
@@ -47,6 +48,25 @@ export class AuthService {
   
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getRoles(): string[] {
+    const rolesString = localStorage.getItem('roles');
+
+    if (rolesString) {
+      return JSON.parse(rolesString);
+    }else{
+      return [];
+    }
+    
+  }
+
+  redirectLogin(){
+    this.router.navigateByUrl('/');
+  }
+
+  redirectHome(){
+    this.router.navigateByUrl('/listar-llamados');
   }
 
 }

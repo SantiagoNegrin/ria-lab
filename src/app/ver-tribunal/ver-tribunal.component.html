@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let tipo of tipos">{{ tipo.nombre }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let puesto of puestos">
+        <td>{{ puesto }}</td>
+        <td *ngFor="let tipo of tipos">
+          <ul>
+            <li *ngFor="let user of getUser(puesto, tipo)">
+              {{ user.persona.primerNombre }} {{user.persona.primerApellido}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>

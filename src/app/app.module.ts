@@ -40,6 +40,8 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/listar-postulantes-llamado.component';
 import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
+import { AuthGuard } from './auth.guard';
+import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
     ModificarUsuarioComponent,
     RolesUsuarioComponent,
     ListarPostulantesLlamadoComponent,
-    AltaPostulanteComponent
+    AltaPostulanteComponent,
+    VerTribunalComponent
   ],
   imports: [
     HttpClientModule,
@@ -84,10 +87,13 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
     ReactiveFormsModule,
   ],
   providers: [
-    AuthService,TokenInterceptor,
+    AuthService,
+    TokenInterceptor,
     {provide: HTTP_INTERCEPTORS,
        useClass: TokenInterceptor, 
-       multi: true },],
+       multi: true },
+    AuthGuard  
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

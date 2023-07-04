@@ -47,11 +47,10 @@ export class AltaUsuarioComponent implements OnInit {
 
     this.usuario.id = "";
     this.usuario.imagen = "";
-    this.usuario.tipoDeDocumento = this.selectedTipoDocumento;
+    this.usuario.tipoDocumentoId = this.selectedTipoDocumento;
     this.usuario.activo = true;
 
     console.log(this.usuario);
-
 
     this.http.post<any>(apiUrl, this.usuario).subscribe(response => {
       this.errorMessage = '';
