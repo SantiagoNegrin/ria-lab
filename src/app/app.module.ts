@@ -43,6 +43,7 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
 import { AuthGuard } from './auth.guard';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 import { ModificarEstadoComponent } from './modificar-estado/modificar-estado.component';
+import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ModificarEstadoComponent } from './modificar-estado/modificar-estado.co
     ModificarUsuarioComponent,
     RolesUsuarioComponent,
     ListarPostulantesLlamadoComponent,
-    AltaPostulanteComponent
+    AltaPostulanteComponent,
+    AgregarEstadoLlamadoComponent
   ],
   imports: [
     HttpClientModule,

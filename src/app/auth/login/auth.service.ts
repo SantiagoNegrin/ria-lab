@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LoginResponse } from './login-response'; // Importa la interfaz LoginResponse desde el archivo login-response.ts
+import { LoginResponse } from './login-response';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -21,6 +21,7 @@ export class AuthService {
         if (response && response.token) {
           this.storeToken(response.token);
           this.storeRoles(response.roles);
+          this.storeNombre(response.nombre);
         }
       })
     );
@@ -29,15 +30,21 @@ export class AuthService {
   private storeToken(token: string): void {
     localStorage.setItem('token', token);
   }
+
   private storeRoles(roles: string[]): void {
     localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  private storeNombre(nombre: string): void {
+    localStorage.setItem('nombre', nombre);
   }
 
   logout(): void {
     this.clearToken();
     this.clearRoles();
+    this.clearNombre();
   }
-  
+
   private clearToken(): void {
     localStorage.removeItem('token');
   }
@@ -45,9 +52,17 @@ export class AuthService {
   private clearRoles(): void {
     localStorage.removeItem('roles');
   }
-  
+
+  private clearNombre(): void {
+    localStorage.removeItem('nombre');
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getNombre(): string | null {
+    return localStorage.getItem('nombre');
   }
 
   getRoles(): string[] {
@@ -55,18 +70,16 @@ export class AuthService {
 
     if (rolesString) {
       return JSON.parse(rolesString);
-    }else{
+    } else {
       return [];
     }
-    
   }
 
-  redirectLogin(){
+  redirectLogin() {
     this.router.navigateByUrl('/');
   }
 
-  redirectHome(){
+  redirectHome() {
     this.router.navigateByUrl('/listar-llamados');
   }
-
 }
