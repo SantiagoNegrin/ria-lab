@@ -1,19 +1,56 @@
-<app-alta-llamado></app-alta-llamado>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Llamados</h4>
+    <button class="btn btn-primary" (click)="openModal()">Nuevo</button>
+  </div>
 
-<form (ngSubmit)="aplicarFiltros()">
+  <div class="container card-body">
+    <form (ngSubmit)="aplicarFiltros()">
       <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4">
           <div class="form-group">
-            <label for="filtroNombre">Nombre:</label>
-            <input class="form-control" type="text" id="filtroNombre" [(ngModel)]="filtroNombre" name="filtroNombre">
-            <label for="filtroNombre">Identificador:</label>
-            <input class="form-control" type="text" id="filtroNombre" [(ngModel)]="filtroIdentificador" name="filtroNombre">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="filtroNombre">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="identificador">Identificador:</label>
+            <input type="text" class="form-control" id="identificador" name="identificador" [(ngModel)]="filtroIdentificador">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select class="form-select" id="estado" [(ngModel)]="filtroEstado" name="estado">
+              <option [value]="0" selected >Todos</option>
+              <option *ngFor="let estado of estadosPosibles" [value]="estado.id">{{ estado.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="persona">Miembro del tribunal:</label>
+            <select *ngIf="!rolTribunal" class="form-select" id="persona" [(ngModel)]="filtroTribunal" name="persona">
+              <option [value]="0" selected >Todos</option>
+              <option *ngFor="let persona of miembrosTribunal" [value]="persona.persona.id">
+                {{ persona.persona.primerNombre }} {{ persona.persona.primerApellido }} - {{persona.persona.documento}}
+              </option>
+            </select>
+            
+            <input *ngIf="rolTribunal" type="text" class="form-control" id="persona" name="persona" [(ngModel)]="filtroTribunal" disabled>
           </div>
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
           <div class="form-group">
             <div class="btn-group" role="group" aria-label="Filtro de activo">
+              <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === null }"
+                (click)="filtroActivo = null">Todos</button>
               <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === true }"
                 (click)="filtroActivo = true">Activo</button>
               <button type="button" class="btn btn-outline-primary" [ngClass]="{ 'active': filtroActivo === false }"
@@ -21,70 +58,69 @@
             </div>
           </div>
         </div>
-
         <div class="col-12 d-flex justify-content-end" style="padding-right: 20px; margin: 10px;">
-          <button class="btn btn-primary" type="submit">Aplicar filtro</button>
+          <button class="btn btn-primary" type="submit">Aplicar Filtros</button>
         </div>
       </div>
     </form>
+  </div>
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Identificador</th>
+          <th>Nombre</th>
+          <th>Link Planilla Puntajes</th>
+          <th>Link Acta</th>
+          <th>Minutos Entrevista</th>
+          <th>Área</th>
+          <th>Estado</th>
+          <th>Modificar Estado</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let llamado of llamados">
+          <td>{{ llamado.identificador }}</td>
+          <td>{{ llamado.nombre }}</td>
+          <td>{{ llamado.linkPlanillaPuntajes }}</td>
+          <td>{{ llamado.linkActa }}</td>
+          <td>{{ llamado.minutosEntrevista }}</td>
+          <td>{{ llamado.area.nombre }}</td>
+          <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
+          <td class="d-flex justify-content-center">
+            <button class="btn btn-primary"
+              [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 1]"
+              style="margin-right: 10px;">
+              <i class="fas fa-arrow-up"></i>
+            </button>
 
-<table class="table"> 
-  <thead>
-    <tr>
-      <th>Identificador</th>
-      <th>Nombre</th>
-      <th>Link Planilla Puntajes</th>
-      <th>Link Acta</th>
-      <th>Minutos Entrevista</th>
-      <th>Área</th>
-      <th>Estado</th>
-      <th>Modificar Estado</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let llamado of llamados">
-      <td>{{ llamado.identificador }}</td>
-      <td>{{ llamado.nombre }}</td>
-      <td>{{ llamado.linkPlanillaPuntajes }}</td>
-      <td>{{ llamado.linkActa }}</td>
-      <td>{{ llamado.minutosEntrevista }}</td>
-      <td>{{ llamado.area.nombre }}</td>
-      <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
-      <td>
-        <button class="btn btn-primary" [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 1]"  style="margin-right: 10px;">
-          <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        <button class="btn btn-primary" [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 0]" style="margin-left: 10px; ">
-          <i class="fas fa-arrow-down"></i>
-        </button>
-      </td>
-      
-      <td>
-        <a class="btn btn-primary btn-sm" [routerLink]="['/listar-postulantes-llamado', llamado.id, llamado.nombre, llamado.identificador]">Postulantes</a>
-      </td>
-      <td>  
-        <button class="btn btn-primary btn-sm" [routerLink]="['/ver-tribunal', llamado.id]">Tribunal</button>
-      </td>  
-      <td>
-        <button class="btn btn-primary btn-sm">Estados</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<nav aria-label="Paginación" *ngIf="totalPages > 1">
-  <ul class="pagination mt-3">
-    <li class="page-item" [class.disabled]="currentPage === 1">
-      <a class="page-link" (click)="cambiarPagina(currentPage - 1)">Anterior</a>
-    </li>
-    <li class="page-item" *ngFor="let page of obtenerPaginas()" [class.active]="currentPage === page">
-      <a class="page-link" (click)="cambiarPagina(page)">{{ page }}</a>
-    </li>
-    <li class="page-item" [class.disabled]="currentPage === totalPages">
-      <a class="page-link" (click)="cambiarPagina(currentPage + 1)">Siguiente</a>
-    </li>
-  </ul>
-</nav>
+            <button class="btn btn-primary"
+              [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 0]"
+              style="margin-left: 10px; ">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </td>
+
+          <td>
+            <a class="btn btn-primary btn-sm"
+              [routerLink]="['/listar-postulantes-llamado', llamado.id, llamado.nombre, llamado.identificador]">Postulantes</a>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" [routerLink]="['/ver-tribunal', llamado.id]">Tribunal</button>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm">Estados</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="totalPages > 1" class="d-flex justify-content-center" style="margin: 10px;">
+    <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
+    <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+    <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
+  </div>
+</div>

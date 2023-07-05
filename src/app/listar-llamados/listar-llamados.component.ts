@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AltaLlamadoComponent } from '../alta-llamado/alta-llamado.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../auth/login/auth.service';
 
 @Component({
   selector: 'app-listar-llamados',
@@ -9,60 +12,124 @@ import { HttpClient } from '@angular/common/http';
 export class ListarLlamadosComponent implements OnInit {
   llamados: any[] = [];
   paginaActual = 1;
-  filtroActivo = true;
+  filtroActivo: boolean|null = true;
   filtroNombre = '';
   filtroIdentificador = '';
-  totalPages: number = 0;
+  filtroTribunal = 0;
+  filtroEstado = 0;
+  estadosPosibles: any[] = [];
+  miembrosTribunal: any[] = [];
+  rolTribunal: boolean = this.authService.getRoles().includes("TRIBUNAL");
   currentPage: number = 1;
-  limit: number = 10;
+  totalPages: number = 1;
+  pageSize: number = 10;
+  totalCount: number = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public modal: NgbModal, private authService: AuthService ) { }
 
   ngOnInit() {
-    this.getListarLlamados();
+    this.getMiembrosTribunal();
+    this.getEstadosPosibles();
+    if( this.rolTribunal == true){
+      this.setearFiltroTribunal();
+    }else{
+      this.getLlamados();
+    }
   }
 
-  getListarLlamados() {
+  getLlamados() {
     const url = 'http://localhost:5000/api/Llamados/Paged';
     const body = {
-      limit: this.limit,
-      offset: (this.paginaActual - 1) * this.limit,
+      limit: this.pageSize,
+      offset: (this.paginaActual - 1) * this.pageSize,
       id: 0,
       filters: {
         activo: this.filtroActivo,
         nombre: this.filtroNombre,
-        identificador: this.filtroIdentificador
+        identificador: this.filtroIdentificador,
+        personaTribunalId: this.filtroTribunal,
+        estadoId: this.filtroEstado
       },
       orders: ['string']
     };
-
     this.http.post<any>(url, body)
       .subscribe(response => {
-        console.log(response);
         this.llamados = response.list;
+        this.totalCount = response.totalCount;
         this.totalPages = response.totalPages;
       });
   }
 
+  getEstadosPosibles() {
+    const url = 'http://localhost:5000/api/LlamadosEstadosPosibles/Paged';    
+    const body = {
+      limit: -1,
+      offset: 0,
+      id: 0,
+      filters: {
+        activo: true,
+        nombre: ""
+      },
+      orders: ['string']
+    };
+    this.http.post<any>(url, body)
+      .subscribe(response => {
+        this.estadosPosibles = response.list;
+      });
+  }
+
+  getMiembrosTribunal() {
+    const url = 'http://localhost:5000/api/MiembrosTribunales/Paged';    
+    const body = {
+      limit: -1,
+      offset: 0,
+      id: 0,
+      filters: {
+        activo: true,
+        nombre: ""
+      },
+      orders: ['string']
+    };
+    this.http.post<any>(url, body)
+      .subscribe(response => {
+        this.miembrosTribunal = response.list;
+      });
+  }
+
+  setearFiltroTribunal(){
+    const doc = this.authService.getDoc();
+    this.filtroTribunal = this.miembrosTribunal.find(value => value.persona.documento === doc);
+    this.getLlamados();
+  }
+
   aplicarFiltros() {
     this.paginaActual = 1;
-    this.getListarLlamados();
+    this.getLlamados();
   }
 
-  cambiarPagina(page: number) {
+  goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.getListarLlamados();
+      this.getLlamados();
     }
   }
 
-  obtenerPaginas(): number[] {
-    const pages: number[] = [];
-    for (let i = 1; i <= this.totalPages; i++) {
-      pages.push(i);
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.getLlamados();
     }
-    return pages;
   }
 
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getLlamados();
+    }
+  }
+
+  openModal() {
+		this.modal.open(AltaLlamadoComponent, { scrollable:true });
+	}
   
 }
