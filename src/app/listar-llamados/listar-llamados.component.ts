@@ -20,6 +20,7 @@ export class ListarLlamadosComponent implements OnInit {
   estadosPosibles: any[] = [];
   miembrosTribunal: any[] = [];
   rolTribunal: boolean = this.authService.getRoles().includes("TRIBUNAL");
+  admin: boolean = this.authService.getRoles().includes("ADMIN");
   currentPage: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;

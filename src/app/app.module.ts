@@ -42,7 +42,6 @@ import { ListarPostulantesLlamadoComponent } from './listar-postulantes-llamado/
 import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.component';
 import { AuthGuard } from './auth.guard';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
-import { ModificarEstadoComponent } from './modificar-estado/modificar-estado.component';
 import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
 
 @NgModule({
@@ -79,8 +78,7 @@ import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-
     ListarPostulantesLlamadoComponent,
     AltaPostulanteComponent,
     AgregarEstadoLlamadoComponent,
-    VerTribunalComponent, 
-    ModificarEstadoComponent
+    VerTribunalComponent
   ],
   imports: [
     HttpClientModule,

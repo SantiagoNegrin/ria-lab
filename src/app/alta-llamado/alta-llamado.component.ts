@@ -15,7 +15,7 @@ export class AltaLlamadoComponent {
   linkActa: string ='';
   minutosEntrevista: number =0;
   areaS: any;
-  areaID: number=0; // Cambio de areaId a areaID
+  areaID: number = 0; // Cambio de areaId a areaID
   successMessage: string = '';
   errorMessage: string = '';
   

@@ -53,12 +53,11 @@ export class ListarUsuarioComponent implements OnInit{
       },
       orders: ['string']
     };
-    console.log(body);
 
     this.http.post<any>(url, body).subscribe(response => {
       this.usuarios = response.list;
       this.totalCount = response.totalCount;
-      this.totalPages = Math.ceil(this.totalCount / this.pageSize);
+      this.totalPages = response.totalPages;
       console.log('Usuarios obtenidos exitosamente:', this.usuarios);
     }, error => {
       this.errorMessage = 'Error al obtener los usuarios: ' + error.message;
