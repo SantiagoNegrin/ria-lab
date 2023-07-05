@@ -79,7 +79,8 @@ import { ModificarPostulanteComponent } from './modificar-postulante/modificar-p
     ListarPostulantesLlamadoComponent,
     AltaPostulanteComponent,
     AgregarEstadoLlamadoComponent,
-    VerTribunalComponent
+    VerTribunalComponent,
+    ModificarPostulanteComponent
   ],
   imports: [
     HttpClientModule,

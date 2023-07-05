@@ -1,15 +1,15 @@
 <div *ngIf="postulanteSeleccionado">
     <h2>Modificar Postulante</h2>
     <form (submit)="guardarCambios()">
-        <label for="documento">Documento:</label>
-        <span id="documento">{{ postulanteSeleccionado.persona.documento }}</span>
-        
-        <label for="nombre">Nombre:</label>
-        <span id="nombre">{{ postulanteSeleccionado.persona.primerNombre }}</span>
-        
-        <label for="apellido">Apellido:</label>
-        <span id="apellido">{{ postulanteSeleccionado.persona.primerApellido }}</span>
-        
+      <label for="documento">Documento:</label>
+      <span id="documento">{{ postulanteSeleccionado.persona.documento }}</span>
+  
+      <label for="nombre">Nombre:</label>
+      <span id="nombre">{{ postulanteSeleccionado.persona.primerNombre }}</span>
+  
+      <label for="apellido">Apellido:</label>
+      <span id="apellido">{{ postulanteSeleccionado.persona.primerApellido }}</span>
+  
       <label for="estudioMeritos">Estudio de Méritos:</label>
       <input type="checkbox" id="estudioMeritos" name="estudioMeritos" [(ngModel)]="postulanteSeleccionado.estudioMeritosRealizado">
   
