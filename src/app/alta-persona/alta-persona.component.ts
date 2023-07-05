@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AltaPersonaComponent implements OnInit {
   persona: any = {};
   tiposDocumento: any[] = [];
-  selectedTipoDocumento: any;
+  selectedTipoDocumento: any = null;
   successMessage: string = '';
   errorMessage: string = '';
 
@@ -17,12 +17,13 @@ export class AltaPersonaComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerTiposDocumento();
+    this.persona.activo = true;
   }
 
   obtenerTiposDocumento() {
     const apiUrl = 'http://localhost:5000/api/TiposDeDocumentos/Paged';
     const body = {
-      limit: 1000000,
+      limit: -1,
       offset: 0,
       id: 0,
       filters: {
@@ -44,20 +45,14 @@ export class AltaPersonaComponent implements OnInit {
       this.errorMessage = 'Debe seleccionar un tipo de documento';
       return;
     }
-
     const tipoDocumentoSeleccionado = this.tiposDocumento.find(tipoDocumento => tipoDocumento.id === +this.selectedTipoDocumento);
-
-    if (!tipoDocumentoSeleccionado) {
-      this.errorMessage = 'Tipo de documento seleccionado no encontrado';
-      return;
-    }
-
     this.persona.tipoDeDocumento = tipoDocumentoSeleccionado;
-    this.persona.activo = true;
 
     this.http.post<any>(apiUrl, this.persona).subscribe(response => {
+      this,this.errorMessage = '';
       this.successMessage = 'Persona creada correctamente';
-      this.persona = {}; // Limpiar los datos del formulario
+      this.persona = {}; 
+      location.reload();
     }, error => {
       this.errorMessage = 'Error al crear la persona';
     });

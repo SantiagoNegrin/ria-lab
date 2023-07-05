@@ -1,18 +1,25 @@
 <div class="card">
-    <div class="card-body">
-      <h2>Modificar Persona</h2>
+  <div class="card-header">
+      <h4>Modificar Persona</h4>
+  </div>
+  <div class="card-body">
       <div class="alert alert-success" *ngIf="successMessage">
         {{ successMessage }}
       </div>
       <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
         <p>Error: {{ errorMessage }}</p>
       </div>
+
       <form *ngIf="persona" (submit)="guardarCambios()">
-        <label for="tipoDocumento">Tipo de Documento:</label>
-        <select id="tipoDocumento" [ngModel]="persona.tipoDeDocumento?.id" (ngModelChange)="persona.tipoDeDocumento ? persona.tipoDeDocumento.id = $event : null" name="tipoDocumento">
-          <option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.id">{{ tipoDoc.nombre }}</option>
-        </select>
-  
+        
+        <div class="form-group">
+          <label for="tipoDocumento">Tipo de Documento:</label>
+          <select id="tipoDocumento" [ngModel]="persona.tipoDeDocumento?.id" class="form-select"
+              (ngModelChange)="persona.tipoDeDocumento ? persona.tipoDeDocumento.id = $event : null" name="tipoDocumento">
+            <option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.id">{{ tipoDoc.nombre }}</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="documento">Documento:</label>
           <input type="text" id="documento" [(ngModel)]="persona.documento" name="documento" class="form-control">
@@ -38,7 +45,14 @@
           <input type="text" id="segundoApellido" [(ngModel)]="persona.segundoApellido" name="segundoApellido" class="form-control">
         </div>
   
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <div class="form-group">
+          <label style="margin-right: 10px;" for="activo">Activo:</label>
+          <input type="checkbox" id="activo" [(ngModel)]="persona.activo" name="activo">
+        </div>
+
+        <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
       </form>
     </div>
   </div>

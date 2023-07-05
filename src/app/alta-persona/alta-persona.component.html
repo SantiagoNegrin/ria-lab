@@ -1,44 +1,59 @@
-<h2>Alta de Persona</h2>
-
-<div>
-    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+<div class="card">
+  <div class="card-header">
+      <h4>Nueva Persona</h4>
+  </div>
+  <div class="card-body">
+      <div class="alert alert-success" *ngIf="successMessage">
         {{ successMessage }}
       </div>
-  
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
+      <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+        <p>Error: {{ errorMessage }}</p>
       </div>
-  <label for="tipoDocumento">Tipo de Documento:</label>
-  <select id="tipoDocumento" [(ngModel)]="selectedTipoDocumento" name="tipoDocumento">
-    <option *ngFor="let tipoDocumento of tiposDocumento" [value]="tipoDocumento.id">{{ tipoDocumento.nombre }}</option>
-  </select>
-</div>
 
-<div>
-  <label for="documento">Documento:</label>
-  <input type="text" id="documento" [(ngModel)]="persona.documento" name="documento" required>
-</div>
+      <form *ngIf="persona" (submit)="crearPersona()">
+        
+        <div class="form-group">
+          <label for="tipoDocumento">Tipo de Documento:</label>
+          <select id="tipoDocumento" [(ngModel)]="selectedTipoDocumento" class="form-select" name="tipoDocumento">
+              <option [value]="null" selected >Seleccione un tipo de documento</option>
+              <option *ngFor="let tipoDocumento of tiposDocumento" [value]="tipoDocumento.id">{{ tipoDocumento.nombre }}</option>
+          </select>
+        </div>
 
-<div>
-  <label for="primerNombre">Primer Nombre:</label>
-  <input type="text" id="primerNombre" [(ngModel)]="persona.primerNombre" name="primerNombre" required>
-</div>
+        <div class="form-group">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" [(ngModel)]="persona.documento" name="documento" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="primerNombre">Primer Nombre:</label>
+          <input type="text" id="primerNombre" [(ngModel)]="persona.primerNombre" name="primerNombre" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="segundoNombre">Segundo Nombre:</label>
+          <input type="text" id="segundoNombre" [(ngModel)]="persona.segundoNombre" name="segundoNombre" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="primerApellido">Primer Apellido:</label>
+          <input type="text" id="primerApellido" [(ngModel)]="persona.primerApellido" name="primerApellido" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="segundoApellido">Segundo Apellido:</label>
+          <input type="text" id="segundoApellido" [(ngModel)]="persona.segundoApellido" name="segundoApellido" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label style="margin-right: 10px;" for="activo">Activo:</label>
+          <input type="checkbox" id="activo" [(ngModel)]="persona.activo" name="activo" checked>
+        </div>
 
-<div>
-  <label for="segundoNombre">Segundo Nombre:</label>
-  <input type="text" id="segundoNombre" [(ngModel)]="persona.segundoNombre" name="segundoNombre">
-</div>
+        <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-<div>
-  <label for="primerApellido">Primer Apellido:</label>
-  <input type="text" id="primerApellido" [(ngModel)]="persona.primerApellido" name="primerApellido" required>
-</div>
-
-<div>
-  <label for="segundoApellido">Segundo Apellido:</label>
-  <input type="text" id="segundoApellido" [(ngModel)]="persona.segundoApellido" name="segundoApellido">
-</div>
-
-<!-- Agrega los demás campos del formulario según tus necesidades -->
-
-<button (click)="crearPersona()">Crear</button>

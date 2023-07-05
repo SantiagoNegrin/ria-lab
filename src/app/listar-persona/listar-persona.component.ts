@@ -32,7 +32,7 @@ export class ListarPersonaComponent implements OnInit {
       id: -1,
       filters: {
         activo: this.filtroActivo,
-        primerNombre: this.filtroNombre
+        nombre: this.filtroNombre
       },
       orders: ['string']
     };

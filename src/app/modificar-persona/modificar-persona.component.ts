@@ -44,6 +44,7 @@ export class ModificarPersonaComponent implements OnInit {
       response => {
         this.successMessage = 'Los cambios se guardaron correctamente.';
         this.errorMessage = '';
+        location.reload();
       },
       error => {
         this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
