@@ -44,6 +44,7 @@ import { AuthGuard } from './auth.guard';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 import { ModificarEstadoComponent } from './modificar-estado/modificar-estado.component';
 import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
+import { ModificarPostulanteComponent } from './modificar-postulante/modificar-postulante.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,7 @@ import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-
     AltaPostulanteComponent,
     AgregarEstadoLlamadoComponent,
     VerTribunalComponent, 
-    ModificarEstadoComponent
+    ModificarEstadoComponent, ModificarPostulanteComponent
   ],
   imports: [
     HttpClientModule,

@@ -34,6 +34,7 @@ import { AuthGuard } from './auth.guard';
 import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
+import { ModificarPostulanteComponent } from './modificar-postulante/modificar-postulante.component';
 
 
 const routes: Routes = [
@@ -82,6 +83,7 @@ const routes: Routes = [
 
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
+  { path: 'modificar-postulante/:id', component: ModificarPostulanteComponent },
 
 ];
 

@@ -1,0 +1,28 @@
+<div *ngIf="postulanteSeleccionado">
+    <h2>Modificar Postulante</h2>
+    <form (submit)="guardarCambios()">
+        <label for="documento">Documento:</label>
+        <span id="documento">{{ postulanteSeleccionado.persona.documento }}</span>
+        
+        <label for="nombre">Nombre:</label>
+        <span id="nombre">{{ postulanteSeleccionado.persona.primerNombre }}</span>
+        
+        <label for="apellido">Apellido:</label>
+        <span id="apellido">{{ postulanteSeleccionado.persona.primerApellido }}</span>
+        
+      <label for="estudioMeritos">Estudio de Méritos:</label>
+      <input type="checkbox" id="estudioMeritos" name="estudioMeritos" [(ngModel)]="postulanteSeleccionado.estudioMeritosRealizado">
+  
+      <label for="fecha">Fecha de Entrevista:</label>
+      <input type="date" id="fecha" name="fecha" [(ngModel)]="selectedDate">
+  
+      <label for="hora">Hora de Entrevista:</label>
+      <input type="time" id="hora" name="hora" [(ngModel)]="selectedTime">
+  
+      <label for="entrevistaRealizada">Entrevista Realizada:</label>
+      <input type="checkbox" id="entrevistaRealizada" name="entrevistaRealizada" [(ngModel)]="postulanteSeleccionado.entrevistaRealizada">
+  
+      <button type="submit">Guardar Cambios</button>
+    </form>
+  </div>
+  
