@@ -57,19 +57,19 @@
 
 <!-- Resultados -->
 
-<div *ngIf="usuarios.length > 0" class="card" >
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Documento</th>
-        <th>Email</th>
-        <th>Código</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+  <div *ngIf="usuarios.length > 0" class="card" >
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Documento</th>
+          <th>Email</th>
+          <th>Código</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         <tr *ngFor="let u of usuarios">
             
             <td>{{ u.persona.primerNombre }} {{ u.persona.segundoNombre }} {{ u.persona.primerApellido }} {{ u.persona.segundoApellido }}</td>
@@ -84,16 +84,16 @@
             </td>
           </tr>
           
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
 
-<!-- Paginado -->
-<div *ngIf="usuarios.length > 0" class="d-flex justify-content-center" style="margin: 10px;">
-  <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
-  <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
-  <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
-</div>
+  <!-- Paginado -->
+  <div *ngIf="totalPages > 1" class="d-flex justify-content-center" style="margin: 10px;">
+    <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
+    <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+    <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
+  </div>
 </div>
 
 
