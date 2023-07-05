@@ -20,10 +20,9 @@ export class AuthService {
       tap(response => {
         if (response && response.token) {
           this.storeToken(response.token);
-          this.storeToken(response.email);
+          this.storeEmail(response.email);
           this.storeRoles(response.roles);
           this.storeNombre(response.nombre);
-          this.storeDoc(response.documento);
         }
       })
     );
@@ -45,15 +44,10 @@ export class AuthService {
     localStorage.setItem('nombre', nombre);
   }
 
-  private storeDoc(documento: string): void {
-    localStorage.setItem('documento', documento);
-  }
-
   logout(): void {
     this.clearToken();
     this.clearRoles();
     this.clearNombre();
-    this.clearDoc();
     this.clearEmail();
   }
 
@@ -68,10 +62,6 @@ export class AuthService {
   private clearNombre(): void {
     localStorage.removeItem('nombre');
   }
-
-  private clearDoc(): void {
-    localStorage.removeItem('documento');
-  }
   
   private clearEmail(): void {
     localStorage.removeItem('email');
@@ -85,10 +75,6 @@ export class AuthService {
     return localStorage.getItem('nombre');
   }
 
-  getDoc(): string | null {
-    return localStorage.getItem('documento');
-  }
-  
   getEmail(): string | null {
     return localStorage.getItem('email');
   }

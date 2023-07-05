@@ -2,7 +2,7 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <h4 class="mb-0">Tribunal del llamado {{ llamado }}</h4>
     <button *ngIf="admin" class="btn btn-primary" style="margin-left: 40px;" (click)="agregarMiembro()">Nuevo Miembro</button>
-    <button *ngIf="renunciar" class="btn btn-danger" style="margin-left: 40px;" (click)="renuncia(modalRenuncia)">Renunciar</button>
+    <!-- <button *ngIf="renunciar" class="btn btn-danger" style="margin-left: 40px;" (click)="renuncia(modalRenuncia)">Renunciar</button> -->
   </div>
 
   <div class="container card-body">
@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let puesto of puestos">
-          <td>{{ puesto }}</td>
+          <td> <span class="d-flex justify-content-center"> {{ puesto }} </span></td>
           <td *ngFor="let tipo of tipos">
             <ul class="list-unstyled">
               <span class="d-flex justify-content-center">
@@ -28,12 +28,15 @@
               <li *ngFor="let user of getUser(puesto, tipo.id)">
                 <span class="d-flex justify-content-center">
                   <img *ngIf="user.renuncia" src="../../assets/alert.png" alt="" ngbTooltip="Ver motivo de renuncia"
-                    (click)="openMotivo(modalMotivo, user.persona.id)">
+                    (click)="openMotivo(modalMotivo, user.persona.id)" style="margin-right: 15px;">
 
                   {{ user.persona.primerNombre }} {{user.persona.primerApellido}}
-
-                  <img style="margin-left: 5px;" *ngIf="admin" src="../../assets/eliminar.png" alt=""
-                    (click)="confirmarEliminacion(user.id)">
+                  
+                </span>
+                <br>
+                <span *ngIf="admin && getUser(puesto, tipo.id).length != 0" class="d-flex justify-content-end">
+                  <button *ngIf="!user.renuncia" style="margin: 5px;" type="button" class="btn btn-outline-danger btn-sm" (click)="renuncia(modalRenuncia, user.id)">Renuncia</button>
+                  <button style="margin: 5px;" type="button" class="btn btn-danger btn-sm" (click)="confirmarEliminacion(user.id)">Eliminar</button>
                 </span>
               </li>
             </ul>
@@ -63,8 +66,8 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label for="motivoR">Ingrese el motivo de su renuncia al tribunal:</label>
-            <textarea class="form-control" name="motivoR" cols="30" rows="10" [(ngModel)]="motivoRenuncia"></textarea>
+            <label for="motivoR">Ingrese el motivo:</label>
+            <textarea class="form-control" name="motivoR" cols="30" rows="5" [(ngModel)]="motivoRenuncia"></textarea>
           </div>
           <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
             <button (click)="confirmarRenuncia()" class="btn btn-primary">Confirmar</button>

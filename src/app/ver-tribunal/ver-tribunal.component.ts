@@ -15,16 +15,14 @@ export class VerTribunalComponent {
   llamadoId: number = 0;
   puestos: string[] = [];
   tipos: any[] = [];
-  tiposnombres: string [] = [];
   miembrosTribunal: any[] = [];
   users: any[] = [];
   admin: boolean = this.authService.getRoles().includes("ADMIN");
-  rolTribunal: boolean = this.authService.getRoles().includes("TRIBUNAL");
   motivo: string = "";
   llamado: string = "";
   motivoRenuncia: string = '';
   error: string = '';
-  renunciar: boolean = true;
+  userRenuncia: any;
   
 
   constructor(private http: HttpClient, private route: ActivatedRoute, 
@@ -60,14 +58,6 @@ export class VerTribunalComponent {
           this.users.push(user);
         });
 
-        const doc = this.authService.getDoc();
-        let miembroactual = this.miembrosTribunal.find(user => user.persona.documento === doc);
-        if (this.rolTribunal && miembroactual != null && miembroactual.renuncia == false){
-          this.renunciar = true;
-        }else{
-          this.renunciar = false;
-        }
-
         this.puestos = Array.from(new Set(this.users.map(user => user.puesto)));
         this.tipos = Array.from(new Set(this.users.map(user => user.tipo)));
         console.log(this.tipos);
@@ -76,10 +66,6 @@ export class VerTribunalComponent {
           (value, index, self) =>
             index === self.findIndex((obj) => obj.nombre === value.nombre)
         );
-
-       /* this.tiposnombres = this.tipos;
-        this.tiposnombres = this.tiposnombres.filter((value, index, self) => self.indexOf(value) === index);
-*/
         console.log(this.tipos);
     
       } else {
@@ -124,29 +110,27 @@ export class VerTribunalComponent {
       modalRef.componentInstance.orden = orden;
   }
 
-  renuncia(content: any){
+  renuncia(content: any, id: number){
+    this.userRenuncia = this.miembrosTribunal.find(user => user.id === id);
     this.motivoRenuncia = "";
     this.modalService.open(content, { centered: true });
   }
 
   confirmarRenuncia(){
-    const doc = this.authService.getDoc();
-    let u = this.miembrosTribunal.find(user => user.persona.documento === doc);
-    u.renuncia = true;
-    u.motivoRenuncia = this.motivoRenuncia;
-    console.log(u);
-    const id = u.id;
+    const id = this.userRenuncia.id;
     const url = `http://localhost:5000/api/MiembrosTribunales/${id}`;
-
-    this.http.put<any>(url, {body: u}).subscribe(
+    this.userRenuncia.renuncia = true;
+    this.userRenuncia.motivoRenuncia = this.motivoRenuncia;
+    const body = this.userRenuncia;
+    this.http.put<any>(url, body).subscribe(
       () => {
         console.log('Renuncia guardada');
-        //location.reload();
+        location.reload();
       },
       error => {
         console.error('Error al guardar la renuncia', error);
         this.error = 'Error al guardar la renuncia';
-       // location.reload();
+        location.reload();
       }
     );
   }
