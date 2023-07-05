@@ -20,7 +20,7 @@ export class AuthService {
       tap(response => {
         if (response && response.token) {
           this.storeToken(response.token);
-          this.storeToken(response.email);
+          this.storeEmail(response.email);
           this.storeRoles(response.roles);
           this.storeNombre(response.nombre);
           this.storeDoc(response.documento);
