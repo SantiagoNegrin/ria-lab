@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Nuevo Miembro de Tribunal</h4>
+  </div>
+  <div class="card-body">
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+
+    <form (submit)="enviarFormulario()">
+      <div>
+        <label for="persona">Persona:</label>
+        <select id="persona" [(ngModel)]="personaSeleccionada" name="persona" required class="form-select">
+          <option value="" disabled selected hidden>Seleccione una persona</option>
+          <option *ngFor="let persona of personas" [ngValue]="persona">{{ persona.primerNombre }}
+            {{persona.primerApellido}} - {{ persona.documento }}</option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="tipo === null">
+        <label for="tipoIntegrante">Tipo de Integrante:</label>
+        <select id="tipoIntegrante" [(ngModel)]="tipoIntegranteSeleccionado" name="tipoIntegrante" required
+          class="form-select">
+          <option *ngFor="let tipoIntegrante of tiposIntegrantes" [ngValue]="tipoIntegrante">{{
+            tipoIntegrante.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="tipo != null">
+        <label for="tipo">Tipo de Integrante:</label>
+        <input name="tipo" id="tipo" class="form-control" type="text" disabled
+          value={{tipoIntegranteSeleccionado.nombre}}>
+      </div>
+
+      <div class="form-group">
+        <label for="orden">Orden:</label>
+        <input class="form-control" type="number" [(ngModel)]="orden" name="orden" id="orden" [disabled]="tipo != null">
+      </div>
+
+      <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

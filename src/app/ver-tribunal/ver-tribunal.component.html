@@ -1,20 +1,71 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th *ngFor="let tipo of tipos">{{ tipo.nombre }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let puesto of puestos">
-        <td>{{ puesto }}</td>
-        <td *ngFor="let tipo of tipos">
-          <ul>
-            <li *ngFor="let user of getUser(puesto, tipo)">
-              {{ user.persona.primerNombre }} {{user.persona.primerApellido}}
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card" >
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Tribunal del llamado {{ llamado }}</h4>
+    <button *ngIf="admin" class="btn btn-primary" style="margin-left: 40px;" (click)="agregarMiembro()">Nuevo Miembro</button>
+    <button *ngIf="rolTribunal" class="btn btn-danger" style="margin-left: 40px;" (click)="renuncia(modalRenuncia)">Renunciar</button>
+  </div>
+
+  <div class="container card-body">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th style="font-size: large;"> Orden </th>
+          <th style="font-size: large;" *ngFor="let tipo of tipos">{{ tipo.nombre }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let puesto of puestos">
+          <td>{{ puesto }}</td>
+          <td *ngFor="let tipo of tipos">
+            <ul class="list-unstyled">
+              <span class="d-flex justify-content-center">
+                <img *ngIf="admin && getUser(puesto, tipo.id).length == 0" src="../../assets/agregar.png" alt=""
+                  (click)="agregarPorTipoOrden(tipo, puesto)" ngbTooltip="Agregar miembro">
+              </span>
+              <li *ngFor="let user of getUser(puesto, tipo.id)">
+                <span class="d-flex justify-content-center">
+                  <img *ngIf="user.renuncia" src="../../assets/alert.png" alt="" ngbTooltip="Ver motivo de renuncia"
+                    (click)="openMotivo(modalMotivo, user.persona.id)">
+
+                  {{ user.persona.primerNombre }} {{user.persona.primerApellido}}
+
+                  <img style="margin-left: 5px;" *ngIf="admin" src="../../assets/eliminar.png" alt=""
+                    (click)="confirmarEliminacion(user.id)">
+                </span>
+              </li>
+            </ul>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+    <ng-template #modalMotivo>
+      <div class="card">
+        <div class="card-header">
+          <h4>Motivo de renuncia</h4>
+        </div>
+        <div class="card-body">
+          {{ motivo }}
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #modalRenuncia>
+      <div class="card">
+        <div class="card-header">
+          <h4>Motivo de renuncia</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="motivo">Ingrese el motivo de su renuncia al tribunal:</label>
+            <input class="form-control" type="text" [(ngModel)]="motivo" name="motivo" id="motivo">
+          </div>
+          <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+            <button (click)="confirmarRenuncia()" class="btn btn-primary">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
