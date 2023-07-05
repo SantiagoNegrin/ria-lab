@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AltaPersonaComponent } from '../alta-persona/alta-persona.component';
+import { ModificarPersonaComponent } from '../modificar-persona/modificar-persona.component';
 
 @Component({
   selector: 'app-listar-persona',
@@ -9,13 +12,13 @@ import { Router } from '@angular/router';
 })
 export class ListarPersonaComponent implements OnInit {
   personas: any[] = [];
-  filtroActivo: boolean = true;
+  filtroActivo: boolean | null = null;
   filtroNombre: string = '';
   totalPages: number = 0;
   currentPage: number = 1;
   limit: number = 10;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, public modal: NgbModal) { }
 
   ngOnInit() {
     this.obtenerPersonas();
@@ -47,9 +50,16 @@ export class ListarPersonaComponent implements OnInit {
     this.router.navigate(['/postular-Persona', id]);
   }
 
-  cambiarPagina(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.obtenerPersonas();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
       this.obtenerPersonas();
     }
   }
@@ -59,11 +69,13 @@ export class ListarPersonaComponent implements OnInit {
     this.obtenerPersonas();
   }
 
-  obtenerPaginas(): number[] {
-    const pages: number[] = [];
-    for (let i = 1; i <= this.totalPages; i++) {
-      pages.push(i);
-    }
-    return pages;
+  openModal() {
+		this.modal.open(AltaPersonaComponent, { scrollable:true });
+	}
+
+  openModificar(id: string){
+    const modalRef = this.modal.open(ModificarPersonaComponent);
+    modalRef.componentInstance.personaId = id;
   }
+
 }

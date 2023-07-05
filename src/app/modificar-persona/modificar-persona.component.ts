@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./modificar-persona.component.css']
 })
 export class ModificarPersonaComponent implements OnInit {
+  personaId: string = '';
   persona: any = {};
   tiposDocumento: any[] = [];
   errorMessage: string = ''; 
@@ -17,14 +18,14 @@ export class ModificarPersonaComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const personaId = params['id'];
-      this.obtenerPersona(personaId);
+      
+      this.obtenerPersona(this.personaId);
     });
 
     this.obtenerTiposDocumento();
   }
 
-  obtenerPersona(id: number) {
+  obtenerPersona(id: string) {
     const url = `http://localhost:5000/api/Personas/${id}`;
     this.http.get<any>(url).subscribe(response => {
       if (response && response.id) { 
