@@ -20,7 +20,7 @@ import { ModificarPersonaComponent } from './modificar-persona/modificar-persona
 import { AltaEstadosPosiblesComponent } from './alta-estados-posibles/alta-estados-posibles.component';
 import { ListarEstadosPosiblesComponent } from './listar-estados-posibles/listar-estados-posibles.component';
 import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/modificar-posibles-estados.component';
-import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
+import { AltaMiembrosTribunalesComponent } from './alta-miembros-tribunales/alta-miembros-tribunales.component';
 import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
@@ -80,7 +80,7 @@ const routes: Routes = [
 
   { path: 'ver-tribunal/:id', component: VerTribunalComponent},
 
-  { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponenComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
 
 ];

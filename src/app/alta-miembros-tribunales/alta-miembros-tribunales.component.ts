@@ -3,27 +3,36 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-alta-miembros-tribunales-componen',
-  templateUrl: './alta-miembros-tribunales-componen.component.html',
-  styleUrls: ['./alta-miembros-tribunales-componen.component.css']
+  templateUrl: './alta-miembros-tribunales.component.html',
+  styleUrls: ['./alta-miembros-tribunales.component.css']
 })
-export class AltaMiembrosTribunalesComponenComponent {
+export class AltaMiembrosTribunalesComponent {
   personas: any[] = [];
   tiposIntegrantes: any[] = [];
   tipoIntegranteSeleccionado: any;
+  tipo: any = null;
   personaSeleccionada: any;
+  orden: number = 0;
+  llamadoId: number = 0;
+
+  errorMessage: string = '';
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.obtenerPersonas();
-    this.obtenerTiposIntegrantes();
+    if (this.tipo != null){
+      this.tipoIntegranteSeleccionado = this.tipo;
+    }else{
+      this.obtenerTiposIntegrantes();
+    }
   }
 
   obtenerPersonas() {
     const apiUrl = 'http://localhost:5000/api/Personas/Paged';
   
     const body = {
-      limit: 1000,
+      limit: -1,
       offset: 0,
       id: 0,
       filters: {
@@ -44,9 +53,8 @@ export class AltaMiembrosTribunalesComponenComponent {
 
   obtenerTiposIntegrantes() {
     const apiUrl = 'http://localhost:5000/api/TiposDeIntegrantes/Paged';
-  
     const body = {
-      limit: 1000,
+      limit: -1,
       offset: 0,
       id: 0,
       filters: {
@@ -63,30 +71,19 @@ export class AltaMiembrosTribunalesComponenComponent {
       console.error('Error al obtener los tipos de integrantes:', error);
     });
   }
+
   enviarFormulario() {
     if (this.tipoIntegranteSeleccionado && this.personaSeleccionada) {
       const data = {
         id: 0,
         activo: true,
-        orden: 0,
+        orden: this.orden,
         renuncia: false,
         motivoRenuncia: "",
-        llamadoId: 0,
+        llamadoId: this.llamadoId,
         personaId: this.personaSeleccionada.id,
-        persona: {
-          id: this.personaSeleccionada.id,
-          activo: this.personaSeleccionada.activo,
-          tipoDeDocumento: {
-            id: 0,
-            activo: true,
-            nombre: "string"
-          },
-          documento: this.personaSeleccionada.documento,
-          primerNombre: this.personaSeleccionada.primerNombre,
-          segundoNombre: this.personaSeleccionada.segundoNombre,
-          primerApellido: this.personaSeleccionada.primerApellido,
-          segundoApellido: this.personaSeleccionada.segundoApellido
-        },
+        persona: this.personaSeleccionada,
+         
         tipoDeIntegranteId: this.tipoIntegranteSeleccionado.id,
         tipoDeIntegrante: {
           id: this.tipoIntegranteSeleccionado.id,
@@ -97,8 +94,18 @@ export class AltaMiembrosTribunalesComponenComponent {
       };
   
       console.log(data); // Imprimir los datos en la consola
-  
-      // Aquí realizar la llamada a la API para enviar los datos
+      const apiUrl = 'http://localhost:5000/api/MiembrosTribunales';
+      this.http.post<any>(apiUrl, data).subscribe(response => {
+        this.errorMessage = "";
+        location.reload();
+        
+      }, error => {
+        console.error(error);
+        this.errorMessage = "Error al agregar miembro."
+      });
+
+    }else{
+      this.errorMessage = "Completa todos los datos"
     }
   }
   

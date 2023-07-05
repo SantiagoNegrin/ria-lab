@@ -15,7 +15,9 @@
             <th>Área</th>
             <th>Estado</th>
             <th>Modificar Estado</th>
-            <th>Acciones</th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +43,11 @@
             
             <td>
               <a class="btn btn-primary btn-sm" [routerLink]="['/listar-postulantes-llamado', llamado.id,llamado.nombre, llamado.identificador]">Postulantes</a>
-              <button class="btn btn-primary btn-sm">Tribunal</button>
+            </td>
+            <td>  
+              <button class="btn btn-primary btn-sm" [routerLink]="['/ver-tribunal', llamado.id]">Tribunal</button>
+            </td>  
+            <td>
               <button class="btn btn-primary btn-sm">Estados</button>
             </td>
           </tr>

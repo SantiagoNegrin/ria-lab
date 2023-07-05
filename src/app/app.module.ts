@@ -32,7 +32,7 @@ import { ModificarPosiblesEstadosComponent } from './modificar-posibles-estados/
 import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
-import { AltaMiembrosTribunalesComponenComponent } from './alta-miembros-tribunales-componen/alta-miembros-tribunales-componen.component';
+import { AltaMiembrosTribunalesComponent } from './alta-miembros-tribunales/alta-miembros-tribunales.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ListarLlamadosComponent } from './listar-llamados/listar-llamados.component';
@@ -67,7 +67,7 @@ import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-
     AltaEstadosPosiblesComponent,
     ListarEstadosPosiblesComponent,
     ModificarPosiblesEstadosComponent,
-    AltaMiembrosTribunalesComponenComponent,
+    AltaMiembrosTribunalesComponent,
     AltaLlamadoComponent,
     ListarUsuarioComponent,
     AltaUsuarioComponent,
