@@ -33,6 +33,7 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
 import { AuthGuard } from './auth.guard';
 import { AltaLlamadoComponent } from './alta-llamado/alta-llamado.component';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
+import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
 
 
 const routes: Routes = [
@@ -64,7 +65,8 @@ const routes: Routes = [
   { path: 'listar-posibles-estados-llamados', component: ListarEstadosPosiblesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'alta-estados-posibles-llamado', component: AltaEstadosPosiblesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'modificar-estados-posibles/:id', component: ModificarPosiblesEstadosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
- 
+  { path: 'agregar-estado-llamado/:id/:idEstado/:idAccion', component: AgregarEstadoLlamadoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
   { path: 'listar-usuario', component: ListarUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'registro', component: AltaUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'modificar-usuario/:id', component: ModificarUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },

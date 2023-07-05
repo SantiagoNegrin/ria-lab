@@ -4,7 +4,7 @@
       <h2 class="card-title">Lista Llamados</h2>
     </div>
     <div class="card-body">
-      <table class="table">
+      <table class="table"> 
         <thead>
           <tr>
             <th>Identificador</th>
@@ -30,14 +30,16 @@
             <td>{{ llamado.area.nombre }}</td>
             <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
             <td>
-                <button class="btn btn-primary" style="margin-right: 10px;">
-                    <span class="fas fa-arrow-up"></span>
-                </button>
-                
-                <button class="btn btn-primary" style="margin-left: 10px;">
-                    <span class="fas fa-arrow-down"></span>
-                </button>
+              <button class="btn btn-primary" [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId,1]"  style="margin-right: 10px;">
+                <i class="fas fa-arrow-up"></i>
+              </button>
+              
+              <button class="btn btn-primary" [routerLink]="['/agregar-estado-llamado', llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId,0]" style="margin-left: 10px; ">
+                <i class="fas fa-arrow-down"></i>
+              </button>
+            
             </td>
+            
             
             <td>
               <a class="btn btn-primary btn-sm" [routerLink]="['/listar-postulantes-llamado', llamado.id,llamado.nombre, llamado.identificador]">Postulantes</a>

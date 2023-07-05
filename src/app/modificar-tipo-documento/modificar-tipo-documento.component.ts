@@ -15,9 +15,9 @@ export class ModificarTipoDocumentoComponent implements OnInit {
   activo: boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-   /* this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.tipoDocumentoId = params['id'];
-    });*/
+    });
   }
 
   ngOnInit() {
