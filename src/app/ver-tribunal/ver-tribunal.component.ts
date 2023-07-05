@@ -5,6 +5,7 @@ import { AuthService } from '../auth/login/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AltaMiembrosTribunalesComponent } from '../alta-miembros-tribunales/alta-miembros-tribunales.component';
 
+
 @Component({
   selector: 'app-ver-tribunal',
   templateUrl: './ver-tribunal.component.html',
@@ -21,6 +22,10 @@ export class VerTribunalComponent {
   rolTribunal: boolean = this.authService.getRoles().includes("TRIBUNAL");
   motivo: string = "";
   llamado: string = "";
+  motivoRenuncia: string = '';
+  error: string = '';
+  renunciar: boolean = true;
+  
 
   constructor(private http: HttpClient, private route: ActivatedRoute, 
     private authService: AuthService, private modalService: NgbModal)  { }
@@ -55,7 +60,13 @@ export class VerTribunalComponent {
           this.users.push(user);
         });
 
-        console.log(this.users);
+        const doc = this.authService.getDoc();
+        let miembroactual = this.miembrosTribunal.find(user => user.persona.documento === doc);
+        if (this.rolTribunal && miembroactual != null && miembroactual.renuncia == false){
+          this.renunciar = true;
+        }else{
+          this.renunciar = false;
+        }
 
         this.puestos = Array.from(new Set(this.users.map(user => user.puesto)));
         this.tipos = Array.from(new Set(this.users.map(user => user.tipo)));
@@ -91,11 +102,11 @@ export class VerTribunalComponent {
 
       this.http.delete<any>(url).subscribe(
         () => {
-          console.log('Usuario eliminado');
+          console.log('Miembro eliminado');
           location.reload();
         },
         error => {
-          console.error('Error al eliminar el usuario', error);
+          console.error('Error al eliminar el miembro del tribunal', error);
         }
       );
     }
@@ -114,12 +125,30 @@ export class VerTribunalComponent {
   }
 
   renuncia(content: any){
-    this.motivo = "";
+    this.motivoRenuncia = "";
     this.modalService.open(content, { centered: true });
   }
 
   confirmarRenuncia(){
-    
+    const doc = this.authService.getDoc();
+    let u = this.miembrosTribunal.find(user => user.persona.documento === doc);
+    u.renuncia = true;
+    u.motivoRenuncia = this.motivoRenuncia;
+    console.log(u);
+    const id = u.id;
+    const url = `http://localhost:5000/api/MiembrosTribunales/${id}`;
+
+    this.http.put<any>(url, {body: u}).subscribe(
+      () => {
+        console.log('Renuncia guardada');
+        //location.reload();
+      },
+      error => {
+        console.error('Error al guardar la renuncia', error);
+        this.error = 'Error al guardar la renuncia';
+       // location.reload();
+      }
+    );
   }
   
 

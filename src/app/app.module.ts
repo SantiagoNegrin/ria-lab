@@ -78,7 +78,9 @@ import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-
     RolesUsuarioComponent,
     ListarPostulantesLlamadoComponent,
     AltaPostulanteComponent,
-    AgregarEstadoLlamadoComponent
+    AgregarEstadoLlamadoComponent,
+    VerTribunalComponent, 
+    ModificarEstadoComponent
   ],
   imports: [
     HttpClientModule,

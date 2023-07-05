@@ -22,6 +22,7 @@ export class AuthService {
           this.storeToken(response.token);
           this.storeRoles(response.roles);
           this.storeNombre(response.nombre);
+          this.storeDoc(response.documento);
         }
       })
     );
@@ -39,10 +40,15 @@ export class AuthService {
     localStorage.setItem('nombre', nombre);
   }
 
+  private storeDoc(documento: string): void {
+    localStorage.setItem('documento', documento);
+  }
+
   logout(): void {
     this.clearToken();
     this.clearRoles();
     this.clearNombre();
+    this.clearDoc();
   }
 
   private clearToken(): void {
@@ -57,12 +63,20 @@ export class AuthService {
     localStorage.removeItem('nombre');
   }
 
+  private clearDoc(): void {
+    localStorage.removeItem('documento');
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
   getNombre(): string | null {
     return localStorage.getItem('nombre');
+  }
+
+  getDoc(): string | null {
+    return localStorage.getItem('documento');
   }
 
   getRoles(): string[] {
