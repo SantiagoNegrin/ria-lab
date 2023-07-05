@@ -23,9 +23,14 @@ export class AuthService {
           this.storeEmail(response.email);
           this.storeRoles(response.roles);
           this.storeNombre(response.nombre);
+          this.storeDoc(response.documento);
         }
       })
     );
+  }
+
+  private storeDoc(documento: string): void {
+    localStorage.setItem('token', documento);
   }
 
   private storeToken(token: string): void {
@@ -49,6 +54,11 @@ export class AuthService {
     this.clearRoles();
     this.clearNombre();
     this.clearEmail();
+    this.clearDoc();
+  }
+
+  private clearDoc(): void {
+    localStorage.removeItem('documento');
   }
 
   private clearToken(): void {
@@ -65,6 +75,10 @@ export class AuthService {
   
   private clearEmail(): void {
     localStorage.removeItem('email');
+  }
+
+  getDoc(): string | null {
+    return localStorage.getItem('documento');
   }
 
   getToken(): string | null {
