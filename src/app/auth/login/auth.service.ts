@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   private storeDoc(documento: string): void {
-    localStorage.setItem('token', documento);
+    localStorage.setItem('documento', documento);
   }
 
   private storeToken(token: string): void {
