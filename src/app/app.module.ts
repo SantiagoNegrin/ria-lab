@@ -43,6 +43,7 @@ import { AltaPostulanteComponent } from './alta-postulante/alta-postulante.compo
 import { AuthGuard } from './auth.guard';
 import { VerTribunalComponent } from './ver-tribunal/ver-tribunal.component';
 import { AgregarEstadoLlamadoComponent } from './agregar-estado-llamado/agregar-estado-llamado.component';
+import { ModificarPostulanteComponent } from './modificar-postulante/modificar-postulante.component';
 
 @NgModule({
   declarations: [

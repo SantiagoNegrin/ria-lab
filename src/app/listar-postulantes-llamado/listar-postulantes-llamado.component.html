@@ -1,16 +1,42 @@
 <app-alta-postulante></app-alta-postulante>
+
 <table>
-    <thead>
-      <tr>
-        <th>Documento</th>
-        <th>Primer Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let postulante of postulantes">
-        <td>{{ postulante.persona.documento }}</td>
-        <td>{{ postulante.persona.primerNombre }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th> Documento </th>
+      <th> Nombre </th>
+      <th> Apellido </th>
+      <th> Estudio Meritos </th>
+      <th> Fecha de Entrevista </th>
+      <th> Entrevista </th>
+      <th> Acciones </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let postulante of postulantes">
+      <td>{{ postulante.persona.documento }}</td>
+      <td>{{ postulante.persona.primerNombre }}</td>
+      <td>{{ postulante.persona.primerApellido }}</td>
+      <td>
+        <button *ngIf="!postulante.persona.estudioMeritosRealizado" class="btn btn-danger">
+          <i class="fas fa-times"></i>
+        </button>
+        <button *ngIf="postulante.persona.estudioMeritosRealizado" class="btn btn-success">
+          <i class="fas fa-check"></i>
+        </button>
+      </td>
+      <td>{{ postulante.persona.fechaHoraEntrevista }}</td>
+      <td>
+      <button *ngIf="!postulante.persona.entrevistaRealizada" class="btn btn-danger">
+        <i class="fas fa-times"></i>
+      </button>
+      <button *ngIf="postulante.persona.entrevistaRealizada" class="btn btn-success">
+        <i class="fas fa-check"></i>
+      </button>
+    </td>
+    <td>
+      <button class="btn btn-primary" [routerLink]="['/modificar-postulante', postulante.id]">Modificar</button>
+    </td>
+    </tr>
+  </tbody>
+</table>
