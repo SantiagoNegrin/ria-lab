@@ -18,19 +18,19 @@
       <td>{{ postulante.persona.primerNombre }}</td>
       <td>{{ postulante.persona.primerApellido }}</td>
       <td>
-        <button *ngIf="!postulante.persona.estudioMeritosRealizado" class="btn btn-danger">
+        <button *ngIf="!postulante.estudioMeritosRealizado" class="btn btn-danger">
           <i class="fas fa-times"></i>
         </button>
-        <button *ngIf="postulante.persona.estudioMeritosRealizado" class="btn btn-success">
+        <button *ngIf="postulante.estudioMeritosRealizado" class="btn btn-success">
           <i class="fas fa-check"></i>
         </button>
       </td>
-      <td>{{ postulante.persona.fechaHoraEntrevista }}</td>
+      <td>{{ postulante.fechaHoraEntrevista }}</td>
       <td>
-      <button *ngIf="!postulante.persona.entrevistaRealizada" class="btn btn-danger">
+      <button *ngIf="!postulante.entrevistaRealizada" class="btn btn-danger">
         <i class="fas fa-times"></i>
       </button>
-      <button *ngIf="postulante.persona.entrevistaRealizada" class="btn btn-success">
+      <button *ngIf="postulante.entrevistaRealizada" class="btn btn-success">
         <i class="fas fa-check"></i>
       </button>
     </td>
