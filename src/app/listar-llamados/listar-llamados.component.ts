@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AltaLlamadoComponent } from '../alta-llamado/alta-llamado.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/login/auth.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-listar-llamados',
   templateUrl: './listar-llamados.component.html',
@@ -26,7 +26,7 @@ export class ListarLlamadosComponent implements OnInit {
   pageSize: number = 10;
   totalCount: number = 0;
 
-  constructor(private http: HttpClient, public modal: NgbModal, private authService: AuthService ) { }
+  constructor(private http: HttpClient, public modal: NgbModal, private authService: AuthService, private router:Router ) { }
 
   ngOnInit() {
     this.getMiembrosTribunal();
@@ -107,7 +107,30 @@ export class ListarLlamadosComponent implements OnInit {
     this.paginaActual = 1;
     this.getLlamados();
   }
-
+  /*
+  1 Iniciado	Si	
+  2 Estudio de Méritos Realizado	Si	
+  3 Entrevistas Realizadas	Si	
+  4 Psicotécnicos Realizados	Si	
+  5 Finalizado
+  */
+  tienePermisoUp(llamado: any): boolean {
+    if (this.admin === true && (llamado.ultimoEstado.llamadoEstadoPosibleId === 1 || llamado.ultimoEstado.llamadoEstadoPosibleId === 2 || llamado.ultimoEstado.llamadoEstadoPosibleId === 5)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  tienePermisoDown(llamado: any): boolean {
+    if (this.admin === true && (llamado.ultimoEstado.llamadoEstadoPosibleId === 1 || llamado.ultimoEstado.llamadoEstadoPosibleId === 3)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -120,6 +143,11 @@ export class ListarLlamadosComponent implements OnInit {
       this.currentPage++;
       this.getLlamados();
     }
+  }
+
+  redirigirA(idLlamado: number, idEstado: number, idAccion: number) {
+    // Redirige a la ruta deseada
+    this.router.navigate(['/agregar-estado-llamado', idLlamado, idEstado, idAccion]);
   }
 
   previousPage() {

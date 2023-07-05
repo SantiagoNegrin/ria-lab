@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/login/auth.service';
 import { Router } from '@angular/router';
+import { count } from 'rxjs';
 
 interface LlamadoEstadoPosible {
   id: number;
@@ -108,7 +109,10 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
   agregarExitoso: boolean = false;
   agregarError: boolean = false;
   successMessage: string ='';
-  
+  admin: boolean = false;
+  tribunal: boolean = false;
+  coordinador: boolean = false;
+  auxCuentas: number = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private authService: AuthService,private router: Router) {}
 
@@ -117,10 +121,21 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
       this.idLlamado = +params['id'];
       this.idEstado = +params['idEstado']; // Corregido
       this.idAccion = +params['idAccion']; // Corregido
+      this.auxCuentas= this.idEstado + 1;
     });
-
     this.obtenerLlamadosEstadosPosibles();
     this.obtenerLlamados();
+    this.admin = this.authService.getRoles().includes("ADMIN");
+    this.tribunal = this.authService.getRoles().includes("TRIBUNAL");
+    this.coordinador = this.authService.getRoles().includes("COORDINADOR");
+    if (this.admin === false) {
+      window.alert('NO TIENES PERMISO admin');
+      this.router.navigate(['/listar-llamados']);
+    }
+    if (this.coordinador === true) {
+      window.alert('NO TIENES PERMISO, COORDINADOR');
+      this.router.navigate(['/listar-llamados']);
+    }
   }
 
   obtenerLlamados() {
@@ -217,6 +232,10 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
             this.agregarExitoso = true;
             this.agregarError = false;
             console.log(response);
+            this.router.navigate(['/listar-llamados']);
+
+            // Mostrar un mensaje de confirmación con window.alert()
+            window.alert('Se ha agregado correctamente');
           },
           (error) => {
             this.agregarExitoso = false;

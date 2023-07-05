@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/login/auth.service';
 import * as moment from 'moment';
 
 @Component({
@@ -28,13 +29,18 @@ export class ModificarPostulanteComponent implements OnInit {
       entrevistaRealizada: false
     }
   };
-
+  admin: boolean = false;
+  tribunal: boolean = false;
+  coordinador: boolean = false;
   selectedDate?: string;
   selectedTime?: string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private authService:AuthService) { }
 
   ngOnInit() {
+    this.admin = this.authService.getRoles().includes("ADMIN");
+    this.tribunal = this.authService.getRoles().includes("TRIBUNAL");
+    this.coordinador = this.authService.getRoles().includes("COORDINADOR");
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.obtenerPostulante(id);

@@ -1,0 +1,5 @@
+.disabled-button {
+    opacity: 0.5; /* Reduce la opacidad del botón deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+  }
+  
