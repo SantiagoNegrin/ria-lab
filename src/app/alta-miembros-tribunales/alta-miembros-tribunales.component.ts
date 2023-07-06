@@ -11,7 +11,7 @@ export class AltaMiembrosTribunalesComponent {
   tiposIntegrantes: any[] = [];
   tipoIntegranteSeleccionado: any;
   tipo: any = null;
-  personaSeleccionada: any;
+  personaSeleccionada: any = null;
   orden: number = 0;
   llamadoId: number = 0;
 

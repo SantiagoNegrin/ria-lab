@@ -49,7 +49,7 @@ export class ModificarPostulanteComponent implements OnInit {
     const url = `http://localhost:5000/api/Postulantes/${id}`;
     this.http.get(url).subscribe((response: any) => {
       this.postulanteSeleccionado = response;
-      this.nombre = this.postulanteSeleccionado.persona.primerNombre + this.postulanteSeleccionado.persona.primerApellido;
+      this.nombre = this.postulanteSeleccionado.persona.primerNombre + ' ' + this.postulanteSeleccionado.persona.primerApellido;
       this.selectedDate = moment(this.postulanteSeleccionado.fechaHoraEntrevista).format('YYYY-MM-DD');
       this.selectedTime = moment(this.postulanteSeleccionado.fechaHoraEntrevista).format('HH:mm');
     });
