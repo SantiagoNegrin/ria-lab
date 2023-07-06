@@ -77,9 +77,10 @@ export class AltaLlamadoComponent {
       .subscribe(
         (response: any) => {
           console.log('Respuesta:', response);
-          this.successMessage = 'Llamado posible creado exitosamente.';
+          this.successMessage = 'Llamado creado exitosamente.';
           this.errorMessage = '';
           console.log('Estado posible creado exitosamente.');
+          location.reload();
         },
         error => {
           console.error('Error:', error);
