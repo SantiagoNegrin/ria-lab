@@ -1,12 +1,28 @@
-<h2>Agregar Postulante</h2>
-
-<!-- Formulario para seleccionar persona y llamado -->
-<form (ngSubmit)="altaPostulante()">
-  <div class="form-group">
-    <label for="persona">Persona:</label>
-    <select id="persona" class="form-control" [(ngModel)]="personaId" name="personaId">
-      <option *ngFor="let persona of personas" [value]="persona.id">{{ persona.primerNombre }} {{ persona.primerApellido }}</option>
-    </select>
+<div class="card">
+  <div class="card-header">
+    <h4>Nuevo altaPostulante </h4>
   </div>
-  <button type="submit" class="btn btn-primary">Agregar</button>
-</form>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+    <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+      <p>Error: {{ errorMessage }}</p>
+    </div>
+
+    <form (ngSubmit)="altaPostulante()">
+      
+      <div class="form-group">
+        <label for="persona">Persona:</label>
+        <select id="persona" class="form-select" [(ngModel)]="personaId" name="personaId">
+          <option [value]="0" >Selecciona una persona</option>
+          <option *ngFor="let persona of personas" [value]="persona.id">{{ persona.primerNombre }} {{ persona.primerApellido }} - {{ persona.documento }}</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

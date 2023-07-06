@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../auth/login/auth.service';
+import { AltaPostulanteComponent } from '../alta-postulante/alta-postulante.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModificarPostulanteComponent } from '../modificar-postulante/modificar-postulante.component';
 
 @Component({
   selector: 'app-listar-postulantes-llamado',
@@ -12,8 +16,9 @@ export class ListarPostulantesLlamadoComponent implements OnInit {
   idG: string = '';
   identificadorG: string = '';
   postulantes: any[] = [];
+  admin: boolean = this.authService.getRoles().includes("ADMIN");
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, public modal: NgbModal,private authService: AuthService) {}
   
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -27,7 +32,7 @@ export class ListarPostulantesLlamadoComponent implements OnInit {
 
   fetchPostulantes() {
     const data = {
-      limit: 1000,
+      limit: -1,
       offset: 0,
       id: 0,
       filters: {
@@ -39,8 +44,6 @@ export class ListarPostulantesLlamadoComponent implements OnInit {
       },
       orders: ['string']
     };
-
-    console.log('Request Body:', data);
 
     this.http
       .post('http://localhost:5000/api/Llamados/Paged', data)
@@ -54,4 +57,14 @@ export class ListarPostulantesLlamadoComponent implements OnInit {
         }
       );
   }
+
+  openModal(){
+    const modalRef = this.modal.open(AltaPostulanteComponent, {scrollable: true});
+    modalRef.componentInstance.idG = this.idG;
+  }
+
+  openModificar(id: string){
+    const modalRef = this.modal.open(ModificarPostulanteComponent);
+    modalRef.componentInstance.id = id;
+}
 }

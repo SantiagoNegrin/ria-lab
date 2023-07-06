@@ -1,28 +1,50 @@
-<div *ngIf="postulanteSeleccionado">
-    <h2>Modificar Postulante</h2>
-    <form (submit)="guardarCambios()">
-      <label for="documento">Documento:</label>
-      <span id="documento">{{ postulanteSeleccionado.persona.documento }}</span>
-  
-      <label for="nombre">Nombre:</label>
-      <span id="nombre">{{ postulanteSeleccionado.persona.primerNombre }}</span>
-  
-      <label for="apellido">Apellido:</label>
-      <span id="apellido">{{ postulanteSeleccionado.persona.primerApellido }}</span>
-  
-      <label for="estudioMeritos">Estudio de Méritos:</label>
-      <input type="checkbox" id="estudioMeritos" name="estudioMeritos" [(ngModel)]="postulanteSeleccionado.estudioMeritosRealizado">
-  
-      <label for="fecha">Fecha de Entrevista:</label>
-      <input type="date" id="fecha" name="fecha" [(ngModel)]="selectedDate">
-  
-      <label for="hora">Hora de Entrevista:</label>
-      <input type="time" id="hora" name="hora" [(ngModel)]="selectedTime">
-  
-      <label for="entrevistaRealizada">Entrevista Realizada:</label>
-      <input type="checkbox" id="entrevistaRealizada" name="entrevistaRealizada" [(ngModel)]="postulanteSeleccionado.entrevistaRealizada">
-  
-      <button type="submit">Guardar Cambios</button>
-    </form>
+<div class="card">
+  <div class="card-header">
+      <h4>Modificar Postulante</h4>
   </div>
+  <div class="card-body">
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      <div class="mt-4" *ngIf="errorMessage" class="alert alert-danger">
+        <p>Error: {{ errorMessage }}</p>
+      </div>
+
+      <form *ngIf="postulanteSeleccionado" (submit)="guardarCambios()">
+ 
+        <div class="form-group">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" [(ngModel)]="postulanteSeleccionado.persona.documento" name="documento" class="form-control" disabled>
+        </div>
   
+        <div class="form-group">
+          <label for="primerNombre">Primer Nombre:</label>
+          <input type="text" id="primerNombre" [(ngModel)]="nombre" name="primerNombre" class="form-control" disabled>
+        </div>
+  
+        <div class="form-group">
+          <label class="checkbox1" for="meritos">Estudio de méritos realizado:</label>
+          <input type="checkbox" id="meritos" [(ngModel)]="postulanteSeleccionado.estudioMeritosRealizado" name="meritos">
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox2" for="entrevista">Entrevista realizada:</label>
+          <input type="checkbox" id="entrevista" [(ngModel)]="postulanteSeleccionado.entrevistaRealizada" name="entrevista">
+        </div>
+
+        <div class="form-group">
+          <label for="fecha">Fecha de la Entrevista:</label>
+          <input class="form-control" type="date" id="fecha" name="fecha" [(ngModel)]="selectedDate">
+        </div>
+       
+        <div class="form-group">
+          <label for="hora">Hora de Entrevista:</label>
+          <input class="form-control" type="time" id="hora" name="hora" [(ngModel)]="selectedTime">
+        </div>
+
+        <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>

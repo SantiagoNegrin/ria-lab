@@ -21,23 +21,28 @@
           <td> <span class="d-flex justify-content-center"> {{ puesto }} </span></td>
           <td *ngFor="let tipo of tipos">
             <ul class="list-unstyled">
+              
               <span class="d-flex justify-content-center">
-                <img *ngIf="admin && getUser(puesto, tipo.id).length == 0" src="../../assets/agregar.png" alt=""
-                  (click)="agregarPorTipoOrden(tipo, puesto)" ngbTooltip="Agregar miembro">
+                <button *ngIf="admin && getUser(puesto, tipo.id).length == 0" class="btn btn-outline-primary btn-sm"
+                      (click)="agregarPorTipoOrden(tipo, puesto)" > Agregar </button>
               </span>
+
               <li *ngFor="let user of getUser(puesto, tipo.id)">
+                
+                <span *ngIf="admin && getUser(puesto, tipo.id).length != 0" class="d-flex justify-content-end">
+                  <button *ngIf="!user.renuncia" style="margin: 5px;" type="button" class="btn btn-outline-danger btn-sm" (click)="renuncia(modalRenuncia, user.id)">Renuncia</button>
+                  <button style="margin: 5px;" type="button" class="btn btn-danger btn-sm" (click)="confirmarEliminacion(user.id)">Eliminar</button>
+                </span>
+
+                <br>
+
                 <span class="d-flex justify-content-center">
                   <img *ngIf="user.renuncia" src="../../assets/alert.png" alt="" ngbTooltip="Ver motivo de renuncia"
                     (click)="openMotivo(modalMotivo, user.persona.id)" style="margin-right: 15px;">
 
                   {{ user.persona.primerNombre }} {{user.persona.primerApellido}}
-                  
                 </span>
-                <br>
-                <span *ngIf="admin && getUser(puesto, tipo.id).length != 0" class="d-flex justify-content-end">
-                  <button *ngIf="!user.renuncia" style="margin: 5px;" type="button" class="btn btn-outline-danger btn-sm" (click)="renuncia(modalRenuncia, user.id)">Renuncia</button>
-                  <button style="margin: 5px;" type="button" class="btn btn-danger btn-sm" (click)="confirmarEliminacion(user.id)">Eliminar</button>
-                </span>
+                
               </li>
             </ul>
 

@@ -43,13 +43,6 @@ export class ListarPersonaComponent implements OnInit {
     });
   }
 
-  modificarPersona(id: number) {
-    this.router.navigate(['/modificar-persona', id]);
-  }
-  postularPersona(id: number) {
-    this.router.navigate(['/postular-Persona', id]);
-  }
-
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;

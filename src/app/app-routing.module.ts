@@ -77,13 +77,13 @@ const routes: Routes = [
   { path: 'alta-persona', component: AltaPersonaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'modificar-persona/:id', component: ModificarPersonaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
 
-  { path: 'alta-postulante', component: AltaPostulanteComponent },
+  { path: 'alta-postulante', component: AltaPostulanteComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
 
-  { path: 'ver-tribunal/:id', component: VerTribunalComponent},
+  { path: 'ver-tribunal/:id', component: VerTribunalComponent , canActivate: [AuthGuard], data: { roles: ['ADMIN', 'COORDINADOR', 'TRIBUNAL'] }  },
 
   { path: 'alta-miembros-tribunales', component: AltaMiembrosTribunalesComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'listar-postulantes-llamado/:idG/:nombreG/:identificadorG', component: ListarPostulantesLlamadoComponent },
-  { path: 'modificar-postulante/:id', component: ModificarPostulanteComponent },
+  { path: 'modificar-postulante/:id', component: ModificarPostulanteComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'TRIBUNAL'] } },
 
 ];
 

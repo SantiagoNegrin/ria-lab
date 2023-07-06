@@ -10,6 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./modificar-postulante.component.css']
 })
 export class ModificarPostulanteComponent implements OnInit {
+  id: number = 0;
   postulanteSeleccionado: any = {
     persona: {
       id: 0,
@@ -34,24 +35,21 @@ export class ModificarPostulanteComponent implements OnInit {
   coordinador: boolean = false;
   selectedDate?: string;
   selectedTime?: string;
+  nombre: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private authService:AuthService) { }
 
   ngOnInit() {
-    this.admin = this.authService.getRoles().includes("ADMIN");
-    this.tribunal = this.authService.getRoles().includes("TRIBUNAL");
-    this.coordinador = this.authService.getRoles().includes("COORDINADOR");
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.obtenerPostulante(id);
-    });
+    this.obtenerPostulante(this.id);
   }
 
   obtenerPostulante(id: number) {
     const url = `http://localhost:5000/api/Postulantes/${id}`;
     this.http.get(url).subscribe((response: any) => {
       this.postulanteSeleccionado = response;
-      console.log('RRRRRRRRRRRRRRR', response);
+      this.nombre = this.postulanteSeleccionado.persona.primerNombre + this.postulanteSeleccionado.persona.primerApellido;
       this.selectedDate = moment(this.postulanteSeleccionado.fechaHoraEntrevista).format('YYYY-MM-DD');
       this.selectedTime = moment(this.postulanteSeleccionado.fechaHoraEntrevista).format('HH:mm');
     });
@@ -60,11 +58,18 @@ export class ModificarPostulanteComponent implements OnInit {
   guardarCambios() {
     const url = `http://localhost:5000/api/Postulantes/${this.postulanteSeleccionado.id}`;
     const fechaEntrevista = moment(`${this.selectedDate} ${this.selectedTime}`, 'YYYY-MM-DD HH:mm').toISOString();
-    this.postulanteSeleccionado.persona.fechaHoraEntrevista = fechaEntrevista;
+    this.postulanteSeleccionado.fechaHoraEntrevista = fechaEntrevista;
 
-    this.http.put(url, this.postulanteSeleccionado).subscribe((response: any) => {
-      console.log('Cambios guardados exitosamente');
-      console.log(response);
-    });
+    this.http.put(url, this.postulanteSeleccionado).subscribe(
+      response => {
+        this.successMessage = 'Los cambios se guardaron correctamente.';
+        this.errorMessage = '';
+        location.reload();
+      },
+      error => {
+        this.errorMessage = 'Ocurrió un error al guardar los cambios. Por favor, inténtalo de nuevo.';
+        this.successMessage = '';
+      }
+    );
   }
 }

@@ -4,6 +4,8 @@ import { AltaLlamadoComponent } from '../alta-llamado/alta-llamado.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/login/auth.service';
 import { Router } from '@angular/router';
+import { AgregarEstadoLlamadoComponent } from '../agregar-estado-llamado/agregar-estado-llamado.component';
+
 @Component({
   selector: 'app-listar-llamados',
   templateUrl: './listar-llamados.component.html',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class ListarLlamadosComponent implements OnInit {
   llamados: any[] = [];
   paginaActual = 1;
-  filtroActivo: boolean|null = true;
+  filtroActivo: boolean | null = true;
   filtroNombre = '';
   filtroIdentificador = '';
   filtroTribunal = 0;
@@ -25,16 +27,17 @@ export class ListarLlamadosComponent implements OnInit {
   totalPages: number = 1;
   pageSize: number = 10;
   totalCount: number = 0;
+  nombreTribunal: string = '';
 
-  constructor(private http: HttpClient, public modal: NgbModal, private authService: AuthService, private router:Router ) { }
+  constructor(private http: HttpClient, public modal: NgbModal, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.getMiembrosTribunal();
     this.getEstadosPosibles();
-    if( this.rolTribunal == true){
+    if (this.rolTribunal == true) {
       this.setearFiltroTribunal();
-    }else{
+    } else {
       this.getLlamados();
+      this.getMiembrosTribunal();
     }
   }
 
@@ -62,7 +65,7 @@ export class ListarLlamadosComponent implements OnInit {
   }
 
   getEstadosPosibles() {
-    const url = 'http://localhost:5000/api/LlamadosEstadosPosibles/Paged';    
+    const url = 'http://localhost:5000/api/LlamadosEstadosPosibles/Paged';
     const body = {
       limit: -1,
       offset: 0,
@@ -80,7 +83,7 @@ export class ListarLlamadosComponent implements OnInit {
   }
 
   getMiembrosTribunal() {
-    const url = 'http://localhost:5000/api/MiembrosTribunales/Paged';    
+    const url = 'http://localhost:5000/api/MiembrosTribunales/Paged';
     const body = {
       limit: -1,
       offset: 0,
@@ -97,10 +100,30 @@ export class ListarLlamadosComponent implements OnInit {
       });
   }
 
-  setearFiltroTribunal(){
-    const doc = this.authService.getDoc();
-    this.filtroTribunal = this.miembrosTribunal.find(value => value.persona.documento === doc);
-    this.getLlamados();
+  setearFiltroTribunal() {
+    const url = 'http://localhost:5000/api/MiembrosTribunales/Paged';
+    const body = {
+      limit: -1,
+      offset: 0,
+      id: 0,
+      filters: {
+        activo: true,
+        nombre: ""
+      },
+      orders: ['string']
+    };
+    this.http.post<any>(url, body)
+      .subscribe(response => {
+        this.miembrosTribunal = response.list;
+        const doc = this.authService.getDoc();
+        const u = this.miembrosTribunal.find(value => value.persona.documento === doc);
+        this.filtroTribunal = u.persona.id;
+        this.nombreTribunal = u.persona.primerNombre + ' ' + u.persona.primerApellido + ' - ' + u.persona.documento;
+        if(this.filtroTribunal!= 0){
+          this.getLlamados();
+        }
+      });
+
   }
 
   aplicarFiltros() {
@@ -121,20 +144,12 @@ export class ListarLlamadosComponent implements OnInit {
       return true;
     }
   }
-  
+
   tienePermisoDown(llamado: any): boolean {
     if (this.admin === true && (llamado.ultimoEstado.llamadoEstadoPosibleId === 1 || llamado.ultimoEstado.llamadoEstadoPosibleId === 3)) {
       return false;
     } else {
       return true;
-    }
-  }
-  
-  
-  goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.getLlamados();
     }
   }
 
@@ -145,11 +160,6 @@ export class ListarLlamadosComponent implements OnInit {
     }
   }
 
-  redirigirA(idLlamado: number, idEstado: number, idAccion: number) {
-    // Redirige a la ruta deseada
-    this.router.navigate(['/agregar-estado-llamado', idLlamado, idEstado, idAccion]);
-  }
-
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -158,7 +168,14 @@ export class ListarLlamadosComponent implements OnInit {
   }
 
   openModal() {
-		this.modal.open(AltaLlamadoComponent, { scrollable:true });
-	}
-  
+    this.modal.open(AltaLlamadoComponent, { scrollable: true });
+  }
+
+  modalEstado(idLlamado: number, idEstado: number, idAccion: number){
+    const modalRef = this.modal.open(AgregarEstadoLlamadoComponent);
+    modalRef.componentInstance.idLlamado = idLlamado;
+    modalRef.componentInstance.idEstado = idEstado;
+    modalRef.componentInstance.idAccion = idAccion;
+  }
+
 }

@@ -1,42 +1,47 @@
-<app-alta-postulante></app-alta-postulante>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Postulantes al Llamado {{ identificadorG }} - {{ nombreG }} </h4>
+    <button *ngIf="admin" class="btn btn-primary" (click)="openModal()">Nuevo</button>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th> Documento </th>
-      <th> Nombre </th>
-      <th> Apellido </th>
-      <th> Estudio Meritos </th>
-      <th> Fecha de Entrevista </th>
-      <th> Entrevista </th>
-      <th> Acciones </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let postulante of postulantes">
-      <td>{{ postulante.persona.documento }}</td>
-      <td>{{ postulante.persona.primerNombre }}</td>
-      <td>{{ postulante.persona.primerApellido }}</td>
-      <td>
-        <button *ngIf="!postulante.estudioMeritosRealizado" class="btn btn-danger">
-          <i class="fas fa-times"></i>
-        </button>
-        <button *ngIf="postulante.estudioMeritosRealizado" class="btn btn-success">
-          <i class="fas fa-check"></i>
-        </button>
-      </td>
-      <td>{{ postulante.fechaHoraEntrevista }}</td>
-      <td>
-      <button *ngIf="!postulante.entrevistaRealizada" class="btn btn-danger">
-        <i class="fas fa-times"></i>
-      </button>
-      <button *ngIf="postulante.entrevistaRealizada" class="btn btn-success">
-        <i class="fas fa-check"></i>
-      </button>
-    </td>
-    <td>
-      <button class="btn btn-primary" [routerLink]="['/modificar-postulante', postulante.id]">Modificar</button>
-    </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="container card-body">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th> Documento </th>
+          <th> Nombre </th>
+          <th> Apellido </th>
+          <th> Estudio de Méritos </th>
+          <th> Entrevista </th>
+          <th> Fecha de Entrevista </th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let postulante of postulantes">
+          <td>{{ postulante.persona.documento }}</td>
+          <td>{{ postulante.persona.primerNombre }}</td>
+          <td>{{ postulante.persona.primerApellido }}</td>
+
+          <td style="text-align: center;">
+              <i *ngIf="!postulante.estudioMeritosRealizado" class="fas fa-times"></i>
+
+              <i *ngIf="postulante.estudioMeritosRealizado" class="fas fa-check "></i>
+          </td>
+
+          <td style="text-align: center;" >
+              <i *ngIf="!postulante.entrevistaRealizada" class="fas fa-times"></i>
+
+              <i *ngIf="postulante.entrevistaRealizada"  class="fas fa-check"></i>
+          </td>
+
+          <td>{{ postulante.fechaHoraEntrevista }}</td>
+          
+          <td>
+            <img src="..\assets\editar2.png" ngbTooltip="Modificar"
+              (click)="openModificar(postulante.id)">
+          </td>
+        </tr>
+      </tbody>
+    </table>

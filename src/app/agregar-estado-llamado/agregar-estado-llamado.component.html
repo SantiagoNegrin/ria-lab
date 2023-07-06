@@ -1,21 +1,26 @@
 <div *ngIf="llamado">
-    <div *ngIf="agregarExitoso" class="success-message">
-        Estado agregado exitosamente. se le enviara a listar llamados.
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Estado del llamado {{ llamado.identificador }} - {{ llamado.nombre }}</h2>
+    </div>
+    <div class="card-body">
+      <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
       </div>
       
-      <div *ngIf="agregarError" class="error-message">
-        Hubo un error al agregar el estado. se le enviara a listar llamados.
-      </div>
-      
-    <h2>Agregar Estado a Llamado</h2>
-    <p>Identificador del llamado: {{ llamado.identificador }}</p>
-    <p>Estado actual: {{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</p>
+    <h5>Pasar a: {{ proximoEstado?.nombre }}</h5>
   
     <div class="form-group">
       <label for="observacion">Observación</label>
       <input type="text" class="form-control" id="observacion" [(ngModel)]="observacion" name="observacion">
     </div>
   
-    <button class="btn btn-primary" (click)="agregarEstadoLlamado()">Agregar</button>
+    <div class="d-flex justify-content-end" style="margin-top: 10px; margin-bottom: 10px;">
+      <button (click)="agregarEstadoLlamado()" class="btn btn-primary">Guardar</button>
+    </div>
   </div>
   

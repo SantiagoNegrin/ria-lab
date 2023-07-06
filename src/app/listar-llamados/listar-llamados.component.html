@@ -42,7 +42,7 @@
               </option>
             </select>
             
-            <input *ngIf="rolTribunal" type="text" class="form-control" id="persona" name="persona" [(ngModel)]="filtroTribunal" disabled>
+            <input *ngIf="rolTribunal" type="text" class="form-control" id="persona" name="persona" [(ngModel)]="nombreTribunal" disabled>
           </div>
         </div>
 
@@ -70,13 +70,12 @@
         <tr>
           <th>Identificador</th>
           <th>Nombre</th>
-          <th>Link Planilla Puntajes</th>
-          <th>Link Acta</th>
-          <th>Minutos Entrevista</th>
+          <th>Planilla de Puntajes</th>
+          <th>Acta</th>
+          <th>Duración Entrevista</th>
           <th>Área</th>
           <th>Estado</th>
           <th>Modificar Estado</th>
-          <th></th>
           <th></th>
           <th></th>
         </tr>
@@ -87,31 +86,28 @@
           <td>{{ llamado.nombre }}</td>
           <td>{{ llamado.linkPlanillaPuntajes }}</td>
           <td>{{ llamado.linkActa }}</td>
-          <td>{{ llamado.minutosEntrevista }}</td>
+          <td>{{ llamado.minutosEntrevista }} min. </td>
           <td>{{ llamado.area.nombre }}</td>
           <td>{{ llamado.ultimoEstado.llamadoEstadoPosible.nombre }}</td>
+          
           <td class="d-flex justify-content-center">
-            <button class="btn btn-primary" [disabled]="!tienePermisoUp(llamado)" (click)="redirigirA(llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 1)"
+            <button class="btn btn-primary" [disabled]="!tienePermisoUp(llamado)" (click)="modalEstado(llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 1)"
               [class.disabled-button]="!tienePermisoUp(llamado)" style="margin-left: 10px;">
               <i class="fas fa-arrow-up"></i>
             </button>
-            <button class="btn btn-primary" [disabled]="!tienePermisoDown(llamado)" (click)="redirigirA(llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 0)"
+            <button class="btn btn-primary" [disabled]="!tienePermisoDown(llamado)" (click)="modalEstado(llamado.id, llamado.ultimoEstado.llamadoEstadoPosibleId, 0)"
               [class.disabled-button]="!tienePermisoDown(llamado)" style="margin-left: 10px;">
               <i class="fas fa-arrow-down"></i>
             </button>
-
-            
           </td>
 
           <td>
             <a class="btn btn-primary btn-sm"
               [routerLink]="['/listar-postulantes-llamado', llamado.id, llamado.nombre, llamado.identificador]">Postulantes</a>
           </td>
+          
           <td>
             <button class="btn btn-primary btn-sm" [routerLink]="['/ver-tribunal', llamado.id]">Tribunal</button>
-          </td>
-          <td>
-            <button class="btn btn-primary btn-sm">Estados</button>
           </td>
         </tr>
       </tbody>

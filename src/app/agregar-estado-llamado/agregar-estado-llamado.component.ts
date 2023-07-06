@@ -101,41 +101,24 @@ interface Llamado {
 export class AgregarEstadoLlamadoComponent implements OnInit {
   llamado: Llamado | null = null;
   llamadoEstadosPosibles: any[] = [];
-  selectedLlamadoEstado: number | null = null;
   idLlamado?: number;
   idAccion?: number;
-  idEstado?: number;
+  idEstado: number = 0;
   observacion: string = '';
-  agregarExitoso: boolean = false;
-  agregarError: boolean = false;
   successMessage: string ='';
-  admin: boolean = false;
-  tribunal: boolean = false;
-  coordinador: boolean = false;
+  errorMessage: string ='';
+  admin: boolean = this.authService.getRoles().includes("ADMIN");
+  tribunal: boolean = this.authService.getRoles().includes("TRIBUNAL");
+  coordinador: boolean = this.authService.getRoles().includes("COORDINADOR");
   auxCuentas: number = 0;
+  proximoEstado: any = null;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private authService: AuthService,private router: Router) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.idLlamado = +params['id'];
-      this.idEstado = +params['idEstado']; // Corregido
-      this.idAccion = +params['idAccion']; // Corregido
-      this.auxCuentas= this.idEstado + 1;
-    });
+    this.auxCuentas= this.idEstado + 1;
     this.obtenerLlamadosEstadosPosibles();
     this.obtenerLlamados();
-    this.admin = this.authService.getRoles().includes("ADMIN");
-    this.tribunal = this.authService.getRoles().includes("TRIBUNAL");
-    this.coordinador = this.authService.getRoles().includes("COORDINADOR");
-    if (this.admin === false) {
-      window.alert('NO TIENES PERMISO admin');
-      this.router.navigate(['/listar-llamados']);
-    }
-    if (this.coordinador === true) {
-      window.alert('NO TIENES PERMISO, COORDINADOR');
-      this.router.navigate(['/listar-llamados']);
-    }
   }
 
   obtenerLlamados() {
@@ -148,15 +131,6 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
           console.log(error);
         }
       );
-  }
-  
-  llamadoEstadosPosiblesExistente(llamadoEstadoId: number | null): boolean {
-    if (!llamadoEstadoId) {
-      return true; // Deshabilitar el botón si no se ha seleccionado un estado llamado
-    }
-    
-    const existe = this.llamado?.llamadoEstados.some(estado => estado.llamadoEstadoPosible.id === llamadoEstadoId);
-    return existe ? true : false;
   }
 
   obtenerLlamadosEstadosPosibles() {
@@ -179,6 +153,11 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
     this.http.post<any>(url, body, { headers }).subscribe(
       (response) => {
         this.llamadoEstadosPosibles = response.list;
+        if(this.idAccion === 1){
+          this.proximoEstado = this.llamadoEstadosPosibles.find(value => value.id === this.idEstado + 1);
+        }else{
+          this.proximoEstado = this.llamadoEstadosPosibles.find(value => value.id === this.idEstado - 1);
+        }
         console.log(response);
       },
       (error) => {
@@ -205,7 +184,7 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
         llamadoEstadoPosibleId -= 1;
   
         if (llamadoEstadoPosibleId < 1) {
-          console.log('Error: No se puede retroce');
+          console.log('Error: No se puede retroceder');
           return;
         }
       } else {
@@ -229,17 +208,11 @@ export class AgregarEstadoLlamadoComponent implements OnInit {
   
         this.http.post(url, data, { headers }).subscribe(
           (response) => {
-            this.agregarExitoso = true;
-            this.agregarError = false;
-            console.log(response);
-            this.router.navigate(['/listar-llamados']);
-
-            // Mostrar un mensaje de confirmación con window.alert()
-            window.alert('Se ha agregado correctamente');
+            this.successMessage = 'Estado modificado correctamente.'
+            location.reload();
           },
           (error) => {
-            this.agregarExitoso = false;
-            this.agregarError = true;
+            this.errorMessage = 'Ocurrió un error al modificar el estado del llamado.'
             console.log(error);
           }
         );

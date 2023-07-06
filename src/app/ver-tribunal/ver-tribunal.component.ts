@@ -13,7 +13,7 @@ import { AltaMiembrosTribunalesComponent } from '../alta-miembros-tribunales/alt
 })
 export class VerTribunalComponent {
   llamadoId: number = 0;
-  puestos: string[] = [];
+  puestos: number[] = [];
   tipos: any[] = [];
   miembrosTribunal: any[] = [];
   users: any[] = [];
@@ -36,7 +36,7 @@ export class VerTribunalComponent {
     });
   }
 
-  getUser(puesto: string, tipo: number): any[] {
+  getUser(puesto: number, tipo: number): any[] {
     return this.users.filter(user => user.puesto === puesto && user.tipo.id === tipo);  
   }
 
@@ -60,13 +60,13 @@ export class VerTribunalComponent {
 
         this.puestos = Array.from(new Set(this.users.map(user => user.puesto)));
         this.tipos = Array.from(new Set(this.users.map(user => user.tipo)));
-        console.log(this.tipos);
+
+        this.puestos.sort((a, b) => a -b);
         this.tipos.sort((a, b) => a.orden - b.orden);
         this.tipos = this.tipos.filter(
           (value, index, self) =>
             index === self.findIndex((obj) => obj.nombre === value.nombre)
         );
-        console.log(this.tipos);
     
       } else {
         console.error('No se encontro el llamado');

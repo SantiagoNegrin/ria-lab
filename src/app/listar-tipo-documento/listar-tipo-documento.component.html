@@ -56,7 +56,7 @@
       </table>
     </div>
 
-    <div *ngIf="tiposDocumento.length > 0" class="d-flex justify-content-center" style="margin: 10px;">
+    <div *ngIf=" totalPages > 1 " class="d-flex justify-content-center" style="margin: 10px;">
       <button [disabled]="currentPage === 1" (click)="cambiarPagina(currentPage - 1)"
         class="btn btn-primary">Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
